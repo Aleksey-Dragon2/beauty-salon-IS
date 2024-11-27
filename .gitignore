@@ -1,3 +1,40 @@
+# Папки с временными данными
+bin/
+obj/
+
+# Отладочные файлы
+*.pdb
+*.user
+*.suo
+*.userosscache
+*.csproj.user
+# Конфигурационные файлы, специфичные для IDE
+.vs/
+.idea/
+
+# Файлы локальных настроек
+*.db
+
+# Пакеты NuGet, если используется старый формат (NuGet 2.x)
+packages/
+
+# Системы сборки (например, NPM для frontend)
+node_modules/
+
+# Кеши IDE
+.vscode/
+.vs
+
+*.Designer.cs
+*.resx
+Settings.settings
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
