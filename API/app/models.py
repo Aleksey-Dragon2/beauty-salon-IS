@@ -19,7 +19,7 @@ class Service(Base):
     __tablename__="services"
     id: Mapped[intpk]
     name: Mapped[ustr_255]=mapped_column(nullable=False)
-    base_price: Mapped[float]=mapped_column(Numeric(10,2))
+    price: Mapped[float]=mapped_column(Numeric(10,2))
 
 # Модель для таблицы masters
 class Master(Base):
@@ -32,14 +32,14 @@ class Master(Base):
 class MasterService(Base):
     __tablename__= "master_services"
     id: Mapped[intpk]
-    master_id: Mapped[int]=mapped_column(ForeignKey("masters.id", ondelete="CASCADE"),nullable=False, unique=True)
-    service_id: Mapped[int]=mapped_column(ForeignKey("services.id", ondelete="CASCADE"),nullable=False, unique=True)
+    master_id: Mapped[int]=mapped_column(ForeignKey("masters.id", ondelete="CASCADE"),nullable=False)
+    service_id: Mapped[int]=mapped_column(ForeignKey("services.id", ondelete="CASCADE"),nullable=False)
 
 class Visit(Base):
     __tablename__='visits'
     id:Mapped[intpk]
     client_name: Mapped[str_30]
-    visits:Mapped[date]=mapped_column(index=True)
+    visits_date:Mapped[date]=mapped_column(index=True)
     status: Mapped[str]=mapped_column(String(15), default="Ожидает")
 
 class ProvidedService(Base):
@@ -57,3 +57,4 @@ class PriceCoefficient(Base):
     id:Mapped[intpk]
     application_date: Mapped[Date] = mapped_column(Date, nullable=False)
     value: Mapped[float]=mapped_column(Numeric(10,2),nullable=True)
+
