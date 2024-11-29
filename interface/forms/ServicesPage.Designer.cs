@@ -40,6 +40,8 @@
             this.PriceService = new System.Windows.Forms.Label();
             this.NameService = new System.Windows.Forms.Label();
             this.PanelServicesList = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.HeaderTable.SuspendLayout();
             this.PanelTitleServices.SuspendLayout();
             this.TableServicesList.SuspendLayout();
@@ -193,6 +195,8 @@
             // 
             // PanelServicesList
             // 
+            this.PanelServicesList.Controls.Add(this.label2);
+            this.PanelServicesList.Controls.Add(this.label1);
             this.PanelServicesList.Controls.Add(this.TableServicesList);
             this.PanelServicesList.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelServicesList.Location = new System.Drawing.Point(0, 109);
@@ -200,6 +204,24 @@
             this.PanelServicesList.Padding = new System.Windows.Forms.Padding(150, 30, 150, 10);
             this.PanelServicesList.Size = new System.Drawing.Size(982, 368);
             this.PanelServicesList.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(46, 108);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 158);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 16);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "label2";
             // 
             // ServicesPage
             // 
@@ -218,6 +240,7 @@
             this.TableServicesList.ResumeLayout(false);
             this.PanelService.ResumeLayout(false);
             this.PanelServicesList.ResumeLayout(false);
+            this.PanelServicesList.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -236,6 +259,8 @@
         private Guna.UI2.WinForms.Guna2Panel PanelService;
         private System.Windows.Forms.Label NameService;
         private System.Windows.Forms.Label PriceService;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
