@@ -25,25 +25,23 @@ namespace @interface
 
         }
 
-        List<ServicePanelContainer> servicePanelContainers = new List<ServicePanelContainer>();
         private async void ServicesLabel_Click(object sender, EventArgs e)
         {
-                for (int i=0; i < servicePanelContainers.Count; i++)
-                {
-                PanelListServices.Controls.Remove(servicePanelContainers[i].PanelService);
-                }
+            for (int i = PanelListServices.Controls.Count - 1; i >= 0; i--)
+            {
+                Control control = PanelListServices.Controls[i];
+                PanelListServices.Controls.Remove(control);
+            }
 
 
             List<Service> services = await ServiceApiHandler.GetServicesAsync();
             foreach (Service service in services){
-                //MessageBox.Show($"{service.Id},{service.Name}, {service.Price}");
 
                 ServicePanelContainer servicePanel = new ServicePanelContainer(service.Id.ToString(), service.Name, service.Price.ToString());
                 PanelListServices.Controls.Add(servicePanel.PanelService);
-                //PanelListServices.Controls.Remove(servicePanel.PanelService);
-
-                servicePanelContainers.Add(servicePanel);
+                servicePanel.PanelService.Click+= new System.EventHandler(this.PanelService_Click);
             }
+
         }
       
         private void PanelService_Click(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 ﻿using Guna.UI2.WinForms;
 using System;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 
 public class ServicePanelContainer
@@ -26,6 +27,7 @@ public class ServicePanelContainer
             Size = new Size(682, 30),
             TabIndex = 0,
             Cursor = Cursors.Hand
+
         };
 
         // Создание метки для имени услуги
@@ -91,37 +93,27 @@ public class ServicePanelContainer
     // Общий обработчик клика
     private void OnControlClick(object sender, EventArgs e)
     {
-        MessageBox.Show($"Клик по элементу: {((Control)sender).Name}", "Обработчик клика");
+        Control clickedControl = (Control)sender;
+        //MessageBox.Show($"Клик по элементу: {clickedControl.Name}", "Обработчик клика");
+        int id=Convert.ToInt32(clickedControl.Name.Split('_')[1]);
+        MessageBox.Show(id.ToString());
     }
 
-    // Обработчик события MouseEnter
     private void OnControlMouseEnter(object sender, EventArgs e)
     {
-        Control control = (Control)sender;
 
-        // Меняем цвет границы панели только если это Guna2Panel
-        if (control is Guna2Panel panel)
-        {
-            panel.BorderColor = Color.Red;
-        }
-        // В любом случае показываем изменения на панели
-        else 
-        {
             PanelService.BorderColor = Color.Red;
-        }
+        
     }
 
-    // Обработчик события MouseLeave
     private void OnControlMouseLeave(object sender, EventArgs e)
     {
         Control control = (Control)sender;
 
-        // Восстанавливаем цвет границы панели только если это Guna2Panel
         if (control is Guna2Panel panel)
         {
             panel.BorderColor = Color.Transparent;
         }
-        // В любом случае показываем изменения на панели
         else
         {
             PanelService.BorderColor = Color.Transparent;
