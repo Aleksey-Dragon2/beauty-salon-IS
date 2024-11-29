@@ -1,7 +1,7 @@
 # Папки с временными данными
 bin/
 obj/
-
+appsettings.json
 # Отладочные файлы
 *.pdb
 *.user
