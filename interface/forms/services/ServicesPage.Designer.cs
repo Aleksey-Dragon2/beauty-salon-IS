@@ -35,18 +35,16 @@
             this.ServicesLabel = new System.Windows.Forms.Label();
             this.PanelTitleServices = new System.Windows.Forms.Panel();
             this.TitleServices = new System.Windows.Forms.Label();
-            this.TableServicesList = new System.Windows.Forms.TableLayoutPanel();
+            this.PanelServicesList = new System.Windows.Forms.Panel();
+            this.PanelListServices = new System.Windows.Forms.Panel();
             this.PanelService = new Guna.UI2.WinForms.Guna2Panel();
             this.PriceService = new System.Windows.Forms.Label();
             this.NameService = new System.Windows.Forms.Label();
-            this.PanelServicesList = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.HeaderTable.SuspendLayout();
             this.PanelTitleServices.SuspendLayout();
-            this.TableServicesList.SuspendLayout();
-            this.PanelService.SuspendLayout();
             this.PanelServicesList.SuspendLayout();
+            this.PanelListServices.SuspendLayout();
+            this.PanelService.SuspendLayout();
             this.SuspendLayout();
             // 
             // HeaderTable
@@ -140,45 +138,61 @@
             this.TitleServices.Text = "Список услуг";
             this.TitleServices.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // TableServicesList
+            // PanelServicesList
             // 
-            this.TableServicesList.ColumnCount = 1;
-            this.TableServicesList.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TableServicesList.Controls.Add(this.PanelService, 0, 0);
-            this.TableServicesList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TableServicesList.Location = new System.Drawing.Point(150, 30);
-            this.TableServicesList.Name = "TableServicesList";
-            this.TableServicesList.RowCount = 1;
-            this.TableServicesList.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TableServicesList.Size = new System.Drawing.Size(682, 328);
-            this.TableServicesList.TabIndex = 2;
+            this.PanelServicesList.Controls.Add(this.PanelListServices);
+            this.PanelServicesList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelServicesList.Location = new System.Drawing.Point(0, 109);
+            this.PanelServicesList.Name = "PanelServicesList";
+            this.PanelServicesList.Padding = new System.Windows.Forms.Padding(150, 15, 150, 10);
+            this.PanelServicesList.Size = new System.Drawing.Size(982, 368);
+            this.PanelServicesList.TabIndex = 3;
+            // 
+            // PanelListServices
+            // 
+            this.PanelListServices.Controls.Add(this.PanelService);
+            this.PanelListServices.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelListServices.Location = new System.Drawing.Point(150, 15);
+            this.PanelListServices.Name = "PanelListServices";
+            this.PanelListServices.Size = new System.Drawing.Size(682, 325);
+            this.PanelListServices.TabIndex = 5;
             // 
             // PanelService
             // 
             this.PanelService.AutoRoundedCorners = true;
             this.PanelService.BackColor = System.Drawing.Color.Transparent;
-            this.PanelService.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.PanelService.BorderColor = System.Drawing.Color.Transparent;
             this.PanelService.BorderRadius = 18;
+            this.PanelService.BorderThickness = 1;
             this.PanelService.Controls.Add(this.PriceService);
             this.PanelService.Controls.Add(this.NameService);
+            this.PanelService.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PanelService.CustomBorderColor = System.Drawing.Color.Transparent;
             this.PanelService.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelService.FillColor = System.Drawing.Color.LightGray;
-            this.PanelService.Location = new System.Drawing.Point(3, 3);
+            this.PanelService.Location = new System.Drawing.Point(0, 0);
             this.PanelService.Name = "PanelService";
-            this.PanelService.Size = new System.Drawing.Size(676, 39);
+            this.PanelService.Size = new System.Drawing.Size(682, 39);
             this.PanelService.TabIndex = 0;
+            this.PanelService.Click += new System.EventHandler(this.PanelService_Click);
+            this.PanelService.MouseEnter += new System.EventHandler(this.PanelService_MouseEnter);
+            this.PanelService.MouseLeave += new System.EventHandler(this.PanelService_MouseLeave);
             // 
             // PriceService
             // 
-            this.PriceService.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PriceService.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PriceService.Dock = System.Windows.Forms.DockStyle.Right;
             this.PriceService.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.PriceService.Location = new System.Drawing.Point(578, 0);
+            this.PriceService.Location = new System.Drawing.Point(594, 0);
             this.PriceService.Name = "PriceService";
             this.PriceService.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
-            this.PriceService.Size = new System.Drawing.Size(98, 39);
+            this.PriceService.Size = new System.Drawing.Size(88, 39);
             this.PriceService.TabIndex = 1;
             this.PriceService.Text = "10.0";
             this.PriceService.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.PriceService.Click += new System.EventHandler(this.PanelService_Click);
+            this.PriceService.MouseEnter += new System.EventHandler(this.PanelService_MouseEnter);
+            this.PriceService.MouseLeave += new System.EventHandler(this.PanelService_MouseLeave);
             // 
             // NameService
             // 
@@ -188,40 +202,13 @@
             this.NameService.Location = new System.Drawing.Point(0, 0);
             this.NameService.Name = "NameService";
             this.NameService.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.NameService.Size = new System.Drawing.Size(578, 39);
+            this.NameService.Size = new System.Drawing.Size(564, 39);
             this.NameService.TabIndex = 0;
             this.NameService.Text = "Маникюр";
             this.NameService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // PanelServicesList
-            // 
-            this.PanelServicesList.Controls.Add(this.label2);
-            this.PanelServicesList.Controls.Add(this.label1);
-            this.PanelServicesList.Controls.Add(this.TableServicesList);
-            this.PanelServicesList.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PanelServicesList.Location = new System.Drawing.Point(0, 109);
-            this.PanelServicesList.Name = "PanelServicesList";
-            this.PanelServicesList.Padding = new System.Windows.Forms.Padding(150, 30, 150, 10);
-            this.PanelServicesList.Size = new System.Drawing.Size(982, 368);
-            this.PanelServicesList.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 108);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 158);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 16);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "label2";
+            this.NameService.Click += new System.EventHandler(this.PanelService_Click);
+            this.NameService.MouseEnter += new System.EventHandler(this.PanelService_MouseEnter);
+            this.NameService.MouseLeave += new System.EventHandler(this.PanelService_MouseLeave);
             // 
             // ServicesPage
             // 
@@ -237,10 +224,9 @@
             this.HeaderTable.ResumeLayout(false);
             this.HeaderTable.PerformLayout();
             this.PanelTitleServices.ResumeLayout(false);
-            this.TableServicesList.ResumeLayout(false);
-            this.PanelService.ResumeLayout(false);
             this.PanelServicesList.ResumeLayout(false);
-            this.PanelServicesList.PerformLayout();
+            this.PanelListServices.ResumeLayout(false);
+            this.PanelService.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -254,13 +240,11 @@
         private System.Windows.Forms.Label VisitsLabel;
         private System.Windows.Forms.Panel PanelTitleServices;
         private System.Windows.Forms.Label TitleServices;
-        private System.Windows.Forms.TableLayoutPanel TableServicesList;
         private System.Windows.Forms.Panel PanelServicesList;
         private Guna.UI2.WinForms.Guna2Panel PanelService;
-        private System.Windows.Forms.Label NameService;
         private System.Windows.Forms.Label PriceService;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label NameService;
+        private System.Windows.Forms.Panel PanelListServices;
     }
 }
 
