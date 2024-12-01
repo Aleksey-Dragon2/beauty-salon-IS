@@ -160,8 +160,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="components\ServiceInfoPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="endpoints\ServiceApiHandler.cs" />
-    <Compile Include="forms\services\ServicePanelContainer.cs" />
     <Compile Include="forms\services\ServicesPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +181,9 @@
     </Compile>
     <Compile Include="utils\APIservice.cs" />
     <Compile Include="utils\HttpClientService.cs" />
+    <EmbeddedResource Include="components\ServiceInfoPanel.resx">
+      <DependentUpon>ServiceInfoPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\services\ServiceAddPage.resx">
       <DependentUpon>ServiceAddPage.cs</DependentUpon>
     </EmbeddedResource>

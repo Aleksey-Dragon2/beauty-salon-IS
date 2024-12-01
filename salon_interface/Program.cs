@@ -16,8 +16,7 @@ namespace salon_interface
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ServiceAddPage());
-
+            Application.Run(new ServicesPage());
         }
     }
 }
