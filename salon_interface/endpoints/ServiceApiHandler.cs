@@ -52,5 +52,30 @@ namespace ProjectName.api
 
             return await _apiService.AddServiceAsync(endpoint, name, price);
         }
+
+        public static async Task<Service> UpdateServiceAsync(int id, string name, float price)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Path.Combine(AppContext.BaseDirectory, @"..\..\endpoints"))  // Full path or Relative path
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+
+            string apiUrl = configuration["ApiUrls:ApiUpdateService"];
+            string endpoint = apiUrl;
+
+            return await _apiService.UpdateServiceAsync(endpoint, id, name, price);
+        }
+        public static async Task<Service> DeleteServiceAsync(int id)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Path.Combine(AppContext.BaseDirectory, @"..\..\endpoints"))  // Full path or Relative path
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+
+            string apiUrl = configuration["ApiUrls:ApiDeleteService"];
+            string endpoint = apiUrl;
+
+            return await _apiService.DeleteServiceAsync(endpoint, id);
+        }
     }
 }

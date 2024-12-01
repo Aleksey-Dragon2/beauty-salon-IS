@@ -22,11 +22,11 @@ namespace salon_interface
         {
             InitializeComponent();
             _apiService = new ApiService();
-            ServicesLabel_Click(null, null);
+            updateService();
         }
-
-        public static async void ServicesLabel_Click(object sender, EventArgs e)
+        private async void ServicesLabel_Click(object sender, EventArgs e)
         {
+            
             for (int i = PanelListServices.Controls.Count - 1; i >= 0; i--)
             {
                 Control control = PanelListServices.Controls[i];
@@ -37,17 +37,17 @@ namespace salon_interface
             List<Service> services = await ServiceApiHandler.GetServicesAsync();
             foreach (Service service in services){
 
-                ServiceInfoPanel servicePanel = new ServiceInfoPanel(service.Id.ToString());
+                ServiceInfoPanel servicePanel = new ServiceInfoPanel(service.Id.ToString(), this);
                 servicePanel.NameService.Text=service.Name;
                 servicePanel.PriceService.Text = service.Price.ToString();
-                
+
 
                 PanelListServices.Controls.Add(servicePanel.PanelService);
                 //servicePanel.NameService.Click+= new System.EventHandler(this.PanelService_Click);
             }
-
+            
         }
-      
+
         private void PanelService_Click(object sender, EventArgs e)
         {
             if (sender is Label button)

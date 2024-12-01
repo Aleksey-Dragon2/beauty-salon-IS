@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using MyWindowsFormsApp.Models;
+using ProjectName.api;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace salon_interface
 {
@@ -21,6 +24,26 @@ namespace salon_interface
             }
             base.Dispose(disposing);
         }
+        public async void updateService()
+        {
+            for (int i = PanelListServices.Controls.Count - 1; i >= 0; i--)
+            {
+                Control control = PanelListServices.Controls[i];
+                PanelListServices.Controls.Remove(control);
+            }
+
+
+            List<Service> services = await ServiceApiHandler.GetServicesAsync();
+            foreach (Service service in services)
+            {
+                ServiceInfoPanel servicePanel = new ServiceInfoPanel(service.Id.ToString(), this);
+                servicePanel.NameService.Text = service.Name;
+                servicePanel.PriceService.Text = service.Price.ToString();
+
+                PanelListServices.Controls.Add(servicePanel.PanelService);
+            }
+
+        }
 
 
         #region Код, автоматически созданный конструктором форм Windows
@@ -39,14 +62,17 @@ namespace salon_interface
             this.PanelTitleServices = new System.Windows.Forms.Panel();
             this.TitleServices = new System.Windows.Forms.Label();
             this.PanelServicesList = new System.Windows.Forms.Panel();
-            PanelListServices = new System.Windows.Forms.Panel();
+            this.PanelButton = new System.Windows.Forms.Panel();
+            this.PanelListServices = new System.Windows.Forms.Panel();
             this.PanelService = new Guna.UI2.WinForms.Guna2Panel();
             this.PriceService = new System.Windows.Forms.Label();
             this.NameService = new System.Windows.Forms.Label();
+            this.AcceptEditButton = new Guna.UI2.WinForms.Guna2Button();
             this.HeaderTable.SuspendLayout();
             this.PanelTitleServices.SuspendLayout();
             this.PanelServicesList.SuspendLayout();
-            PanelListServices.SuspendLayout();
+            this.PanelButton.SuspendLayout();
+            this.PanelListServices.SuspendLayout();
             this.PanelService.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,7 +145,7 @@ namespace salon_interface
             this.ServicesLabel.TabIndex = 0;
             this.ServicesLabel.Text = "Услуги";
             this.ServicesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            ServicesLabel.Click += new System.EventHandler(ServicesLabel_Click);
+            this.ServicesLabel.Click += new System.EventHandler(this.ServicesLabel_Click);
             // 
             // PanelTitleServices
             // 
@@ -144,7 +170,8 @@ namespace salon_interface
             // 
             // PanelServicesList
             // 
-            this.PanelServicesList.Controls.Add(PanelListServices);
+            this.PanelServicesList.Controls.Add(this.PanelButton);
+            this.PanelServicesList.Controls.Add(this.PanelListServices);
             this.PanelServicesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelServicesList.Location = new System.Drawing.Point(0, 109);
             this.PanelServicesList.Name = "PanelServicesList";
@@ -152,15 +179,25 @@ namespace salon_interface
             this.PanelServicesList.Size = new System.Drawing.Size(1169, 558);
             this.PanelServicesList.TabIndex = 3;
             // 
+            // PanelButton
+            // 
+            this.PanelButton.Controls.Add(this.AcceptEditButton);
+            this.PanelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PanelButton.Location = new System.Drawing.Point(150, 438);
+            this.PanelButton.Name = "PanelButton";
+            this.PanelButton.Size = new System.Drawing.Size(869, 110);
+            this.PanelButton.TabIndex = 1;
+            // 
             // PanelListServices
             // 
-            PanelListServices.AutoScroll = true;
-            PanelListServices.Controls.Add(this.PanelService);
-            PanelListServices.Dock = System.Windows.Forms.DockStyle.Fill;
-            PanelListServices.Location = new System.Drawing.Point(150, 15);
-            PanelListServices.Name = "PanelListServices";
-            PanelListServices.Size = new System.Drawing.Size(869, 533);
-            PanelListServices.TabIndex = 5;
+            this.PanelListServices.AutoScroll = true;
+            this.PanelListServices.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelListServices.Controls.Add(this.PanelService);
+            this.PanelListServices.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelListServices.Location = new System.Drawing.Point(150, 15);
+            this.PanelListServices.Name = "PanelListServices";
+            this.PanelListServices.Size = new System.Drawing.Size(869, 533);
+            this.PanelListServices.TabIndex = 5;
             // 
             // PanelService
             // 
@@ -178,7 +215,7 @@ namespace salon_interface
             this.PanelService.Location = new System.Drawing.Point(0, 0);
             this.PanelService.Margin = new System.Windows.Forms.Padding(4);
             this.PanelService.Name = "PanelService";
-            this.PanelService.Size = new System.Drawing.Size(869, 39);
+            this.PanelService.Size = new System.Drawing.Size(867, 39);
             this.PanelService.TabIndex = 0;
             this.PanelService.Click += new System.EventHandler(this.PanelService_Click);
             this.PanelService.MouseEnter += new System.EventHandler(this.PanelService_MouseEnter);
@@ -189,7 +226,7 @@ namespace salon_interface
             this.PriceService.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PriceService.Dock = System.Windows.Forms.DockStyle.Right;
             this.PriceService.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.PriceService.Location = new System.Drawing.Point(781, 0);
+            this.PriceService.Location = new System.Drawing.Point(779, 0);
             this.PriceService.Name = "PriceService";
             this.PriceService.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.PriceService.Size = new System.Drawing.Size(88, 39);
@@ -216,6 +253,23 @@ namespace salon_interface
             this.NameService.MouseEnter += new System.EventHandler(this.PanelService_MouseEnter);
             this.NameService.MouseLeave += new System.EventHandler(this.PanelService_MouseLeave);
             // 
+            // AcceptEditButton
+            // 
+            this.AcceptEditButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.AcceptEditButton.BorderRadius = 8;
+            this.AcceptEditButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.AcceptEditButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.AcceptEditButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.AcceptEditButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.AcceptEditButton.FillColor = System.Drawing.Color.LightGray;
+            this.AcceptEditButton.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AcceptEditButton.ForeColor = System.Drawing.Color.Black;
+            this.AcceptEditButton.Location = new System.Drawing.Point(296, 33);
+            this.AcceptEditButton.Name = "AcceptEditButton";
+            this.AcceptEditButton.Size = new System.Drawing.Size(269, 45);
+            this.AcceptEditButton.TabIndex = 4;
+            this.AcceptEditButton.Text = "Добавить услугу";
+            // 
             // ServicesPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -231,7 +285,8 @@ namespace salon_interface
             this.HeaderTable.PerformLayout();
             this.PanelTitleServices.ResumeLayout(false);
             this.PanelServicesList.ResumeLayout(false);
-            PanelListServices.ResumeLayout(false);
+            this.PanelButton.ResumeLayout(false);
+            this.PanelListServices.ResumeLayout(false);
             this.PanelService.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -247,10 +302,12 @@ namespace salon_interface
         private System.Windows.Forms.Panel PanelTitleServices;
         private System.Windows.Forms.Label TitleServices;
         private System.Windows.Forms.Panel PanelServicesList;
-        public static System.Windows.Forms.Panel PanelListServices;
         private Guna.UI2.WinForms.Guna2Panel PanelService;
         private System.Windows.Forms.Label PriceService;
         private System.Windows.Forms.Label NameService;
+        private Panel PanelButton;
+        private Panel PanelListServices;
+        private Guna.UI2.WinForms.Guna2Button AcceptEditButton;
     }
 }
 

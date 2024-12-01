@@ -173,19 +173,28 @@
     <Compile Include="models\service.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="forms\services\ServiceAddPage.cs">
+    <Compile Include="forms\services\ServiceEditPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\services\ServiceAddPage.Designer.cs">
-      <DependentUpon>ServiceAddPage.cs</DependentUpon>
+    <Compile Include="forms\services\ServiceEditPage.Designer.cs">
+      <DependentUpon>ServiceEditPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\services\ServiceDeletePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\services\ServiceDeletePage.Designer.cs">
+      <DependentUpon>ServiceDeletePage.cs</DependentUpon>
     </Compile>
     <Compile Include="utils\APIservice.cs" />
     <Compile Include="utils\HttpClientService.cs" />
     <EmbeddedResource Include="components\ServiceInfoPanel.resx">
       <DependentUpon>ServiceInfoPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\services\ServiceAddPage.resx">
-      <DependentUpon>ServiceAddPage.cs</DependentUpon>
+    <EmbeddedResource Include="forms\services\ServiceEditPage.resx">
+      <DependentUpon>ServiceEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\services\ServiceDeletePage.resx">
+      <DependentUpon>ServiceDeletePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\services\ServicesPage.resx">
       <DependentUpon>ServicesPage.cs</DependentUpon>

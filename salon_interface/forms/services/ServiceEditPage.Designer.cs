@@ -1,6 +1,8 @@
-﻿namespace salon_interface
+﻿using System.Runtime.CompilerServices;
+
+namespace salon_interface
 {
-    partial class ServiceAddPage
+    partial class ServiceEditPage
     {
         /// <summary>
         /// Required designer variable.
@@ -40,8 +42,8 @@
             this.DeleteServiceButton = new Guna.UI2.WinForms.Guna2Button();
             this.AcceptEditButton = new Guna.UI2.WinForms.Guna2Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.EditNameService = new Guna.UI2.WinForms.Guna2TextBox();
             this.EditPriceService = new Guna.UI2.WinForms.Guna2TextBox();
+            this.EditNameService = new Guna.UI2.WinForms.Guna2TextBox();
             this.TitlePanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -98,6 +100,7 @@
             this.DeleteServiceButton.Size = new System.Drawing.Size(180, 45);
             this.DeleteServiceButton.TabIndex = 4;
             this.DeleteServiceButton.Text = "Удалить";
+            this.DeleteServiceButton.Click += new System.EventHandler(this.DeleteServiceButton_Click);
             // 
             // AcceptEditButton
             // 
@@ -107,7 +110,7 @@
             this.AcceptEditButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.AcceptEditButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.AcceptEditButton.FillColor = System.Drawing.Color.LightGray;
-            this.AcceptEditButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AcceptEditButton.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.AcceptEditButton.ForeColor = System.Drawing.Color.Black;
             this.AcceptEditButton.Location = new System.Drawing.Point(479, 186);
             this.AcceptEditButton.Name = "AcceptEditButton";
@@ -132,6 +135,31 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(745, 95);
             this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // EditPriceService
+            // 
+            this.EditPriceService.Animated = true;
+            this.EditPriceService.BorderColor = System.Drawing.Color.Black;
+            this.EditPriceService.BorderRadius = 7;
+            this.EditPriceService.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.EditPriceService.DefaultText = "";
+            this.EditPriceService.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.EditPriceService.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.EditPriceService.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.EditPriceService.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.EditPriceService.Dock = System.Windows.Forms.DockStyle.Top;
+            this.EditPriceService.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.EditPriceService.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.EditPriceService.ForeColor = System.Drawing.Color.Black;
+            this.EditPriceService.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.EditPriceService.Location = new System.Drawing.Point(580, 24);
+            this.EditPriceService.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.EditPriceService.Name = "EditPriceService";
+            this.EditPriceService.PasswordChar = '\0';
+            this.EditPriceService.PlaceholderText = "";
+            this.EditPriceService.SelectedText = "";
+            this.EditPriceService.Size = new System.Drawing.Size(132, 42);
+            this.EditPriceService.TabIndex = 1;
             // 
             // EditNameService
             // 
@@ -159,32 +187,7 @@
             this.EditNameService.Size = new System.Drawing.Size(507, 42);
             this.EditNameService.TabIndex = 0;
             // 
-            // EditPriceService
-            // 
-            this.EditPriceService.Animated = true;
-            this.EditPriceService.BorderColor = System.Drawing.Color.Black;
-            this.EditPriceService.BorderRadius = 7;
-            this.EditPriceService.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.EditPriceService.DefaultText = "";
-            this.EditPriceService.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.EditPriceService.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.EditPriceService.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.EditPriceService.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.EditPriceService.Dock = System.Windows.Forms.DockStyle.Top;
-            this.EditPriceService.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditPriceService.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.EditPriceService.ForeColor = System.Drawing.Color.Black;
-            this.EditPriceService.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditPriceService.Location = new System.Drawing.Point(580, 24);
-            this.EditPriceService.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.EditPriceService.Name = "EditPriceService";
-            this.EditPriceService.PasswordChar = '\0';
-            this.EditPriceService.PlaceholderText = "";
-            this.EditPriceService.SelectedText = "";
-            this.EditPriceService.Size = new System.Drawing.Size(132, 42);
-            this.EditPriceService.TabIndex = 1;
-            // 
-            // ServiceAddPage
+            // ServiceEditPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -197,7 +200,7 @@
             this.Controls.Add(this.TitlePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "ServiceAddPage";
+            this.Name = "ServiceEditPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ServiceAddPage";
             this.TitlePanel.ResumeLayout(false);

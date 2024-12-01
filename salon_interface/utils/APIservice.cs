@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MyWindowsFormsApp.Models;
 using Newtonsoft.Json;
-using ProjectName.Services;  // Подключаем HttpClientService
+using ProjectName.Services; 
 
 namespace ProjectName.Services
 {
@@ -16,7 +16,7 @@ namespace ProjectName.Services
 
         public ApiService()
         {
-            _httpClientService = new HttpClientService();  // Используем HttpClientService
+            _httpClientService = new HttpClientService();
         }
 
         // Метод для получения списка услуг с API
@@ -24,11 +24,9 @@ namespace ProjectName.Services
         {
             try
             {
-                // Отправляем GET-запрос и получаем ответ
                 var response = await _httpClientService.GetAsync(endpoint);
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                // Десериализуем ответ в список объектов Service
                 var services = JsonConvert.DeserializeObject<List<Service>>(responseBody);
                 return services;
             }
@@ -43,11 +41,9 @@ namespace ProjectName.Services
         {
             try
             {
-                // Отправляем GET-запрос и получаем ответ
                 var response = await _httpClientService.GetAsync(endpoint);
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                // Десериализуем ответ в список объектов Service
                 var services = JsonConvert.DeserializeObject<Service>(responseBody);
                 return services;
             }
@@ -61,31 +57,25 @@ namespace ProjectName.Services
         {
             try
             {
-                // Кодируем параметры
                 string encodedName = System.Web.HttpUtility.UrlEncode(name);
-                string encodedPrice = price.ToString(CultureInfo.InvariantCulture); // Используем InvariantCulture для корректной обработки чисел
+                string encodedPrice = price.ToString(CultureInfo.InvariantCulture); // InvariantCulture для корректной обработки чисел
 
-                // Формируем URL с query-параметрами
                 var builder = new UriBuilder(endpoint)
                 {
                     Query = $"name={encodedName}&price={encodedPrice}"
                 };
 
-                // Отправка POST-запроса с query-параметрами
                 var response = await _httpClientService.PostAsync(builder.ToString(), null);
 
-                // Проверка успешности запроса
                 if (response.IsSuccessStatusCode)
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
 
-                    // Десериализация ответа в объект Service
                     var addedService = JsonConvert.DeserializeObject<Service>(responseBody);
                     return addedService;
                 }
                 else
                 {
-                    // Обработка ошибок
                     string errorResponse = await response.Content.ReadAsStringAsync();
                     throw new Exception($"Ошибка при добавлении услуги: {response.StatusCode}, {errorResponse}");
                 }
@@ -98,6 +88,75 @@ namespace ProjectName.Services
         }
 
 
+        public async Task<Service> UpdateServiceAsync(string endpoint, int id, string name, float price)
+        {
+            try
+            {
+                string encodeId = id.ToString(CultureInfo.InvariantCulture);
+                string encodedName = System.Web.HttpUtility.UrlEncode(name);
+                string encodedPrice = price.ToString(CultureInfo.InvariantCulture); // InvariantCulture для корректной обработки чисел
+
+
+                var builder = new UriBuilder(endpoint)
+                {
+                    Query = $"id={encodeId}&name={encodedName}&price={encodedPrice}"
+                };
+
+                var response = await _httpClientService.PostAsync(builder.ToString(), null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    var addedService = JsonConvert.DeserializeObject<Service>(responseBody);
+                    return addedService;
+                }
+                else
+                {
+                    string errorResponse = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Ошибка при изменении услуги: {response.StatusCode}, {errorResponse}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при изменнеии услуги: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task<Service> DeleteServiceAsync(string endpoint, int id)
+        {
+            try
+            {
+                string encodeId = id.ToString(CultureInfo.InvariantCulture);
+
+
+                var builder = new UriBuilder(endpoint)
+                {
+                    Query = $"id={encodeId}"
+                };
+
+                var response = await _httpClientService.PostAsync(builder.ToString(), null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    var addedService = JsonConvert.DeserializeObject<Service>(responseBody);
+                    return addedService;
+                }
+                else
+                {
+                    string errorResponse = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Ошибка при удалении услуги: {response.StatusCode}, {errorResponse}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при удалении услуги: {ex.Message}");
+                throw;
+            }
+        }
 
 
     }
