@@ -3,7 +3,7 @@ from sqlalchemy import select, delete, DateTime
 from sqlalchemy.orm import Session
 from typing import Optional
 
-from app.database import engine, SessionLocal
+from .database import engine, SessionLocal
 from app import models
 from datetime import datetime
 import uvicorn
@@ -144,12 +144,22 @@ def get_services(db: Session = Depends(get_db)):
     services=db.scalars(stmt).all()
     return services
 
+@app.post("/service/delete/")
+def delete_service_by_id(id: int, db:Session=Depends(get_db)):
+    if not isinstance(id, int):
+        raise HTTPException(status_code=415, detail="Unsupported Media Type")
+    stmt = delete(models.Service).where(models.Service.id==id)
+    db.execute(stmt)
+    db.commit()
+
+
+
 # Получение одной услуги
-@app.get("/services/get/{id}")
-def get_service_by_id(id:int, db: Session = Depends(get_db)):
-    stmt=select(models.Service).filter(models.Service.id==id)
-    services=db.scalars(stmt).one()
-    return services
+# @app.get("/services/get/{id}")
+# def get_service_by_id(id:int, db: Session = Depends(get_db)):
+#     stmt=select(models.Service).filter(models.Service.id==id)
+#     services=db.scalars(stmt).one()
+#     return services
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
