@@ -1,4 +1,6 @@
-﻿namespace salon_interface
+﻿using System.Windows.Forms;
+
+namespace salon_interface
 {
     partial class ServicesPage
     {
@@ -20,6 +22,7 @@
             base.Dispose(disposing);
         }
 
+
         #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
@@ -36,14 +39,14 @@
             this.PanelTitleServices = new System.Windows.Forms.Panel();
             this.TitleServices = new System.Windows.Forms.Label();
             this.PanelServicesList = new System.Windows.Forms.Panel();
-            this.PanelListServices = new System.Windows.Forms.Panel();
+            PanelListServices = new System.Windows.Forms.Panel();
             this.PanelService = new Guna.UI2.WinForms.Guna2Panel();
             this.PriceService = new System.Windows.Forms.Label();
             this.NameService = new System.Windows.Forms.Label();
             this.HeaderTable.SuspendLayout();
             this.PanelTitleServices.SuspendLayout();
             this.PanelServicesList.SuspendLayout();
-            this.PanelListServices.SuspendLayout();
+            PanelListServices.SuspendLayout();
             this.PanelService.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +68,7 @@
             this.HeaderTable.Padding = new System.Windows.Forms.Padding(100, 0, 100, 0);
             this.HeaderTable.RowCount = 1;
             this.HeaderTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.HeaderTable.Size = new System.Drawing.Size(982, 59);
+            this.HeaderTable.Size = new System.Drawing.Size(1169, 59);
             this.HeaderTable.TabIndex = 0;
             // 
             // CoefficientsLabel
@@ -73,9 +76,9 @@
             this.CoefficientsLabel.AutoSize = true;
             this.CoefficientsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CoefficientsLabel.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CoefficientsLabel.Location = new System.Drawing.Point(688, 0);
+            this.CoefficientsLabel.Location = new System.Drawing.Point(829, 0);
             this.CoefficientsLabel.Name = "CoefficientsLabel";
-            this.CoefficientsLabel.Size = new System.Drawing.Size(191, 59);
+            this.CoefficientsLabel.Size = new System.Drawing.Size(237, 59);
             this.CoefficientsLabel.TabIndex = 3;
             this.CoefficientsLabel.Text = "Коэффициенты";
             this.CoefficientsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -85,9 +88,9 @@
             this.VisitsLabel.AutoSize = true;
             this.VisitsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.VisitsLabel.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.VisitsLabel.Location = new System.Drawing.Point(493, 0);
+            this.VisitsLabel.Location = new System.Drawing.Point(587, 0);
             this.VisitsLabel.Name = "VisitsLabel";
-            this.VisitsLabel.Size = new System.Drawing.Size(189, 59);
+            this.VisitsLabel.Size = new System.Drawing.Size(236, 59);
             this.VisitsLabel.TabIndex = 2;
             this.VisitsLabel.Text = "Визиты";
             this.VisitsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -97,9 +100,9 @@
             this.MastersLabel.AutoSize = true;
             this.MastersLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MastersLabel.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MastersLabel.Location = new System.Drawing.Point(298, 0);
+            this.MastersLabel.Location = new System.Drawing.Point(345, 0);
             this.MastersLabel.Name = "MastersLabel";
-            this.MastersLabel.Size = new System.Drawing.Size(189, 59);
+            this.MastersLabel.Size = new System.Drawing.Size(236, 59);
             this.MastersLabel.TabIndex = 1;
             this.MastersLabel.Text = "Мастера";
             this.MastersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -112,11 +115,11 @@
             this.ServicesLabel.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ServicesLabel.Location = new System.Drawing.Point(103, 0);
             this.ServicesLabel.Name = "ServicesLabel";
-            this.ServicesLabel.Size = new System.Drawing.Size(189, 59);
+            this.ServicesLabel.Size = new System.Drawing.Size(236, 59);
             this.ServicesLabel.TabIndex = 0;
             this.ServicesLabel.Text = "Услуги";
             this.ServicesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ServicesLabel.Click += new System.EventHandler(this.ServicesLabel_Click);
+            ServicesLabel.Click += new System.EventHandler(ServicesLabel_Click);
             // 
             // PanelTitleServices
             // 
@@ -125,7 +128,7 @@
             this.PanelTitleServices.Location = new System.Drawing.Point(0, 59);
             this.PanelTitleServices.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.PanelTitleServices.Name = "PanelTitleServices";
-            this.PanelTitleServices.Size = new System.Drawing.Size(982, 50);
+            this.PanelTitleServices.Size = new System.Drawing.Size(1169, 50);
             this.PanelTitleServices.TabIndex = 1;
             // 
             // TitleServices
@@ -134,31 +137,30 @@
             this.TitleServices.Font = new System.Drawing.Font("Times New Roman", 22F);
             this.TitleServices.Location = new System.Drawing.Point(0, 0);
             this.TitleServices.Name = "TitleServices";
-            this.TitleServices.Size = new System.Drawing.Size(982, 50);
+            this.TitleServices.Size = new System.Drawing.Size(1169, 50);
             this.TitleServices.TabIndex = 0;
             this.TitleServices.Text = "Список услуг";
             this.TitleServices.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PanelServicesList
             // 
-            this.PanelServicesList.Controls.Add(this.PanelListServices);
+            this.PanelServicesList.Controls.Add(PanelListServices);
             this.PanelServicesList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelServicesList.Location = new System.Drawing.Point(0, 109);
             this.PanelServicesList.Name = "PanelServicesList";
             this.PanelServicesList.Padding = new System.Windows.Forms.Padding(150, 15, 150, 10);
-            this.PanelServicesList.Size = new System.Drawing.Size(982, 444);
+            this.PanelServicesList.Size = new System.Drawing.Size(1169, 558);
             this.PanelServicesList.TabIndex = 3;
             // 
             // PanelListServices
             // 
-            this.PanelListServices.AutoScroll = true;
-            this.PanelListServices.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelListServices.Controls.Add(this.PanelService);
-            this.PanelListServices.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelListServices.Location = new System.Drawing.Point(150, 15);
-            this.PanelListServices.Name = "PanelListServices";
-            this.PanelListServices.Size = new System.Drawing.Size(682, 419);
-            this.PanelListServices.TabIndex = 5;
+            PanelListServices.AutoScroll = true;
+            PanelListServices.Controls.Add(this.PanelService);
+            PanelListServices.Dock = System.Windows.Forms.DockStyle.Fill;
+            PanelListServices.Location = new System.Drawing.Point(150, 15);
+            PanelListServices.Name = "PanelListServices";
+            PanelListServices.Size = new System.Drawing.Size(869, 533);
+            PanelListServices.TabIndex = 5;
             // 
             // PanelService
             // 
@@ -176,7 +178,7 @@
             this.PanelService.Location = new System.Drawing.Point(0, 0);
             this.PanelService.Margin = new System.Windows.Forms.Padding(4);
             this.PanelService.Name = "PanelService";
-            this.PanelService.Size = new System.Drawing.Size(680, 39);
+            this.PanelService.Size = new System.Drawing.Size(869, 39);
             this.PanelService.TabIndex = 0;
             this.PanelService.Click += new System.EventHandler(this.PanelService_Click);
             this.PanelService.MouseEnter += new System.EventHandler(this.PanelService_MouseEnter);
@@ -187,7 +189,7 @@
             this.PriceService.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PriceService.Dock = System.Windows.Forms.DockStyle.Right;
             this.PriceService.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.PriceService.Location = new System.Drawing.Point(592, 0);
+            this.PriceService.Location = new System.Drawing.Point(781, 0);
             this.PriceService.Name = "PriceService";
             this.PriceService.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.PriceService.Size = new System.Drawing.Size(88, 39);
@@ -218,7 +220,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 553);
+            this.ClientSize = new System.Drawing.Size(1169, 667);
             this.Controls.Add(this.PanelServicesList);
             this.Controls.Add(this.PanelTitleServices);
             this.Controls.Add(this.HeaderTable);
@@ -229,7 +231,7 @@
             this.HeaderTable.PerformLayout();
             this.PanelTitleServices.ResumeLayout(false);
             this.PanelServicesList.ResumeLayout(false);
-            this.PanelListServices.ResumeLayout(false);
+            PanelListServices.ResumeLayout(false);
             this.PanelService.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -245,7 +247,7 @@
         private System.Windows.Forms.Panel PanelTitleServices;
         private System.Windows.Forms.Label TitleServices;
         private System.Windows.Forms.Panel PanelServicesList;
-        private System.Windows.Forms.Panel PanelListServices;
+        public static System.Windows.Forms.Panel PanelListServices;
         private Guna.UI2.WinForms.Guna2Panel PanelService;
         private System.Windows.Forms.Label PriceService;
         private System.Windows.Forms.Label NameService;

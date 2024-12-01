@@ -29,5 +29,9 @@ namespace ProjectName.Services
                 throw;
             }
         }
+        public async Task<HttpResponseMessage> PostAsync(string url, HttpContent content)
+        {
+            return await _httpClient.PostAsync(url, content);
+        }
     }
 }

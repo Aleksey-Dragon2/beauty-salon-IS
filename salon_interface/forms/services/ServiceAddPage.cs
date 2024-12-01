@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyWindowsFormsApp.Models;
+using ProjectName.api;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +14,10 @@ namespace salon_interface
 {
     public partial class ServiceAddPage : Form
     {
-        public ServiceAddPage()
+        private int id;
+        public ServiceAddPage(int id)
         {
+            this.id = id;
             InitializeComponent();
         }
 
@@ -32,5 +36,15 @@ namespace salon_interface
             this.CloseFormButton.ForeColor = Color.Black;
         }
 
+        private async void AcceptEditButton_Click(object sender, EventArgs e)
+        {
+            int id = this.id;
+            string name=this.EditNameService.Text;
+            float price=Convert.ToSingle(this.EditPriceService.Text);
+            await ServiceApiHandler.AddServiceAsync(name, price);
+            this.Close();
+            ServicesPage.ServicesLabel_Click(null, null);
+
+        }
     }
 }

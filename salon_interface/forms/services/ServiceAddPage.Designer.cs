@@ -19,6 +19,12 @@
             }
             base.Dispose(disposing);
         }
+        public void FillEditData(string name, string price)
+        {
+            this.EditNameService.Text= name;
+            this.EditPriceService.Text= price;
+
+        }
 
         #region Windows Form Designer generated code
 
@@ -31,11 +37,11 @@
             this.TitleEditService = new System.Windows.Forms.Label();
             this.TitlePanel = new System.Windows.Forms.Panel();
             this.CloseFormButton = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.EditPriceService = new Guna.UI2.WinForms.Guna2TextBox();
-            this.EditNameService = new Guna.UI2.WinForms.Guna2TextBox();
             this.DeleteServiceButton = new Guna.UI2.WinForms.Guna2Button();
             this.AcceptEditButton = new Guna.UI2.WinForms.Guna2Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.EditNameService = new Guna.UI2.WinForms.Guna2TextBox();
+            this.EditPriceService = new Guna.UI2.WinForms.Guna2TextBox();
             this.TitlePanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -77,74 +83,6 @@
             this.CloseFormButton.MouseEnter += new System.EventHandler(this.CloseFormButton_MouseEnter);
             this.CloseFormButton.MouseLeave += new System.EventHandler(this.CloseFormButton_MouseLeave);
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.EditPriceService, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.EditNameService, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 44);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(30, 20, 30, 20);
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(745, 95);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // EditPriceService
-            // 
-            this.EditPriceService.Animated = true;
-            this.EditPriceService.BorderColor = System.Drawing.Color.Black;
-            this.EditPriceService.BorderRadius = 7;
-            this.EditPriceService.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.EditPriceService.DefaultText = "";
-            this.EditPriceService.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.EditPriceService.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.EditPriceService.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.EditPriceService.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.EditPriceService.Dock = System.Windows.Forms.DockStyle.Top;
-            this.EditPriceService.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditPriceService.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.EditPriceService.ForeColor = System.Drawing.Color.Black;
-            this.EditPriceService.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditPriceService.Location = new System.Drawing.Point(580, 24);
-            this.EditPriceService.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.EditPriceService.Name = "EditPriceService";
-            this.EditPriceService.PasswordChar = '\0';
-            this.EditPriceService.PlaceholderText = "";
-            this.EditPriceService.SelectedText = "";
-            this.EditPriceService.Size = new System.Drawing.Size(132, 42);
-            this.EditPriceService.TabIndex = 1;
-            // 
-            // EditNameService
-            // 
-            this.EditNameService.Animated = true;
-            this.EditNameService.BorderColor = System.Drawing.Color.Black;
-            this.EditNameService.BorderRadius = 7;
-            this.EditNameService.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.EditNameService.DefaultText = "";
-            this.EditNameService.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.EditNameService.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.EditNameService.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.EditNameService.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.EditNameService.Dock = System.Windows.Forms.DockStyle.Top;
-            this.EditNameService.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditNameService.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.EditNameService.ForeColor = System.Drawing.Color.Black;
-            this.EditNameService.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.EditNameService.Location = new System.Drawing.Point(33, 24);
-            this.EditNameService.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.EditNameService.Name = "EditNameService";
-            this.EditNameService.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.EditNameService.PasswordChar = '\0';
-            this.EditNameService.PlaceholderText = "";
-            this.EditNameService.SelectedText = "";
-            this.EditNameService.Size = new System.Drawing.Size(507, 42);
-            this.EditNameService.TabIndex = 0;
-            // 
             // DeleteServiceButton
             // 
             this.DeleteServiceButton.BorderRadius = 8;
@@ -176,18 +114,91 @@
             this.AcceptEditButton.Size = new System.Drawing.Size(180, 45);
             this.AcceptEditButton.TabIndex = 3;
             this.AcceptEditButton.Text = "Применить";
+            this.AcceptEditButton.Click += new System.EventHandler(this.AcceptEditButton_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.EditPriceService, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.EditNameService, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 44);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(30, 20, 30, 20);
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(745, 95);
+            this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // EditNameService
+            // 
+            this.EditNameService.Animated = true;
+            this.EditNameService.BorderColor = System.Drawing.Color.Black;
+            this.EditNameService.BorderRadius = 7;
+            this.EditNameService.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.EditNameService.DefaultText = "";
+            this.EditNameService.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.EditNameService.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.EditNameService.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.EditNameService.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.EditNameService.Dock = System.Windows.Forms.DockStyle.Top;
+            this.EditNameService.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.EditNameService.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.EditNameService.ForeColor = System.Drawing.Color.Black;
+            this.EditNameService.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.EditNameService.Location = new System.Drawing.Point(33, 24);
+            this.EditNameService.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.EditNameService.Name = "EditNameService";
+            this.EditNameService.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
+            this.EditNameService.PasswordChar = '\0';
+            this.EditNameService.PlaceholderText = "";
+            this.EditNameService.SelectedText = "";
+            this.EditNameService.Size = new System.Drawing.Size(507, 42);
+            this.EditNameService.TabIndex = 0;
+            // 
+            // EditPriceService
+            // 
+            this.EditPriceService.Animated = true;
+            this.EditPriceService.BorderColor = System.Drawing.Color.Black;
+            this.EditPriceService.BorderRadius = 7;
+            this.EditPriceService.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.EditPriceService.DefaultText = "";
+            this.EditPriceService.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.EditPriceService.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.EditPriceService.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.EditPriceService.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.EditPriceService.Dock = System.Windows.Forms.DockStyle.Top;
+            this.EditPriceService.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.EditPriceService.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.EditPriceService.ForeColor = System.Drawing.Color.Black;
+            this.EditPriceService.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.EditPriceService.Location = new System.Drawing.Point(580, 24);
+            this.EditPriceService.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.EditPriceService.Name = "EditPriceService";
+            this.EditPriceService.PasswordChar = '\0';
+            this.EditPriceService.PlaceholderText = "";
+            this.EditPriceService.SelectedText = "";
+            this.EditPriceService.Size = new System.Drawing.Size(132, 42);
+            this.EditPriceService.TabIndex = 1;
             // 
             // ServiceAddPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 271);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(745, 303);
+            this.ControlBox = false;
             this.Controls.Add(this.DeleteServiceButton);
             this.Controls.Add(this.AcceptEditButton);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.TitlePanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ServiceAddPage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ServiceAddPage";
             this.TitlePanel.ResumeLayout(false);
             this.TitlePanel.PerformLayout();
@@ -202,10 +213,10 @@
         private System.Windows.Forms.Label TitleEditService;
         private System.Windows.Forms.Panel TitlePanel;
         private System.Windows.Forms.Label CloseFormButton;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Guna.UI2.WinForms.Guna2TextBox EditNameService;
-        private Guna.UI2.WinForms.Guna2TextBox EditPriceService;
         private Guna.UI2.WinForms.Guna2Button DeleteServiceButton;
         private Guna.UI2.WinForms.Guna2Button AcceptEditButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private Guna.UI2.WinForms.Guna2TextBox EditPriceService;
+        private Guna.UI2.WinForms.Guna2TextBox EditNameService;
     }
 }

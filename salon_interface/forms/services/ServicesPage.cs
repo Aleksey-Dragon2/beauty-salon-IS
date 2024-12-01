@@ -22,10 +22,10 @@ namespace salon_interface
         {
             InitializeComponent();
             _apiService = new ApiService();
-
+            ServicesLabel_Click(null, null);
         }
 
-        private async void ServicesLabel_Click(object sender, EventArgs e)
+        public static async void ServicesLabel_Click(object sender, EventArgs e)
         {
             for (int i = PanelListServices.Controls.Count - 1; i >= 0; i--)
             {
@@ -37,9 +37,13 @@ namespace salon_interface
             List<Service> services = await ServiceApiHandler.GetServicesAsync();
             foreach (Service service in services){
 
-                ServicePanelContainer servicePanel = new ServicePanelContainer(service.Id.ToString(), service.Name, service.Price.ToString());
+                ServiceInfoPanel servicePanel = new ServiceInfoPanel(service.Id.ToString());
+                servicePanel.NameService.Text=service.Name;
+                servicePanel.PriceService.Text = service.Price.ToString();
+                
+
                 PanelListServices.Controls.Add(servicePanel.PanelService);
-                servicePanel.PanelService.Click+= new System.EventHandler(this.PanelService_Click);
+                //servicePanel.NameService.Click+= new System.EventHandler(this.PanelService_Click);
             }
 
         }
@@ -62,6 +66,11 @@ namespace salon_interface
         private void PanelService_MouseLeave(object sender, EventArgs e)
         {
             this.PanelService.BorderColor= Color.Transparent;
+        }
+
+        private void Service_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
