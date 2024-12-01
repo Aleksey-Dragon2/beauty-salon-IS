@@ -1,14 +1,18 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import select, delete, DateTime
 from sqlalchemy.orm import Session
-from .database import engine, SessionLocal
-from app import models
 from typing import Optional
+
+from app.database import engine, SessionLocal
+from app import models
 from datetime import datetime
 import uvicorn
 
+from urllib.parse import unquote
+
+
 # Создаем таблицы в базе данных (если они еще не существуют)
-models.Base.metadata.drop_all(bind=engine)
+# models.Base.metadata.drop_all(bind=engine)
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -31,6 +35,7 @@ def create_visit(client_name: str, visits_date:datetime, status: str, db: Sessio
     db.commit()
     db.refresh(db_visits)
     return db_visits
+
 
 # Создание мастера
 @app.post("/master/")
@@ -93,10 +98,13 @@ def update_master(
              master.specialization=specialization
 
         db.commit()
+        
 
 # Создание услуги
+
 @app.post("/service/")
 def create_service(name: str, price: float, db: Session=Depends(get_db)):
+    name = unquote(name) 
     db_service=models.Service(name=name, price=price)
     db.add(db_service)
     db.commit()
@@ -133,7 +141,14 @@ def get_masters(db: Session = Depends(get_db)):
 @app.get("/services/get/")
 def get_services(db: Session = Depends(get_db)):
     stmt=select(models.Service)
-    services=db.scalars(stmt).first()
+    services=db.scalars(stmt).all()
+    return services
+
+# Получение одной услуги
+@app.get("/services/get/{id}")
+def get_service_by_id(id:int, db: Session = Depends(get_db)):
+    stmt=select(models.Service).filter(models.Service.id==id)
+    services=db.scalars(stmt).one()
     return services
 
 if __name__ == "__main__":
