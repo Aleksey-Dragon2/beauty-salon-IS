@@ -46,7 +46,8 @@ def create_master(name: str, surname:str, specialization: str, db: Session = Dep
     db.refresh(db_master)
     return db_master
 
-@app.post("/master/assign-service")
+# Добавление услуги в мастера
+@app.post("/master/assign-service/")
 def master_assign_service(master_id:int, service_id:int, db:Session=Depends(get_db)):
     db_master_services=models.MasterService(master_id=master_id, service_id=service_id)
     db.add(db_master_services)
@@ -54,7 +55,8 @@ def master_assign_service(master_id:int, service_id:int, db:Session=Depends(get_
     db.refresh(db_master_services)
     return db_master_services
 
-@app.post("/master/remove-service")
+# Удаление услуги у мастера
+@app.post("/master/remove-service/")
 def master_remove_service(master_id: int, service_id: int, db: Session = Depends(get_db)):
     # Ищем запись для удаления
     stmt = select(models.MasterService).where(
@@ -77,7 +79,7 @@ def master_remove_service(master_id: int, service_id: int, db: Session = Depends
     return {"message": "Service removed successfully"}
 
 # Обновление мастера
-@app.post("/master/update")
+@app.post("/master/update/")
 def update_master(
     id: int, 
     name: Optional[str] = None,
@@ -101,18 +103,36 @@ def update_master(
         
 
 # Создание услуги
-
 @app.post("/service/")
-def create_service(name: str, price: float, db: Session=Depends(get_db)):
+def create_service(name: str, price: float, master_id:int, db: Session=Depends(get_db)):
     name = unquote(name) 
     db_service=models.Service(name=name, price=price)
     db.add(db_service)
+    db.flush()
+    db_provided_service=models.MasterService(master_id=master_id, service_id=db_service.id)
+    db.add(db_provided_service)
     db.commit()
     db.refresh(db_service)
     return db_service
 
+# Удаление услуги
+@app.delete("/service/{id}", status_code=204)
+def delete_service_by_id(id: int, db:Session=Depends(get_db)):
+    service = db.query(models.Service).filter(models.Service.id == id).first()
+    if service is None:
+        raise HTTPException(status_code=404, detail="Service not found")
+    stmt = delete(models.Service).where(models.Service.id == id)
+    db.execute(stmt)
+    db.commit()
+    return {"detail": "Service deleted successfully"}
+    # if not isinstance(id, int):
+    #     raise HTTPException(status_code=415, detail="Unsupported Media Type")
+    # stmt = delete(models.Service).where(models.Service.id==id)
+    # db.execute(stmt)
+    # db.commit()
+
 # Обновление услуги
-@app.post("/service/update")
+@app.post("/service/update/")
 def update_service(
     id: int, 
     name: Optional[str] = None,
@@ -137,6 +157,14 @@ def get_masters(db: Session = Depends(get_db)):
     masters = db.scalars(stmt).all()
     return masters
 
+# Получение всех специализаций
+@app.get("/masters/specialization/")
+def get_masters_specialization(db: Session = Depends(get_db)):
+    stmt=select(models.Master.specialization)
+    masters=db.scalars(stmt).all()
+    return masters
+    
+
 # Получение всех услуг
 @app.get("/services/get/")
 def get_services(db: Session = Depends(get_db)):
@@ -144,13 +172,7 @@ def get_services(db: Session = Depends(get_db)):
     services=db.scalars(stmt).all()
     return services
 
-@app.post("/service/delete/")
-def delete_service_by_id(id: int, db:Session=Depends(get_db)):
-    if not isinstance(id, int):
-        raise HTTPException(status_code=415, detail="Unsupported Media Type")
-    stmt = delete(models.Service).where(models.Service.id==id)
-    db.execute(stmt)
-    db.commit()
+
 
 
 
