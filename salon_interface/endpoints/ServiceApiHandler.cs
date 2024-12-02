@@ -14,68 +14,39 @@ namespace ProjectName.api
     public class ServiceApiHandler
     {
         private static ApiService _apiService = new ApiService();
+        private static IConfigurationRoot GetAPI()
+        {
+            var configuration = new ConfigurationBuilder()
+            .SetBasePath(Path.Combine(AppContext.BaseDirectory, @"..\..\endpoints"))  // Full path or Relative path
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .Build();
 
+            return configuration;
+        }
         public static async Task<List<Service>> GetServicesAsync()
         {
-
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(AppContext.BaseDirectory, @"..\..\endpoints"))  // Full path or Relative path
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
-
-            string apiUrl = configuration["ApiUrls:ApiGetServices"];
-            string endpoint = apiUrl;
-            return await _apiService.GetServicesAsync(endpoint);
-        }
-        public static async Task<Service> GetServiceByIdAsync(int id)
-        {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(AppContext.BaseDirectory, @"..\..\endpoints"))  // Убедитесь, что путь правильный
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
-
-            string apiUrl = configuration["ApiUrls:GetServiceById"];
-            string endpoint = $"{apiUrl}{id}"; // Добавляем ID к endpoint
-
-            return await _apiService.GetServicesByIdAsync(endpoint);
+            string endpoint = GetAPI()["ServiceApi:ApiGetServices"];
+            return await _apiService.GetServicesAsync<List<Service>>(endpoint);
         }
 
-        public static async Task<Service> AddServiceAsync(string name, float price)
+        public static async Task<Service> CreateServiceAsync(string name, float price, int master_id)
         {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(AppContext.BaseDirectory, @"..\..\endpoints"))  // Full path or Relative path
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
 
-            string apiUrl = configuration["ApiUrls:ApiAddService"];
-            string endpoint = apiUrl;
 
-            return await _apiService.AddServiceAsync(endpoint, name, price);
+            string endpoint = GetAPI()["ServiceApi:ApiCreateService"];
+
+            return await _apiService.CreateServiceAsync(endpoint, name, price, master_id);
         }
 
         public static async Task<Service> UpdateServiceAsync(int id, string name, float price)
         {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(AppContext.BaseDirectory, @"..\..\endpoints"))  // Full path or Relative path
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
-
-            string apiUrl = configuration["ApiUrls:ApiUpdateService"];
-            string endpoint = apiUrl;
-
+            string endpoint = GetAPI()["ServiceApi:ApiUpdateService"];
             return await _apiService.UpdateServiceAsync(endpoint, id, name, price);
         }
-        public static async Task<Service> DeleteServiceAsync(int id)
+        public static async Task DeleteServiceAsync(int id)
         {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(AppContext.BaseDirectory, @"..\..\endpoints"))  // Full path or Relative path
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
-
-            string apiUrl = configuration["ApiUrls:ApiDeleteService"];
-            string endpoint = apiUrl;
-
-            return await _apiService.DeleteServiceAsync(endpoint, id);
+            string endpoint = $"{GetAPI()["ServiceApi:ApiDeleteService"]}{id}";
+            await _apiService.DeleteServiceAsync(endpoint);
         }
     }
 }

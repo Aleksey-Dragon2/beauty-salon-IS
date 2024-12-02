@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using MyWindowsFormsApp.Models;
 using Newtonsoft.Json;
 using ProjectName.Services; 
@@ -19,50 +20,36 @@ namespace ProjectName.Services
             _httpClientService = new HttpClientService();
         }
 
-        // Метод для получения списка услуг с API
-        public async Task<List<Service>> GetServicesAsync(string endpoint)
+        public async Task<T> GetServicesAsync<T>(string endpoint)
         {
             try
             {
                 var response = await _httpClientService.GetAsync(endpoint);
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                var services = JsonConvert.DeserializeObject<List<Service>>(responseBody);
-                return services;
+                var responseBody = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(responseBody);
+            }
+            catch (JsonException ex)
+            {
+                MessageBox.Show($"Ошибка десериализации: {ex.Message}");
+                throw new Exception("Ошибка обработки данных. Пожалуйста, свяжитесь с поддержкой.", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка при получении услуг: {ex.Message}");
+                MessageBox.Show($"Ошибка на уровне API: {ex.Message}");
                 throw;
             }
         }
-
-        public async Task<Service> GetServicesByIdAsync(string endpoint)
-        {
-            try
-            {
-                var response = await _httpClientService.GetAsync(endpoint);
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                var services = JsonConvert.DeserializeObject<Service>(responseBody);
-                return services;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка при получении услуг: {ex.Message}");
-                throw;
-            }
-        }
-        public async Task<Service> AddServiceAsync(string endpoint, string name, float price)
+        public async Task<Service> CreateServiceAsync(string endpoint, string name, float price, int master_id)
         {
             try
             {
                 string encodedName = System.Web.HttpUtility.UrlEncode(name);
                 string encodedPrice = price.ToString(CultureInfo.InvariantCulture); // InvariantCulture для корректной обработки чисел
+                string encodedMasterId= master_id.ToString(CultureInfo.InvariantCulture);
 
                 var builder = new UriBuilder(endpoint)
                 {
-                    Query = $"name={encodedName}&price={encodedPrice}"
+                    Query = $"name={encodedName}&price={encodedPrice}&master_id={encodedMasterId}"
                 };
 
                 var response = await _httpClientService.PostAsync(builder.ToString(), null);
@@ -124,40 +111,30 @@ namespace ProjectName.Services
             }
         }
 
-        public async Task<Service> DeleteServiceAsync(string endpoint, int id)
+        public async Task DeleteServiceAsync(string endpoint)
+        {
+          await _httpClientService.DeleteAsync(endpoint);
+        }
+
+        public async Task<T> GetMastersAsync<T>(string endpoint)
         {
             try
             {
-                string encodeId = id.ToString(CultureInfo.InvariantCulture);
-
-
-                var builder = new UriBuilder(endpoint)
-                {
-                    Query = $"id={encodeId}"
-                };
-
-                var response = await _httpClientService.PostAsync(builder.ToString(), null);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-
-                    var addedService = JsonConvert.DeserializeObject<Service>(responseBody);
-                    return addedService;
-                }
-                else
-                {
-                    string errorResponse = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Ошибка при удалении услуги: {response.StatusCode}, {errorResponse}");
-                }
+                var response = await _httpClientService.GetAsync(endpoint);
+                var responseBody = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(responseBody);
+            }
+            catch (JsonException ex)
+            {
+                MessageBox.Show($"Ошибка десериализации: {ex.Message}");
+                throw new Exception("Ошибка обработки данных. Пожалуйста, свяжитесь с поддержкой.", ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка при удалении услуги: {ex.Message}");
+                MessageBox.Show($"Ошибка на уровне API: {ex.Message}");
                 throw;
             }
         }
-
 
     }
 }

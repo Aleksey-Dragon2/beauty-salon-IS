@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ProjectName.Services
 {
@@ -16,22 +17,34 @@ namespace ProjectName.Services
         // Метод для отправки GET-запроса и получения данных
         public async Task<HttpResponseMessage> GetAsync(string url)
         {
-            try
-            {
-                // Отправляем запрос
-                HttpResponseMessage response = await _httpClient.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                return response;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка HTTP-запроса: {ex.Message}");
-                throw;
-            }
+            return await ExecuteRequestAsync(() => _httpClient.GetAsync(url));
         }
         public async Task<HttpResponseMessage> PostAsync(string url, HttpContent content)
         {
             return await _httpClient.PostAsync(url, content);
+        }
+        public async Task<HttpResponseMessage> DeleteAsync(string url)
+        {
+            return await _httpClient.DeleteAsync(url);
+        }
+        private async Task<HttpResponseMessage> ExecuteRequestAsync(Func<Task<HttpResponseMessage>> httpRequest)
+        {
+            try
+            {
+                var response = await httpRequest();
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(($"HTTP-запрос завершился ошибкой: {ex.Message}"));
+                throw;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(($"Неизвестная ошибка: {ex.Message}"));
+                throw;
+            }
         }
     }
 }
