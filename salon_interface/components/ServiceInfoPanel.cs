@@ -37,9 +37,6 @@ namespace salon_interface
             // 
             // PanelService
             // 
-            this.PanelService.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
-            this.PanelService.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
-            this.PanelService.Click += new System.EventHandler(this.OnPanel_MouseClick);
             this.PanelService.AutoRoundedCorners = true;
             this.PanelService.BackColor = System.Drawing.Color.Transparent;
             this.PanelService.BorderColor = System.Drawing.Color.Transparent;
@@ -54,29 +51,29 @@ namespace salon_interface
             this.PanelService.Location = new System.Drawing.Point(0, 0);
             this.PanelService.Margin = new System.Windows.Forms.Padding(4);
             this.PanelService.Name = "PanelService";
-            this.PanelService.Size = new System.Drawing.Size(1166, 30);
+            this.PanelService.Size = new System.Drawing.Size(635, 30);
             this.PanelService.TabIndex = 0;
+            this.PanelService.Click += new System.EventHandler(this.OnPanel_MouseClick);
+            this.PanelService.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
+            this.PanelService.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
             // 
             // PriceService
             // 
-            this.PriceService.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
-            this.PriceService.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
             this.PriceService.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PriceService.Dock = System.Windows.Forms.DockStyle.Right;
             this.PriceService.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.PriceService.Location = new System.Drawing.Point(1078, 0);
+            this.PriceService.Location = new System.Drawing.Point(547, 0);
             this.PriceService.Name = "PriceService";
             this.PriceService.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.PriceService.Size = new System.Drawing.Size(88, 30);
             this.PriceService.TabIndex = 1;
             this.PriceService.Text = "10.0";
             this.PriceService.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.PriceService.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
+            this.PriceService.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
             // 
             // NameService
             // 
-            this.NameService.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
-            this.NameService.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
-            this.NameService.Click += new System.EventHandler(this.OnPanel_MouseClick);
             this.NameService.BackColor = System.Drawing.Color.Transparent;
             this.NameService.Dock = System.Windows.Forms.DockStyle.Left;
             this.NameService.Font = new System.Drawing.Font("Times New Roman", 12F);
@@ -87,6 +84,9 @@ namespace salon_interface
             this.NameService.TabIndex = 0;
             this.NameService.Text = "Маникюр";
             this.NameService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.NameService.Click += new System.EventHandler(this.OnPanel_MouseClick);
+            this.NameService.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
+            this.NameService.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
             // 
             // ServiceInfoPanel
             // 
