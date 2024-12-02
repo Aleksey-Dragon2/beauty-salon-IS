@@ -26,26 +26,7 @@ namespace salon_interface
         }
         private async void ServicesLabel_Click(object sender, EventArgs e)
         {
-            
-            for (int i = PanelListServices.Controls.Count - 1; i >= 0; i--)
-            {
-                Control control = PanelListServices.Controls[i];
-                PanelListServices.Controls.Remove(control);
-            }
-
-
-            List<Service> services = await ServiceApiHandler.GetServicesAsync();
-            foreach (Service service in services){
-
-                ServiceInfoPanel servicePanel = new ServiceInfoPanel(service.Id.ToString(), this);
-                servicePanel.NameService.Text=service.Name;
-                servicePanel.PriceService.Text = service.Price.ToString();
-
-
-                PanelListServices.Controls.Add(servicePanel.PanelService);
-                //servicePanel.NameService.Click+= new System.EventHandler(this.PanelService_Click);
-            }
-            
+            this.updateService();
         }
 
         private void PanelService_Click(object sender, EventArgs e)
@@ -68,8 +49,11 @@ namespace salon_interface
             this.PanelService.BorderColor= Color.Transparent;
         }
 
-        private void Service_Click(object sender, EventArgs e)
+
+        private async void AcceptEditButton_Click(object sender, EventArgs e)
         {
+            ServiceAddPage serviceAddPage = new ServiceAddPage(this);
+            serviceAddPage.ShowDialog();
 
         }
     }
