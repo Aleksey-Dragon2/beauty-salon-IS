@@ -163,6 +163,7 @@
     <Compile Include="components\ServiceInfoPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="endpoints\MasterApiHandler.cs" />
     <Compile Include="endpoints\ServiceApiHandler.cs" />
     <Compile Include="forms\services\ServicesPage.cs">
       <SubType>Form</SubType>
@@ -170,6 +171,7 @@
     <Compile Include="forms\services\ServicesPage.Designer.cs">
       <DependentUpon>ServicesPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="models\master.cs" />
     <Compile Include="models\service.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -185,10 +187,19 @@
     <Compile Include="forms\services\ServiceDeletePage.Designer.cs">
       <DependentUpon>ServiceDeletePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\services\ServiceAddPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\services\ServiceAddPage.Designer.cs">
+      <DependentUpon>ServiceAddPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="utils\APIservice.cs" />
     <Compile Include="utils\HttpClientService.cs" />
     <EmbeddedResource Include="components\ServiceInfoPanel.resx">
       <DependentUpon>ServiceInfoPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\services\ServiceAddPage.resx">
+      <DependentUpon>ServiceAddPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\services\ServiceEditPage.resx">
       <DependentUpon>ServiceEditPage.cs</DependentUpon>
