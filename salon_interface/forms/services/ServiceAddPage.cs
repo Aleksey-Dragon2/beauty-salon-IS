@@ -1,4 +1,5 @@
-﻿using MyWindowsFormsApp.Models;
+﻿using Guna.UI2.WinForms;
+using MyWindowsFormsApp.Models;
 using ProjectName.api;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,11 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace salon_interface
 {
@@ -30,16 +34,31 @@ namespace salon_interface
 
         private async void AcceptAddButton_Click(object sender, EventArgs e)
         {
-            
+            string text=this.AddPriceService.Text;
+            if (this.AddNameService.Text == "" || this.AddNameService.Text == "Специализация")
+                MessageBox.Show("Введите название услуги");
+            else if (this.AddPriceService.Text == "")
+                MessageBox.Show("Укажите цену");
+            else if (!string.IsNullOrEmpty(text) && text[text.Length - 1] == '.')
+                MessageBox.Show($"Цена не может заканчиваться на '.' ");
+            else if (!this.AddNameService.Enabled || !this.AddPriceService.Enabled)
+            {
+                MessageBox.Show("Выберите специализацию и мастера");
+            }
+
+            else
+            {
+
             string serviceName = this.AddNameService.Text;
-            float serivcePrice =Convert.ToSingle(this.AddPriceService.Text);
+            float serivcePrice = Convert.ToSingle(this.AddPriceService.Text);
             string masterSurname = this.ChoseMaster.Text.Split(' ')[0];
             string specialization = this.ChoiseMasterSpezialization.Text;
             int master_id = Find_Id_Masters(masterSurname, specialization);
-
             await ServiceApiHandler.CreateServiceAsync(serviceName, serivcePrice, master_id);
+
             this.servicesPage.updateService();
             this.Close();
+            }
         }
 
         private int Find_Id_Masters(string targetSurname, string targetSpecialization)
@@ -71,14 +90,53 @@ namespace salon_interface
                         this.ChoseMaster.Items.AddRange(new object[] { $"{master.Surname} {master.Name}" });
                     }
                 }
-
                 this.ChoseMaster.SelectedIndex = 0;
+            }
+            else
+            {
+                this.ChoseMaster.Enabled = false;
             }
         }
 
         private void CancelAddServiceButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void AddServicePrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.')
+            {
+                if (string.IsNullOrEmpty(AddPriceService.Text))
+                {
+                    e.Handled = true;
+                    return;
+                }
+                if (AddPriceService.Text.Contains("."))
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+        }
+
+        private void ChoseMaster_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.ChoseMaster.Text!=""&&this.ChoseMaster.Text!="Мастер")
+            {
+                this.AddNameService.Enabled= true;
+                this.AddPriceService.Enabled= true;
+            }
+            else
+            {
+                this.AddNameService.Enabled = false;
+                this.AddPriceService.Enabled = false;
+            }
         }
     }
 }
