@@ -24,37 +24,11 @@ namespace salon_interface
             _apiService = new ApiService();
             updateService();
         }
-        private async void ServicesLabel_Click(object sender, EventArgs e)
-        {
-            this.updateService();
-        }
 
-        private void PanelService_Click(object sender, EventArgs e)
-        {
-            if (sender is Label button)
-            {
-                MessageBox.Show($"Вы нажали на: {button.Name}");
-            }
-        }
-
-
-        private void PanelService_MouseEnter(object sender, EventArgs e)
-        {
-            this.PanelService.BorderColor = Color.Red;
-            
-        }
-
-        private void PanelService_MouseLeave(object sender, EventArgs e)
-        {
-            this.PanelService.BorderColor= Color.Transparent;
-        }
-
-
-        private async void AcceptEditButton_Click(object sender, EventArgs e)
+        private void CreateServiceButton_Click(object sender, EventArgs e)
         {
             ServiceAddPage serviceAddPage = new ServiceAddPage(this);
             serviceAddPage.ShowDialog();
-
         }
     }
 

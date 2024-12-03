@@ -23,6 +23,7 @@ namespace salon_interface
         }
         public void FillEditData(string name, string price)
         {
+            this.defaultName = name;
             this.EditNameService.Text= name;
             this.EditPriceService.Text= price;
 
@@ -154,12 +155,14 @@ namespace salon_interface
             this.EditPriceService.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EditPriceService.Location = new System.Drawing.Point(580, 24);
             this.EditPriceService.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.EditPriceService.MaxLength = 5;
             this.EditPriceService.Name = "EditPriceService";
             this.EditPriceService.PasswordChar = '\0';
             this.EditPriceService.PlaceholderText = "";
             this.EditPriceService.SelectedText = "";
             this.EditPriceService.Size = new System.Drawing.Size(132, 42);
             this.EditPriceService.TabIndex = 1;
+            this.EditPriceService.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditServicePrice_KeyPress);
             // 
             // EditNameService
             // 
