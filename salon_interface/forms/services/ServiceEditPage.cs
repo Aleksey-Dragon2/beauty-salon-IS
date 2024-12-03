@@ -1,14 +1,10 @@
-﻿using MyWindowsFormsApp.Models;
-using ProjectName.api;
+﻿using ProjectName.api;
+using salon_interface;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static salon_interface.ServicesPage;
+using LoadServises = salon_interface.ServicesPage.LoadServices;
 
 namespace salon_interface
 {
@@ -16,12 +12,13 @@ namespace salon_interface
     {
         private int id;
         private string defaultName;
-        private ServicesPage servicesPage;
-        public ServiceEditPage(int id, ServicesPage servicesPage)
+        private LoadServises loadServices;
+        public delegate void CloseEditForm();
+        public ServiceEditPage(int id, LoadServises loadServices)
         {
             this.id = id;
             InitializeComponent();
-            this.servicesPage = servicesPage;
+            this.loadServices = loadServices;
         }
 
         private void CloseFormButton_Click(object sender, EventArgs e)
@@ -55,7 +52,7 @@ namespace salon_interface
             float price=Convert.ToSingle(this.EditPriceService.Text);
             await ServiceApiHandler.UpdateServiceAsync(id,name, price);
             this.Close();
-            servicesPage.updateService();
+                loadServices();
             }
 
         }
@@ -64,7 +61,8 @@ namespace salon_interface
         {
             int id = this.id;
             string name = this.defaultName;
-            ServiceDeletePage deletePage = new ServiceDeletePage(id, name,this, servicesPage);
+            CloseEditForm closeEditForm = this.Close;
+            ServiceDeletePage deletePage = new ServiceDeletePage(id, name, closeEditForm, loadServices);
             deletePage.ShowDialog();
 
         }

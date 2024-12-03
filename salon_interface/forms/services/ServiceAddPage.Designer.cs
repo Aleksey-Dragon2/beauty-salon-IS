@@ -151,6 +151,7 @@ namespace salon_interface
             this.AddNameService.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AddNameService.Location = new System.Drawing.Point(344, 35);
             this.AddNameService.Margin = new System.Windows.Forms.Padding(20, 30, 20, 30);
+            this.AddNameService.MaxLength = 254;
             this.AddNameService.Name = "AddNameService";
             this.AddNameService.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.AddNameService.PasswordChar = '\0';
@@ -219,7 +220,7 @@ namespace salon_interface
             this.TableTitle.ColumnCount = 3;
             this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.02104F));
             this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.97896F));
-            this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 166F));
+            this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 167F));
             this.TableTitle.Controls.Add(this.TitlePriceService, 2, 0);
             this.TableTitle.Controls.Add(this.TitleNameService, 1, 0);
             this.TableTitle.Controls.Add(this.TitleMasterService, 0, 0);
@@ -236,10 +237,10 @@ namespace salon_interface
             this.TitlePriceService.AutoSize = true;
             this.TitlePriceService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TitlePriceService.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitlePriceService.Location = new System.Drawing.Point(706, 0);
+            this.TitlePriceService.Location = new System.Drawing.Point(705, 0);
             this.TitlePriceService.Name = "TitlePriceService";
             this.TitlePriceService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitlePriceService.Size = new System.Drawing.Size(161, 48);
+            this.TitlePriceService.Size = new System.Drawing.Size(162, 48);
             this.TitlePriceService.TabIndex = 3;
             this.TitlePriceService.Text = "Цена";
             this.TitlePriceService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -252,7 +253,7 @@ namespace salon_interface
             this.TitleNameService.Location = new System.Drawing.Point(319, 0);
             this.TitleNameService.Name = "TitleNameService";
             this.TitleNameService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitleNameService.Size = new System.Drawing.Size(381, 48);
+            this.TitleNameService.Size = new System.Drawing.Size(380, 48);
             this.TitleNameService.TabIndex = 2;
             this.TitleNameService.Text = "Название услуги";
             this.TitleNameService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;

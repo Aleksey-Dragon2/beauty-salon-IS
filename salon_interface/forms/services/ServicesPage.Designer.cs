@@ -25,6 +25,8 @@ namespace salon_interface
             }
             base.Dispose(disposing);
         }
+
+        public delegate void LoadServices();
         public async void updateService()
         {
             for (int i = PanelListServices.Controls.Count - 1; i >= 0; i--)
@@ -32,12 +34,12 @@ namespace salon_interface
                 Control control = PanelListServices.Controls[i];
                 PanelListServices.Controls.Remove(control);
             }
-
+            LoadServices loadServices = updateService;
 
             List<Service> services = await ServiceApiHandler.GetServicesAsync();
             foreach (Service service in services)
             {
-                ServiceInfoPanel servicePanel = new ServiceInfoPanel(service.Id.ToString(), this);
+                ServiceInfoPanel servicePanel = new ServiceInfoPanel(service.Id.ToString(), loadServices);
                 servicePanel.NameService.Text = service.Name;
                 servicePanel.PriceService.Text = service.Price.ToString();
 

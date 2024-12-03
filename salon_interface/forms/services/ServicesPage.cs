@@ -17,11 +17,9 @@ namespace salon_interface
 {
     public partial class ServicesPage : Form
     {
-        private readonly ApiService _apiService;
         public ServicesPage()
         {
             InitializeComponent();
-            _apiService = new ApiService();
             updateService();
         }
 

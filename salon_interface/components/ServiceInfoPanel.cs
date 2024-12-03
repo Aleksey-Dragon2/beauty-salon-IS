@@ -1,11 +1,8 @@
 ﻿using Guna.UI2.WinForms;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using LoadServises = salon_interface.ServicesPage.LoadServices;
 
 namespace salon_interface
 {
@@ -14,16 +11,17 @@ namespace salon_interface
         public Guna2Panel PanelService;
         public Label NameService;
         public Label PriceService;
-        private ServicesPage ServicesPage;
-        
+        //private ServicesPage ServicesPage;
+        private LoadServises loadServices;
+
         //public ServicePanelContainer(string id, string serviceName, string servicePrice)
-        public ServiceInfoPanel(string id, ServicesPage servicesPage)
+        public ServiceInfoPanel(string id, LoadServises loadService)
         {
             InitializeComponent();
             this.PanelService.Name = $"ServicePanel_{id}";
             this.NameService.Name = $"ServiceName_{id}";
             this.PriceService.Name = $"ServicePrice_{id}";
-            this.ServicesPage = servicesPage ;
+            this.loadServices = loadService ;
         }
 
 
@@ -106,7 +104,7 @@ namespace salon_interface
         private void OnPanel_MouseClick(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(PanelService.Name.Split('_')[1]);
-            ServiceEditPage serviceAddPage = new ServiceEditPage(id, ServicesPage);
+            ServiceEditPage serviceAddPage = new ServiceEditPage(id, loadServices);
             serviceAddPage.FillEditData(this.NameService.Text, this.PriceService.Text);
             serviceAddPage.ShowDialog();
 

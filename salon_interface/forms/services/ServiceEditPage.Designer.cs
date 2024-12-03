@@ -182,6 +182,7 @@ namespace salon_interface
             this.EditNameService.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.EditNameService.Location = new System.Drawing.Point(33, 24);
             this.EditNameService.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.EditNameService.MaxLength = 254;
             this.EditNameService.Name = "EditNameService";
             this.EditNameService.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.EditNameService.PasswordChar = '\0';
