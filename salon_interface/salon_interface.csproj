@@ -160,6 +160,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="components\MasterFilterItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="components\ServiceInfoPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,6 +173,12 @@
     </Compile>
     <Compile Include="forms\services\ServicesPage.Designer.cs">
       <DependentUpon>ServicesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\masters\MasterPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\masters\MasterPage.Designer.cs">
+      <DependentUpon>MasterPage.cs</DependentUpon>
     </Compile>
     <Compile Include="models\master.cs" />
     <Compile Include="models\service.cs" />
@@ -195,8 +204,14 @@
     </Compile>
     <Compile Include="utils\APIservice.cs" />
     <Compile Include="utils\HttpClientService.cs" />
+    <EmbeddedResource Include="components\MasterFilterItem.resx">
+      <DependentUpon>MasterFilterItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="components\ServiceInfoPanel.resx">
       <DependentUpon>ServiceInfoPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\masters\MasterPage.resx">
+      <DependentUpon>MasterPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\services\ServiceAddPage.resx">
       <DependentUpon>ServiceAddPage.cs</DependentUpon>
