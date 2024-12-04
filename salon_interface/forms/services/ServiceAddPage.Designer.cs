@@ -68,6 +68,7 @@ namespace salon_interface
             this.AcceptAddButton = new Guna.UI2.WinForms.Guna2Button();
             this.tableButtons = new System.Windows.Forms.TableLayoutPanel();
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorLabel = new System.Windows.Forms.Label();
             this.TableAddService.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.TableTitle.SuspendLayout();
@@ -159,6 +160,7 @@ namespace salon_interface
             this.AddNameService.SelectedText = "";
             this.AddNameService.Size = new System.Drawing.Size(364, 40);
             this.AddNameService.TabIndex = 0;
+            this.AddNameService.TextChanged += new System.EventHandler(this.AddNameService_TextChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -220,7 +222,7 @@ namespace salon_interface
             this.TableTitle.ColumnCount = 3;
             this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.02104F));
             this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.97896F));
-            this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 167F));
+            this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
             this.TableTitle.Controls.Add(this.TitlePriceService, 2, 0);
             this.TableTitle.Controls.Add(this.TitleNameService, 1, 0);
             this.TableTitle.Controls.Add(this.TitleMasterService, 0, 0);
@@ -237,10 +239,10 @@ namespace salon_interface
             this.TitlePriceService.AutoSize = true;
             this.TitlePriceService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TitlePriceService.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitlePriceService.Location = new System.Drawing.Point(705, 0);
+            this.TitlePriceService.Location = new System.Drawing.Point(703, 0);
             this.TitlePriceService.Name = "TitlePriceService";
             this.TitlePriceService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitlePriceService.Size = new System.Drawing.Size(162, 48);
+            this.TitlePriceService.Size = new System.Drawing.Size(164, 48);
             this.TitlePriceService.TabIndex = 3;
             this.TitlePriceService.Text = "Цена";
             this.TitlePriceService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -250,10 +252,10 @@ namespace salon_interface
             this.TitleNameService.AutoSize = true;
             this.TitleNameService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TitleNameService.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitleNameService.Location = new System.Drawing.Point(319, 0);
+            this.TitleNameService.Location = new System.Drawing.Point(318, 0);
             this.TitleNameService.Name = "TitleNameService";
             this.TitleNameService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitleNameService.Size = new System.Drawing.Size(380, 48);
+            this.TitleNameService.Size = new System.Drawing.Size(379, 48);
             this.TitleNameService.TabIndex = 2;
             this.TitleNameService.Text = "Название услуги";
             this.TitleNameService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -266,7 +268,7 @@ namespace salon_interface
             this.TitleMasterService.Location = new System.Drawing.Point(3, 0);
             this.TitleMasterService.Name = "TitleMasterService";
             this.TitleMasterService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitleMasterService.Size = new System.Drawing.Size(310, 48);
+            this.TitleMasterService.Size = new System.Drawing.Size(309, 48);
             this.TitleMasterService.TabIndex = 0;
             this.TitleMasterService.Text = "Выбор мастера";
             this.TitleMasterService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -328,11 +330,24 @@ namespace salon_interface
             // 
             this.ErrorProvider.ContainerControl = this;
             // 
+            // errorLabel
+            // 
+            this.errorLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.errorLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(0, 277);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(870, 45);
+            this.errorLabel.TabIndex = 7;
+            this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.errorLabel.Visible = false;
+            // 
             // ServiceAddPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(870, 362);
+            this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.tableButtons);
             this.Controls.Add(this.TableAddService);
             this.Controls.Add(this.TableTitle);
@@ -368,5 +383,6 @@ namespace salon_interface
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Guna.UI2.WinForms.Guna2ComboBox ChoseMaster;
         private ErrorProvider ErrorProvider;
+        private Label errorLabel;
     }
 }

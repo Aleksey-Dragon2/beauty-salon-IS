@@ -34,7 +34,6 @@ namespace ProjectName.api
 
 
             string endpoint = GetAPI()["ServiceApi:ApiCreateService"];
-
             return await _apiService.CreateServiceAsync(endpoint, name, price, master_id);
         }
 

@@ -27,6 +27,7 @@ namespace salon_interface
         }
 
         public delegate void LoadServices();
+
         public async void updateService()
         {
             for (int i = PanelListServices.Controls.Count - 1; i >= 0; i--)

@@ -54,10 +54,19 @@ namespace salon_interface
             string masterSurname = this.ChoseMaster.Text.Split(' ')[0];
             string specialization = this.ChoiseMasterSpezialization.Text;
             int master_id = Find_Id_Masters(masterSurname, specialization);
-            await ServiceApiHandler.CreateServiceAsync(serviceName, serivcePrice, master_id);
+                try
+                {
+                    await ServiceApiHandler.CreateServiceAsync(serviceName, serivcePrice, master_id);
+                    this.servicesPage.updateService();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    this.errorLabel.Text = ex.Message;
+                    this.errorLabel.Visible = true;
+                }
 
-            this.servicesPage.updateService();
-            this.Close();
+
             }
         }
 
@@ -137,6 +146,11 @@ namespace salon_interface
                 this.AddNameService.Enabled = false;
                 this.AddPriceService.Enabled = false;
             }
+        }
+
+        private void AddNameService_TextChanged(object sender, EventArgs e)
+        {
+            this.errorLabel.Visible= false;
         }
     }
 }
