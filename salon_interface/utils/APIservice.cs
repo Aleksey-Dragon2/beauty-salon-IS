@@ -64,13 +64,16 @@ namespace ProjectName.Services
                 else
                 {
                     string errorResponse = await response.Content.ReadAsStringAsync();
-                    throw new Exception($"Ошибка при добавлении услуги: {response.StatusCode}, {errorResponse}");
+                    if (response.StatusCode.ToString() == "NotAcceptable")
+                    {
+                        throw new Exception($"Такая услуга уже существует");
+                    }
+                    throw new Exception($"Ошибка при добавлении услуги: {response.StatusCode}, {response.Content}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка при добавлении услуги: {ex.Message}");
-                throw;
+                throw ex;
             }
         }
 
