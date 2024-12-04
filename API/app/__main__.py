@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import select, delete, DateTime
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from typing import Optional
 
 from .database import engine, SessionLocal
@@ -79,7 +80,7 @@ def master_remove_service(master_id: int, service_id: int, db: Session = Depends
     return {"message": "Service removed successfully"}
 
 # Обновление мастера
-@app.post("/master/update/")
+@app.post("/master/update/", status_code=202)
 def update_master(
     id: int, 
     name: Optional[str] = None,
@@ -103,52 +104,68 @@ def update_master(
         
 
 # Создание услуги
-@app.post("/service/")
-def create_service(name: str, price: float, master_id:int, db: Session=Depends(get_db)):
+@app.post("/service/", status_code=201)
+def create_service(name: str, price: float, master_id: int, db: Session = Depends(get_db)):
     name = unquote(name) 
-    db_service=models.Service(name=name, price=price)
-    db.add(db_service)
-    db.flush()
-    db_provided_service=models.MasterService(master_id=master_id, service_id=db_service.id)
-    db.add(db_provided_service)
-    db.commit()
-    db.refresh(db_service)
-    return db_service
+    try:
+        db_service = models.Service(name=name, price=price)
+        db.add(db_service)
+        db.flush()
+
+        db_provided_service = models.MasterService(master_id=master_id, service_id=db_service.id)
+        db.add(db_provided_service)
+        db.commit()
+        db.refresh(db_service)
+        return db_service
+    except IntegrityError:
+        db.rollback() 
+        raise HTTPException(
+            status_code=406,
+            detail=f"Service with name '{name}' already exists."
+        )
 
 # Удаление услуги
 @app.delete("/service/{id}", status_code=204)
 def delete_service_by_id(id: int, db:Session=Depends(get_db)):
-    service = db.query(models.Service).filter(models.Service.id == id).first()
-    if service is None:
-        raise HTTPException(status_code=404, detail="Service not found")
-    stmt = delete(models.Service).where(models.Service.id == id)
-    db.execute(stmt)
-    db.commit()
-    return {"detail": "Service deleted successfully"}
-    # if not isinstance(id, int):
-    #     raise HTTPException(status_code=415, detail="Unsupported Media Type")
-    # stmt = delete(models.Service).where(models.Service.id==id)
-    # db.execute(stmt)
-    # db.commit()
+    try:
+        service = db.query(models.Service).filter(models.Service.id == id).first()
+        if service is None:
+            raise HTTPException(status_code=404, detail="Service not found")
+        stmt = delete(models.Service).where(models.Service.id == id)
+        db.execute(stmt)
+        db.commit()
+        return {"detail": "Service deleted successfully"}
+    except:
+        raise HTTPException(
+            status_code=523,
+            detail=f"Database unreachable"
+        )
+
 
 # Обновление услуги
-@app.post("/service/update/")
+@app.post("/service/update/",status_code=200)
 def update_service(
     id: int, 
     name: Optional[str] = None,
     price: Optional[float] = None,
     db: Session = Depends(get_db)):
-        stmt = select(models.Service).where(models.Service.id == id)
-        service=db.scalars(stmt).first()
-        if service is None:
-            raise HTTPException(status_code=404, detail="Service not founded")
+        try:
+            stmt = select(models.Service).where(models.Service.id == id)
+            service=db.scalars(stmt).first()
+            if service is None:
+                raise HTTPException(status_code=404, detail="Service not founded")
 
-        if name:
-            service.name=name
-        if price:
-            service.price=price
+            if name:
+                service.name=name
+            if price:
+                service.price=price
 
-        db.commit()
+            db.commit()
+        except:
+            raise HTTPException(
+            status_code=406,
+            detail=f"Service with name '{name}' already exists."
+        )
 
 # Получение всех мастеров
 @app.get("/masters/get/")
@@ -163,7 +180,6 @@ def get_masters_specialization(db: Session = Depends(get_db)):
     stmt=select(models.Master.specialization)
     masters=db.scalars(stmt).all()
     return masters
-    
 
 # Получение всех услуг
 @app.get("/services/get/")
@@ -171,17 +187,6 @@ def get_services(db: Session = Depends(get_db)):
     stmt=select(models.Service)
     services=db.scalars(stmt).all()
     return services
-
-
-
-
-
-# Получение одной услуги
-# @app.get("/services/get/{id}")
-# def get_service_by_id(id:int, db: Session = Depends(get_db)):
-#     stmt=select(models.Service).filter(models.Service.id==id)
-#     services=db.scalars(stmt).one()
-#     return services
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
