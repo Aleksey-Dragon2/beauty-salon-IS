@@ -26,31 +26,24 @@ namespace ProjectName.api
         public static async Task<List<Master>> GetMastersAsync()
         {
             string endpoint = GetAPI()["MasterApi:GetMasters"];
-            return await _apiService.GetMastersAsync<List<Master>>(endpoint);
+            return await _apiService.GetDataAsync<List<Master>>(endpoint);
         }
 
-        public static async Task<Service> AddServicAsync(string name, float price, int master_id)
+        public static async Task<Master> CreateMasterAsync(string name, string surname, string specialization)
         {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(AppContext.BaseDirectory, @"..\..\endpoints"))  // Full path or Relative path
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .Build();
-
-            string apiUrl = configuration["ApiUrls:ApiAddService"];
-            string endpoint = apiUrl;
-
-            return await _apiService.CreateServiceAsync(endpoint, name, price, master_id);
+            string endpoint = GetAPI()["ApiMaster:CreateMaster"];
+            return await _apiService.CreateMasterAsync(endpoint, name, surname, specialization);
         }
 
-        public static async Task<Service> UpdateServiceAsync(int id, string name, float price)
+        public static async Task<Master> UpdateMasterAsync(int id, string name, string surname, string specialization)
         {
             string endpoint = GetAPI()["ApiUrls:ApiUpdateService"]; ;
-            return await _apiService.UpdateServiceAsync(endpoint, id, name, price);
+            return await _apiService.UpdateMasterAsync(endpoint, id, name, surname, specialization);
         }
-        public static async Task DeleteServiceAsync(int id)
+        public static async Task DeleteMasterAsync(int id)
         {
-            string endpoint = $"{GetAPI()["ApiUrls:ApiDeleteService"]}{id}";
-            await _apiService.DeleteServiceAsync(endpoint);
+            string endpoint = $"{GetAPI()["ApiUrls:DeleteMaster"]}{id}";
+            await _apiService.DeleteDateAsync(endpoint);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ProjectName.api
         public static async Task<List<Service>> GetServicesAsync()
         {
             string endpoint = GetAPI()["ServiceApi:ApiGetServices"];
-            return await _apiService.GetServicesAsync<List<Service>>(endpoint);
+            return await _apiService.GetDataAsync<List<Service>>(endpoint);
         }
 
         public static async Task<Service> CreateServiceAsync(string name, float price, int master_id)
@@ -45,7 +45,7 @@ namespace ProjectName.api
         public static async Task DeleteServiceAsync(int id)
         {
             string endpoint = $"{GetAPI()["ServiceApi:ApiDeleteService"]}{id}";
-            await _apiService.DeleteServiceAsync(endpoint);
+            await _apiService.DeleteDateAsync(endpoint);
         }
     }
 }

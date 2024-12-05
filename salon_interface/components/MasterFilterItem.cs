@@ -42,6 +42,8 @@ namespace salon_interface
             this.BackgroundPanel.Name = "BackgroundPanel";
             this.BackgroundPanel.Size = new System.Drawing.Size(104, 38);
             this.BackgroundPanel.TabIndex = 4;
+            this.ItemText.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
+            this.ItemText.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
             // 
             // ItemText
             // 
@@ -54,10 +56,13 @@ namespace salon_interface
             this.ItemText.TabIndex = 0;
             this.ItemText.Text = "Все";
             this.ItemText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ItemText.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
+            this.ItemText.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
             // 
             // MasterFilterItem
             // 
             this.Controls.Add(this.BackgroundPanel);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "MasterFilterItem";
             this.Size = new System.Drawing.Size(104, 32);
             this.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
@@ -82,15 +87,12 @@ namespace salon_interface
 
         private void OnControlMouseEnter(object sender, EventArgs e)
         {
-
-            //PanelService.BorderColor = Color.Red;
-
+            this.BackgroundPanel.BorderColor = Color.Black;
         }
 
         private void OnControlMouseLeave(object sender, EventArgs e)
         {
-            //PanelService.BorderColor = Color.Transparent;
-
+            this.BackgroundPanel.BorderColor = Color.Transparent;
         }
     }
 }

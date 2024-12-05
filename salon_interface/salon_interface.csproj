@@ -160,11 +160,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="components\customTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="components\MasterInfoPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="components\MasterFilterItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="components\ServiceInfoPanel.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="forms\masters\CreateMasterPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\masters\CreateMasterPage.Designer.cs">
+      <DependentUpon>CreateMasterPage.cs</DependentUpon>
     </Compile>
     <Compile Include="endpoints\MasterApiHandler.cs" />
     <Compile Include="endpoints\ServiceApiHandler.cs" />
@@ -204,11 +216,17 @@
     </Compile>
     <Compile Include="utils\APIservice.cs" />
     <Compile Include="utils\HttpClientService.cs" />
+    <EmbeddedResource Include="components\MasterInfoPanel.resx">
+      <DependentUpon>MasterInfoPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="components\MasterFilterItem.resx">
       <DependentUpon>MasterFilterItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="components\ServiceInfoPanel.resx">
       <DependentUpon>ServiceInfoPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\masters\CreateMasterPage.resx">
+      <DependentUpon>CreateMasterPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\masters\MasterPage.resx">
       <DependentUpon>MasterPage.cs</DependentUpon>

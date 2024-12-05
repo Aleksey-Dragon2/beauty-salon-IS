@@ -35,8 +35,8 @@
             this.ServicesLabel = new System.Windows.Forms.Label();
             this.TitleMasters = new System.Windows.Forms.Label();
             this.FilterPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.CreateMaster = new Guna.UI2.WinForms.Guna2Button();
+            this.customFlowLayoutPanel1 = new salon_interface.CustomFlowLayoutPanel();
             this.filterAll = new salon_interface.MasterFilterItem();
             this.HeaderTable.SuspendLayout();
             this.FilterPanel.SuspendLayout();
@@ -111,6 +111,7 @@
             this.ServicesLabel.TabIndex = 0;
             this.ServicesLabel.Text = "Услуги";
             this.ServicesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ServicesLabel.Click += new System.EventHandler(this.ServicesLabel_Click);
             // 
             // TitleMasters
             // 
@@ -135,17 +136,6 @@
             this.FilterPanel.Size = new System.Drawing.Size(939, 98);
             this.FilterPanel.TabIndex = 3;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(108, 235);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 50, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(939, 347);
-            this.flowLayoutPanel1.TabIndex = 4;
-            // 
             // CreateMaster
             // 
             this.CreateMaster.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -157,14 +147,27 @@
             this.CreateMaster.FillColor = System.Drawing.Color.LightGray;
             this.CreateMaster.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CreateMaster.ForeColor = System.Drawing.Color.Black;
-            this.CreateMaster.Location = new System.Drawing.Point(410, 610);
+            this.CreateMaster.Location = new System.Drawing.Point(445, 598);
             this.CreateMaster.Name = "CreateMaster";
             this.CreateMaster.Size = new System.Drawing.Size(269, 45);
             this.CreateMaster.TabIndex = 5;
-            this.CreateMaster.Text = "Добавить услугу";
+            this.CreateMaster.Text = "Добавить мастера";
+            this.CreateMaster.Click += new System.EventHandler(this.CreateMaster_Click);
+            // 
+            // customFlowLayoutPanel1
+            // 
+            this.customFlowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.customFlowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.customFlowLayoutPanel1.Location = new System.Drawing.Point(108, 248);
+            this.customFlowLayoutPanel1.MaxItemsPerRow = 3;
+            this.customFlowLayoutPanel1.Name = "customFlowLayoutPanel1";
+            this.customFlowLayoutPanel1.Size = new System.Drawing.Size(939, 314);
+            this.customFlowLayoutPanel1.TabIndex = 6;
             // 
             // filterAll
             // 
+            this.filterAll.Cursor = System.Windows.Forms.Cursors.Hand;
             this.filterAll.Location = new System.Drawing.Point(3, 3);
             this.filterAll.Name = "filterAll";
             this.filterAll.Size = new System.Drawing.Size(104, 42);
@@ -175,13 +178,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 667);
+            this.Controls.Add(this.customFlowLayoutPanel1);
             this.Controls.Add(this.CreateMaster);
             this.Controls.Add(this.FilterPanel);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.TitleMasters);
             this.Controls.Add(this.HeaderTable);
             this.Name = "MasterPage";
-            this.Text = "MasterPage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "MastersPage";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MasterPage_FormClosing);
             this.HeaderTable.ResumeLayout(false);
             this.HeaderTable.PerformLayout();
             this.FilterPanel.ResumeLayout(false);
@@ -199,7 +204,7 @@
         private System.Windows.Forms.Label TitleMasters;
         private System.Windows.Forms.FlowLayoutPanel FilterPanel;
         private MasterFilterItem filterAll;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private Guna.UI2.WinForms.Guna2Button CreateMaster;
+        private CustomFlowLayoutPanel customFlowLayoutPanel1;
     }
 }
