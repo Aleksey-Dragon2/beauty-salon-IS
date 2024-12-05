@@ -91,7 +91,7 @@ def update_master(
         stmt = select(models.Master).where(models.Master.id == id)
         master=db.scalars(stmt).first()
         if master is None:
-            raise HTTPException(status_code=404, detail="Service not founded")
+            raise HTTPException(status_code=406, detail="Master not founded")
 
         if name:
             master.name=name
@@ -165,6 +165,22 @@ def update_service(
             raise HTTPException(
             status_code=406,
             detail=f"Service with name '{name}' already exists."
+        )
+
+@app.delete("/master/{id}", status_code=204)
+def delete_master_by_id(id: int, db:Session=Depends(get_db)):
+    try:
+        master = db.query(models.Master).filter(models.Master.id == id).first()
+        if master is None:
+            raise HTTPException(status_code=404, detail="Service not found")
+        stmt = delete(models.Master).where(models.Master.id == id)
+        db.execute(stmt)
+        db.commit()
+        return {"detail": "Service deleted successfully"}
+    except:
+        raise HTTPException(
+            status_code=523,
+            detail=f"Database unreachable"
         )
 
 # Получение всех мастеров
