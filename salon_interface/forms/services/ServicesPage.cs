@@ -1,8 +1,9 @@
-﻿using MyWindowsFormsApp.Models;
+﻿using salon_interface.Models;
 using ProjectName.api;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Web;
 using System.Windows.Forms;
 
@@ -15,9 +16,9 @@ namespace salon_interface
         {
             InitializeComponent();
             updateService();
-            this.MasterPage = new MasterPage(ShowServiceLocation);
-            this.MasterPage.Show();
-            this.MasterPage.Hide();
+            //this.MasterPage = new MasterPage(ShowServiceLocation);
+            //this.MasterPage.Show();
+            //this.MasterPage.Hide();
         }
 
         public delegate void LoadServices();

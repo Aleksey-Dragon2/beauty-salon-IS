@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using MyWindowsFormsApp.Models;
+using salon_interface.Models;
 using ProjectName.Services;
 using System;
 using System.Collections.Generic;

@@ -5,22 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using UpdateMasters = salon_interface.MasterPage.updateMasters;
 
 namespace salon_interface
 {
-    public class MasterFilterItem : System.Windows.Forms.UserControl
+    public class VisitFilterItem : System.Windows.Forms.UserControl
     {
         public Guna2Panel BackgroundPanel;
         public Label ItemText;
-        private UpdateMasters updateMasters;
-        public MasterFilterItem(string nameFilter, UpdateMasters updateMasters)
+        public VisitFilterItem(string nameFilter)
         {
             InitializeComponent();
             this.ItemText.Text = nameFilter;
-            this.updateMasters = updateMasters;
         }
-        public MasterFilterItem()
+        public VisitFilterItem()
         {
             InitializeComponent();
         }
@@ -87,16 +84,7 @@ namespace salon_interface
         //Общий обработчик клика
         private async void OnPanel_MouseClick(object sender, EventArgs e)
         {
-            List<Master> masters = new List<Master> { };
-            if (this.ItemText.Text == "Все")
-            {
-                masters = await MasterApiHandler.GetMastersAsync();
-            }
-            else
-            {
-                masters = await MasterApiHandler.GetMastersBySpecializationAsync(this.ItemText.Text);
-            }
-                this.updateMasters(masters);
+
         }
 
         private void OnControlMouseEnter(object sender, EventArgs e)

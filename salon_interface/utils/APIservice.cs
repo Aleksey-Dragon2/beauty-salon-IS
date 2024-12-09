@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MyWindowsFormsApp.Models;
+using salon_interface.Models;
 using Newtonsoft.Json;
 using ProjectName.Services; 
 
@@ -119,38 +119,19 @@ namespace ProjectName.Services
           await _httpClientService.DeleteAsync(endpoint);
         }
 
-        // Мастера
-
-        //public async Task<T> GetMastersAsync<T>(string endpoint)
-        //{
-        //    try
-        //    {
-        //        var response = await _httpClientService.GetAsync(endpoint);
-        //        var responseBody = await response.Content.ReadAsStringAsync();
-        //        return JsonConvert.DeserializeObject<T>(responseBody);
-        //    }
-        //    catch (JsonException ex)
-        //    {
-        //        MessageBox.Show($"Ошибка десериализации: {ex.Message}");
-        //        throw new Exception("Ошибка обработки данных. Пожалуйста, свяжитесь с поддержкой.", ex);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Ошибка на уровне API: {ex.Message}");
-        //        throw;
-        //    }
-        //}
-        public async Task<Master> CreateMasterAsync(string endpoint, string name, string surname, string specialization)
+        public async Task<Master> CreateMasterAsync(string endpoint, string name, string surname, string specialization, List<string> services)
         {
             try
             {
                 string encodedName = System.Web.HttpUtility.UrlEncode(name);
                 string encodedSurname = System.Web.HttpUtility.UrlEncode(surname);
                 string encodedSpecialization = System.Web.HttpUtility.UrlEncode(specialization);
+                string encodedServices= System.Web.HttpUtility.UrlEncode(string.Join(",", services));
+
 
                 var builder = new UriBuilder(endpoint)
                 {
-                    Query = $"name={encodedName}&surname={encodedSurname}&specialization={encodedSpecialization}"
+                    Query = $"name={encodedName}&surname={encodedSurname}&specialization={encodedSpecialization}&service={encodedServices}"
                 };
 
                 var response = await _httpClientService.PostAsync(builder.ToString(), null);
@@ -168,7 +149,7 @@ namespace ProjectName.Services
                     {
                         throw new Exception($"Такой мастер уже существует");
                     }
-                    throw new Exception($"Ошибка при добавлении услуги: {response.StatusCode}, {response.Content}");
+                    throw new Exception($"Ошибка при добавлении мастера: {response.StatusCode}, {response.Content}");
                 }
             }
             catch (Exception ex)
@@ -217,5 +198,42 @@ namespace ProjectName.Services
             }
         }
 
+        public async Task<Master> CreateVisitAsync(string endpoint, string client_name, string date, string status)
+        {
+            try
+            {
+                string encodedName = System.Web.HttpUtility.UrlEncode(client_name);
+                string encodedDate = System.Web.HttpUtility.UrlEncode(date);
+                string encodedStatus = System.Web.HttpUtility.UrlEncode(status);
+
+
+                var builder = new UriBuilder(endpoint)
+                {
+                    Query = $"client_name={encodedName}&visits_date={date}&status={encodedStatus}"
+                };
+
+                var response = await _httpClientService.PostAsync(builder.ToString(), null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    var addedMaster = JsonConvert.DeserializeObject<Master>(responseBody);
+                    return addedMaster;
+                }
+                else
+                {
+                    if (response.StatusCode.ToString() == "NotAcceptable")
+                    {
+                        throw new Exception($"Такой мастер уже существует");
+                    }
+                    throw new Exception($"Ошибка при добавлении мастера: {response.StatusCode}, {response.Content}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

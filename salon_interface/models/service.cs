@@ -1,4 +1,4 @@
-﻿namespace MyWindowsFormsApp.Models
+﻿namespace salon_interface.Models
 {
     public class Service
     {

@@ -1,5 +1,5 @@
 ﻿using Guna.UI2.WinForms;
-using MyWindowsFormsApp.Models;
+using salon_interface.Models;
 using ProjectName.api;
 using System;
 using System.Collections.Generic;

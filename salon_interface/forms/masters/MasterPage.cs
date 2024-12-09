@@ -1,4 +1,4 @@
-﻿using MyWindowsFormsApp.Models;
+﻿using salon_interface.Models;
 using ProjectName.api;
 using System;
 using System.Collections.Generic;
@@ -16,27 +16,57 @@ namespace salon_interface
     public partial class MasterPage : Form
     {
         private ShowServiceForm showServiceForm;
+        public delegate void loadMasters();
+        public delegate void updateMasters(List<Master> masters);
         public MasterPage(ShowServiceForm showServiceForm)
         {
             InitializeComponent();
             LoadMasters();
             this.showServiceForm = showServiceForm;
         }
+        public MasterPage()
+        {
+            InitializeComponent();
+            LoadMasters();
+            LoadFilters();
+        }
 
         public async void LoadMasters()
         {
+            this.customFlowLayoutPanel1.Controls.Clear();
             List<Master> masters = await MasterApiHandler.GetMastersAsync();
             foreach (var master in masters)
             {
                 MasterInfoPanel masterPanel = new MasterInfoPanel(master.Id, master.Name, master.Surname, master.Specialization);
-                MasterFilterItem masterFilter = new MasterFilterItem(master.Specialization);
+                this.customFlowLayoutPanel1.Controls.Add(masterPanel);
+            }
+        }
+
+        public void LoadMasters(List<Master> masters)
+        {
+            this.customFlowLayoutPanel1.Controls.Clear();
+            foreach (var master in masters)
+            {
+                MasterInfoPanel masterPanel = new MasterInfoPanel(master.Id, master.Name, master.Surname, master.Specialization);
+                this.customFlowLayoutPanel1.Controls.Add(masterPanel);
+            }
+        }
+        public async void LoadFilters()
+        {
+            MasterFilterItem filterItem = new MasterFilterItem("Все", LoadMasters);
+            filterItem.Width = filterItem.ItemText.Width + 20;
+            filterItem.ItemText.AutoSize = false;
+            filterItem.ItemText.Dock = DockStyle.Fill;
+            this.FilterPanel.Controls.Add(filterItem);
+
+            List<string> specializations = await MasterApiHandler.GetSpecizlizationAsync();
+            foreach (string item in specializations)
+            {
+                MasterFilterItem masterFilter = new MasterFilterItem(item, LoadMasters);
                 masterFilter.Width = masterFilter.ItemText.Width + 20;
                 masterFilter.ItemText.AutoSize = false;
                 masterFilter.ItemText.Dock = DockStyle.Fill;
-
-
                 this.FilterPanel.Controls.Add(masterFilter);
-                this.customFlowLayoutPanel1.Controls.Add(masterPanel);
             }
         }
 
@@ -47,7 +77,7 @@ namespace salon_interface
 
         private void CreateMaster_Click(object sender, EventArgs e)
         {
-            CreateMasterPage createMasterPage= new CreateMasterPage();
+            CreateMasterPage createMasterPage= new CreateMasterPage(LoadMasters);
             createMasterPage.ShowDialog();
         }
 
@@ -60,6 +90,7 @@ namespace salon_interface
         {
             if (this.WindowState == FormWindowState.Maximized)
             {
+
             }
             showServiceForm(this.Location);
             this.Hide();

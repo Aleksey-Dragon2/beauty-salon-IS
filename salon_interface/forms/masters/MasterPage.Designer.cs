@@ -37,9 +37,7 @@
             this.FilterPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.CreateMaster = new Guna.UI2.WinForms.Guna2Button();
             this.customFlowLayoutPanel1 = new salon_interface.CustomFlowLayoutPanel();
-            this.filterAll = new salon_interface.MasterFilterItem();
             this.HeaderTable.SuspendLayout();
-            this.FilterPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // HeaderTable
@@ -126,10 +124,8 @@
             // 
             // FilterPanel
             // 
-            this.FilterPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FilterPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FilterPanel.Controls.Add(this.filterAll);
+            this.FilterPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.FilterPanel.AutoScroll = true;
             this.FilterPanel.Location = new System.Drawing.Point(108, 112);
             this.FilterPanel.Margin = new System.Windows.Forms.Padding(3, 3, 50, 3);
             this.FilterPanel.Name = "FilterPanel";
@@ -156,22 +152,13 @@
             // 
             // customFlowLayoutPanel1
             // 
-            this.customFlowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.customFlowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.customFlowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.customFlowLayoutPanel1.AutoScroll = true;
             this.customFlowLayoutPanel1.Location = new System.Drawing.Point(108, 248);
             this.customFlowLayoutPanel1.MaxItemsPerRow = 3;
             this.customFlowLayoutPanel1.Name = "customFlowLayoutPanel1";
             this.customFlowLayoutPanel1.Size = new System.Drawing.Size(939, 314);
             this.customFlowLayoutPanel1.TabIndex = 6;
-            // 
-            // filterAll
-            // 
-            this.filterAll.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.filterAll.Location = new System.Drawing.Point(3, 3);
-            this.filterAll.Name = "filterAll";
-            this.filterAll.Size = new System.Drawing.Size(104, 42);
-            this.filterAll.TabIndex = 0;
             // 
             // MasterPage
             // 
@@ -189,7 +176,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MasterPage_FormClosing);
             this.HeaderTable.ResumeLayout(false);
             this.HeaderTable.PerformLayout();
-            this.FilterPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -203,7 +189,6 @@
         private System.Windows.Forms.Label ServicesLabel;
         private System.Windows.Forms.Label TitleMasters;
         private System.Windows.Forms.FlowLayoutPanel FilterPanel;
-        private MasterFilterItem filterAll;
         private Guna.UI2.WinForms.Guna2Button CreateMaster;
         private CustomFlowLayoutPanel customFlowLayoutPanel1;
     }
