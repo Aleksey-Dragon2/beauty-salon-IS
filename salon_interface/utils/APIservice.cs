@@ -178,38 +178,34 @@ namespace ProjectName.Services
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
 
-                    var addedService = JsonConvert.DeserializeObject<Master>(responseBody);
-                    return addedService;
+                    var updateMaster = JsonConvert.DeserializeObject<Master>(responseBody);
+                    return updateMaster;
                 }
                 else
                 {
-                    if (response.StatusCode.ToString() == "NotAcceptable")
-                    {
-                        throw new Exception($"Такой мастер уже существует");
-                    }
                     string errorResponse = await response.Content.ReadAsStringAsync();
                     throw new Exception($"Ошибка при изменении мастера: {response.StatusCode}, {errorResponse}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка при изменнеии услуги: {ex.Message}");
+                Console.WriteLine($"Ошибка при изменнеии мастера: {ex.Message}");
                 throw;
             }
         }
 
-        public async Task<Master> CreateVisitAsync(string endpoint, string client_name, string date, string status)
+        public async Task<Visit> CreateVisitAsync(string endpoint, string client_name, string date, string status, List<string> services)
         {
             try
             {
                 string encodedName = System.Web.HttpUtility.UrlEncode(client_name);
                 string encodedDate = System.Web.HttpUtility.UrlEncode(date);
                 string encodedStatus = System.Web.HttpUtility.UrlEncode(status);
-
+                string encodedServices = System.Web.HttpUtility.UrlEncode(string.Join(",", services));
 
                 var builder = new UriBuilder(endpoint)
                 {
-                    Query = $"client_name={encodedName}&visits_date={date}&status={encodedStatus}"
+                    Query = $"client_name={encodedName}&visits_date={encodedDate}&status={encodedStatus}&services={encodedServices}"
                 };
 
                 var response = await _httpClientService.PostAsync(builder.ToString(), null);
@@ -218,21 +214,54 @@ namespace ProjectName.Services
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
 
-                    var addedMaster = JsonConvert.DeserializeObject<Master>(responseBody);
+                    var addedMaster = JsonConvert.DeserializeObject<Visit>(responseBody);
                     return addedMaster;
                 }
                 else
                 {
                     if (response.StatusCode.ToString() == "NotAcceptable")
                     {
-                        throw new Exception($"Такой мастер уже существует");
+                        throw new Exception($"Такой визит уже существует");
                     }
-                    throw new Exception($"Ошибка при добавлении мастера: {response.StatusCode}, {response.Content}");
+                    throw new Exception($"Ошибка при добавлении визита: {response.StatusCode}, {response.Content}");
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        public async Task<Visit> UpdateVisitAsync(string endpoint, int id, string status)
+        {
+            try
+            {
+                string encodeId = id.ToString(CultureInfo.InvariantCulture);
+                string encodedStatus = System.Web.HttpUtility.UrlEncode(status);
+
+                var builder = new UriBuilder(endpoint)
+                {
+                    Query = $"id={encodeId}&status={encodedStatus}"
+                };
+
+                var response = await _httpClientService.PostAsync(builder.ToString(), null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    var updateVisit = JsonConvert.DeserializeObject<Visit>(responseBody);
+                    return updateVisit;
+                }
+                else
+                {
+                    string errorResponse = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Ошибка при изменении визита: {response.StatusCode}, {errorResponse}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при изменнеии визита: {ex.Message}");
+                throw;
             }
         }
     }

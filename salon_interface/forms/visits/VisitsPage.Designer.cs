@@ -61,15 +61,9 @@ namespace salon_interface
             this.ServicesLabel = new System.Windows.Forms.Label();
             this.TitleVisits = new System.Windows.Forms.Label();
             this.tableFilter = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ClientName = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.CreateVisit = new Guna.UI2.WinForms.Guna2Button();
             this.VisitsPanel = new System.Windows.Forms.Panel();
             this.HeaderTable.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // HeaderTable
@@ -155,6 +149,7 @@ namespace salon_interface
             // 
             // tableFilter
             // 
+            this.tableFilter.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.tableFilter.ColumnCount = 3;
             this.tableFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.53361F));
             this.tableFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.23319F));
@@ -166,93 +161,18 @@ namespace salon_interface
             this.tableFilter.Size = new System.Drawing.Size(523, 40);
             this.tableFilter.TabIndex = 4;
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.ClientName, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.dateTimePicker1, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.CreateVisit, 2, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(43, 172);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1023, 97);
-            this.tableLayoutPanel2.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(344, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(335, 48);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Дата визита";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ClientName
-            // 
-            this.ClientName.BorderColor = System.Drawing.Color.Black;
-            this.ClientName.BorderRadius = 2;
-            this.ClientName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.ClientName.DefaultText = "";
-            this.ClientName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.ClientName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.ClientName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.ClientName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.ClientName.FillColor = System.Drawing.SystemColors.Control;
-            this.ClientName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ClientName.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ClientName.ForeColor = System.Drawing.Color.Black;
-            this.ClientName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ClientName.Location = new System.Drawing.Point(3, 52);
-            this.ClientName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ClientName.Name = "ClientName";
-            this.ClientName.PasswordChar = '\0';
-            this.ClientName.PlaceholderText = "";
-            this.ClientName.SelectedText = "";
-            this.ClientName.Size = new System.Drawing.Size(314, 41);
-            this.ClientName.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(335, 48);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Имя клиента";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CustomFormat = "yyyy.MM.dd  HH:mm";
-            this.dateTimePicker1.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(344, 51);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(335, 38);
-            this.dateTimePicker1.TabIndex = 2;
-            // 
             // CreateVisit
             // 
+            this.CreateVisit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.CreateVisit.BorderRadius = 8;
             this.CreateVisit.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.CreateVisit.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.CreateVisit.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.CreateVisit.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.CreateVisit.Dock = System.Windows.Forms.DockStyle.Left;
             this.CreateVisit.FillColor = System.Drawing.Color.LightGray;
-            this.CreateVisit.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CreateVisit.Font = new System.Drawing.Font("Times New Roman", 13.8F);
             this.CreateVisit.ForeColor = System.Drawing.Color.Black;
-            this.CreateVisit.Location = new System.Drawing.Point(707, 51);
+            this.CreateVisit.Location = new System.Drawing.Point(426, 602);
             this.CreateVisit.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
             this.CreateVisit.Name = "CreateVisit";
             this.CreateVisit.Size = new System.Drawing.Size(224, 43);
@@ -262,10 +182,11 @@ namespace salon_interface
             // 
             // VisitsPanel
             // 
+            this.VisitsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.VisitsPanel.AutoScroll = true;
-            this.VisitsPanel.Location = new System.Drawing.Point(43, 280);
+            this.VisitsPanel.Location = new System.Drawing.Point(43, 176);
             this.VisitsPanel.Name = "VisitsPanel";
-            this.VisitsPanel.Size = new System.Drawing.Size(1023, 349);
+            this.VisitsPanel.Size = new System.Drawing.Size(1023, 412);
             this.VisitsPanel.TabIndex = 6;
             // 
             // VisitsPage
@@ -274,15 +195,14 @@ namespace salon_interface
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 667);
             this.Controls.Add(this.VisitsPanel);
-            this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableFilter);
             this.Controls.Add(this.TitleVisits);
+            this.Controls.Add(this.CreateVisit);
             this.Controls.Add(this.HeaderTable);
             this.Name = "VisitsPage";
             this.Text = "VisitsPage";
             this.HeaderTable.ResumeLayout(false);
             this.HeaderTable.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -296,11 +216,6 @@ namespace salon_interface
         private System.Windows.Forms.Label ServicesLabel;
         private System.Windows.Forms.Label TitleVisits;
         private TableLayoutPanel tableFilter;
-        private TableLayoutPanel tableLayoutPanel2;
-        private Guna.UI2.WinForms.Guna2TextBox ClientName;
-        private Label label1;
-        private DateTimePicker dateTimePicker1;
-        private Label label2;
         private Guna.UI2.WinForms.Guna2Button CreateVisit;
         private Panel VisitsPanel;
     }

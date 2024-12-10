@@ -14,14 +14,23 @@ namespace salon_interface
 {
     public partial class VisitsPage : Form
     {
+
+        public delegate void UpdateVisitsInfo();
+        private UpdateVisitsInfo updateVisitsInfo;
         public VisitsPage()
         {
             InitializeComponent();
             loadFilters();
-            TitleVisits_Click(null, null);
+            loadVisits();
+            this.updateVisitsInfo = loadVisits;
         }
 
-        private async void TitleVisits_Click(object sender, EventArgs e)
+        private void TitleVisits_Click(object sender, EventArgs e)
+        {
+            loadVisits();
+        }
+
+        private async void loadVisits()
         {
             this.VisitsPanel.Controls.Clear();
             List<Visit> visits = await VisitApiHandler.GetVisitAsync();
@@ -33,12 +42,10 @@ namespace salon_interface
             }
         }
 
-        private async void CreateVisit_Click(object sender, EventArgs e)
+        private void CreateVisit_Click(object sender, EventArgs e)
         {
-            string name = this.ClientName.Text;
-            string date = this.dateTimePicker1.Text.Replace('.','-');
-            string status = "Ожидает";
-            await VisitApiHandler.CreateVisitAsync(name, date, status);
+            CreateVisitPage createVisitPage = new CreateVisitPage(this.updateVisitsInfo);
+            createVisitPage.ShowDialog();
         }
     }
 }
