@@ -29,10 +29,16 @@ namespace ProjectName.api
             return await _apiService.GetDataAsync<List<Visit>>(endpoint);
         }
 
-        public static async Task<Master> CreateVisitAsync(string client_name, string date, string status)
+        public static async Task<Visit> CreateVisitAsync(string client_name, string date, string status, List<string> services)
         {
             string endpoint = GetAPI()["VisitApi:CreateVisit"];
-            return await _apiService.CreateVisitAsync(endpoint, client_name, date, status);
+            return await _apiService.CreateVisitAsync(endpoint, client_name, date, status, services);
+        }
+
+        public static async Task<Visit> UpdateVisitAsync(int id, string status)
+        {
+            string endpoint = GetAPI()["VisitApi:UpdateVisit"];
+            return await _apiService.UpdateVisitAsync(endpoint, id, status);
         }
     }
 }
