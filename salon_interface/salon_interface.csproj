@@ -178,6 +178,12 @@
     <Compile Include="components\ServiceInfoPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="forms\visits\CreateVisitPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\visits\CreateVisitPage.Designer.cs">
+      <DependentUpon>CreateVisitPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="endpoints\VisitApiHandler.cs" />
     <Compile Include="forms\masters\CreateMasterPage.cs">
       <SubType>Form</SubType>
@@ -271,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\masters\MasterData.resx">
       <DependentUpon>MasterData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\visits\CreateVisitPage.resx">
+      <DependentUpon>CreateVisitPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
