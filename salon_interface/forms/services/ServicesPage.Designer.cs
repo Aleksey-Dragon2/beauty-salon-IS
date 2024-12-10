@@ -44,11 +44,11 @@ namespace salon_interface
             this.TitleServices = new System.Windows.Forms.Label();
             this.PanelServicesList = new System.Windows.Forms.Panel();
             this.PanelButton = new System.Windows.Forms.Panel();
+            this.CreateServiceButton = new Guna.UI2.WinForms.Guna2Button();
             this.PanelListServices = new System.Windows.Forms.Panel();
             this.PanelService = new Guna.UI2.WinForms.Guna2Panel();
             this.PriceService = new System.Windows.Forms.Label();
             this.NameService = new System.Windows.Forms.Label();
-            this.CreateServiceButton = new Guna.UI2.WinForms.Guna2Button();
             this.HeaderTable.SuspendLayout();
             this.PanelTitleServices.SuspendLayout();
             this.PanelServicesList.SuspendLayout();
@@ -169,6 +169,24 @@ namespace salon_interface
             this.PanelButton.Size = new System.Drawing.Size(869, 110);
             this.PanelButton.TabIndex = 1;
             // 
+            // CreateServiceButton
+            // 
+            this.CreateServiceButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CreateServiceButton.BorderRadius = 8;
+            this.CreateServiceButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.CreateServiceButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.CreateServiceButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.CreateServiceButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.CreateServiceButton.FillColor = System.Drawing.Color.LightGray;
+            this.CreateServiceButton.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CreateServiceButton.ForeColor = System.Drawing.Color.Black;
+            this.CreateServiceButton.Location = new System.Drawing.Point(304, 30);
+            this.CreateServiceButton.Name = "CreateServiceButton";
+            this.CreateServiceButton.Size = new System.Drawing.Size(269, 45);
+            this.CreateServiceButton.TabIndex = 4;
+            this.CreateServiceButton.Text = "Добавить услугу";
+            this.CreateServiceButton.Click += new System.EventHandler(this.CreateServiceButton_Click);
+            // 
             // PanelListServices
             // 
             this.PanelListServices.AutoScroll = true;
@@ -223,24 +241,6 @@ namespace salon_interface
             this.NameService.TabIndex = 0;
             this.NameService.Text = "Маникюр";
             this.NameService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // CreateServiceButton
-            // 
-            this.CreateServiceButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CreateServiceButton.BorderRadius = 8;
-            this.CreateServiceButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.CreateServiceButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.CreateServiceButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.CreateServiceButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.CreateServiceButton.FillColor = System.Drawing.Color.LightGray;
-            this.CreateServiceButton.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CreateServiceButton.ForeColor = System.Drawing.Color.Black;
-            this.CreateServiceButton.Location = new System.Drawing.Point(304, 30);
-            this.CreateServiceButton.Name = "CreateServiceButton";
-            this.CreateServiceButton.Size = new System.Drawing.Size(269, 45);
-            this.CreateServiceButton.TabIndex = 4;
-            this.CreateServiceButton.Text = "Добавить услугу";
-            this.CreateServiceButton.Click += new System.EventHandler(this.CreateServiceButton_Click);
             // 
             // ServicesPage
             // 

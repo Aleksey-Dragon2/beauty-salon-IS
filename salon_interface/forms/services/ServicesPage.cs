@@ -16,9 +16,9 @@ namespace salon_interface
         {
             InitializeComponent();
             updateService();
-            //this.MasterPage = new MasterPage(ShowServiceLocation);
-            //this.MasterPage.Show();
-            //this.MasterPage.Hide();
+            this.MasterPage = new MasterPage(ShowServiceLocation);
+            this.MasterPage.Show();
+            this.MasterPage.Hide();
         }
 
         public delegate void LoadServices();
@@ -66,9 +66,10 @@ namespace salon_interface
             {
                 this.MasterPage.WindowState = FormWindowState.Maximized;
             }
-            this.MasterPage.Location= this.Location;
+            this.MasterPage.Location = this.Location;
             this.MasterPage.Show();
             this.Hide();
+
         }
 
         private void VisitsLabel_Click(object sender, EventArgs e)
