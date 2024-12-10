@@ -1,18 +1,21 @@
 ﻿using Guna.UI2.WinForms;
 using Guna.UI2.WinForms.Enums;
+using ProjectName.api;
 using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace salon_interface
 {
     public class VisitInfoPanel : System.Windows.Forms.UserControl
     {
-        public Guna2Panel MasterPanel;
-        public Label NameLabel;
-        public Label Status;
-        private Guna2Button guna2Button1;
-        public Label DataTimeLabel;
+        private Guna2Panel MasterPanel;
+        private Label NameLabel;
+        private Label Status;
+        private Label DataTimeLabel;
+        private System.ComponentModel.IContainer components;
+        private Guna2Button ControlButton;
         public VisitInfoPanel(int id, string name, string datatime, string status)
         {
             InitializeComponent();
@@ -20,6 +23,22 @@ namespace salon_interface
             this.DataTimeLabel.Text = $"{datatime}";
             this.Status.Text = $"{status}";
             this.Tag = id;
+            if (status.ToLower() == "запланирован")
+            {
+                this.ControlButton.Text = "Начать выполнение";
+                this.ControlButton.Width += 50;
+                this.ControlButton.FillColor = Color.Yellow;
+                this.Size = new System.Drawing.Size(473, 132);
+                this.MasterPanel.Size = new System.Drawing.Size(473, 132);
+                this.MasterPanel.Controls.Add(this.ControlButton);
+            }
+            else if (status.ToLower() == "выполняется")
+            {
+                this.ControlButton.Text = "Завершить";
+                this.Size = new System.Drawing.Size(473, 132);
+                this.MasterPanel.Size = new System.Drawing.Size(473, 132);
+                this.MasterPanel.Controls.Add(this.ControlButton);
+            }
         }
         public VisitInfoPanel()
         {
@@ -32,7 +51,7 @@ namespace salon_interface
             this.Status = new System.Windows.Forms.Label();
             this.DataTimeLabel = new System.Windows.Forms.Label();
             this.NameLabel = new System.Windows.Forms.Label();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.ControlButton = new Guna.UI2.WinForms.Guna2Button();
             this.MasterPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +59,6 @@ namespace salon_interface
             // 
             this.MasterPanel.BorderRadius = 18;
             this.MasterPanel.BorderThickness = 1;
-            this.MasterPanel.Controls.Add(this.guna2Button1);
             this.MasterPanel.Controls.Add(this.Status);
             this.MasterPanel.Controls.Add(this.DataTimeLabel);
             this.MasterPanel.Controls.Add(this.NameLabel);
@@ -48,7 +66,7 @@ namespace salon_interface
             this.MasterPanel.FillColor = System.Drawing.Color.Silver;
             this.MasterPanel.Location = new System.Drawing.Point(0, 0);
             this.MasterPanel.Name = "MasterPanel";
-            this.MasterPanel.Size = new System.Drawing.Size(473, 132);
+            this.MasterPanel.Size = new System.Drawing.Size(473, 96);
             this.MasterPanel.TabIndex = 0;
             this.MasterPanel.Click += new System.EventHandler(this.OnPanel_MouseClick);
             this.MasterPanel.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
@@ -56,12 +74,12 @@ namespace salon_interface
             // 
             // Status
             // 
-            this.Status.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.Status.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Status.AutoSize = true;
             this.Status.BackColor = System.Drawing.Color.Transparent;
             this.Status.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Status.Location = new System.Drawing.Point(19, 72);
+            this.Status.Location = new System.Drawing.Point(18, 67);
             this.Status.Name = "Status";
             this.Status.Size = new System.Drawing.Size(67, 22);
             this.Status.TabIndex = 2;
@@ -70,12 +88,12 @@ namespace salon_interface
             // 
             // DataTimeLabel
             // 
-            this.DataTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.DataTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DataTimeLabel.AutoSize = true;
             this.DataTimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.DataTimeLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DataTimeLabel.Location = new System.Drawing.Point(19, 43);
+            this.DataTimeLabel.Location = new System.Drawing.Point(18, 38);
             this.DataTimeLabel.Name = "DataTimeLabel";
             this.DataTimeLabel.Size = new System.Drawing.Size(112, 22);
             this.DataTimeLabel.TabIndex = 1;
@@ -87,12 +105,12 @@ namespace salon_interface
             // 
             // NameLabel
             // 
-            this.NameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.NameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NameLabel.AutoSize = true;
             this.NameLabel.BackColor = System.Drawing.Color.Transparent;
             this.NameLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.NameLabel.Location = new System.Drawing.Point(19, 14);
+            this.NameLabel.Location = new System.Drawing.Point(18, 9);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(120, 22);
             this.NameLabel.TabIndex = 0;
@@ -102,29 +120,27 @@ namespace salon_interface
             this.NameLabel.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
             this.NameLabel.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
             // 
-            // guna2Button1
+            // ControlButton
             // 
-            this.guna2Button1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button1.BorderRadius = 8;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.Lime;
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button1.Location = new System.Drawing.Point(23, 97);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(117, 22);
-            this.guna2Button1.TabIndex = 3;
-            this.guna2Button1.Text = "Завершить";
+            this.ControlButton.BackColor = System.Drawing.Color.Transparent;
+            this.ControlButton.BorderRadius = 8;
+            this.ControlButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ControlButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ControlButton.FillColor = System.Drawing.Color.Lime;
+            this.ControlButton.Font = new System.Drawing.Font("Times New Roman", 10F);
+            this.ControlButton.ForeColor = System.Drawing.Color.Black;
+            this.ControlButton.Location = new System.Drawing.Point(23, 97);
+            this.ControlButton.Name = "ControlButton";
+            this.ControlButton.Size = new System.Drawing.Size(117, 22);
+            this.ControlButton.TabIndex = 3;
+            this.ControlButton.Click += new System.EventHandler(this.OnControlButton_MouseClick);
             // 
             // VisitInfoPanel
             // 
             this.Controls.Add(this.MasterPanel);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "VisitInfoPanel";
-            this.Size = new System.Drawing.Size(473, 132);
+            this.Size = new System.Drawing.Size(473, 96);
             this.Click += new System.EventHandler(this.OnPanel_MouseClick);
             this.MouseEnter += new System.EventHandler(this.OnControlMouseEnter);
             this.MouseLeave += new System.EventHandler(this.OnControlMouseLeave);
@@ -139,24 +155,52 @@ namespace salon_interface
         //Общий обработчик клика
         private void OnPanel_MouseClick(object sender, EventArgs e)
         {
-            //int id = Convert.ToInt32(PanelService.Name.Split('_')[1]);
-            //ServiceEditPage serviceAddPage = new ServiceEditPage(id, loadServices);
-            //serviceAddPage.FillEditData(this.NameService.Text, this.PriceService.Text);
-            //serviceAddPage.ShowDialog();
-            MessageBox.Show(this.Tag.ToString());
 
+        }
+
+        private async void OnControlButton_MouseClick(object sender, EventArgs e)
+        {
+            int id = (int)this.Tag;
+            string status = "";
+            if (this.ControlButton.Text.ToLower() == "начать выполнение")
+            {
+                status = "Выполняется";
+                await VisitApiHandler.UpdateVisitAsync(id, status);
+
+                this.ControlButton.Text = "Завершить";
+                this.ControlButton.FillColor = Color.Lime;
+                this.ControlButton.Size = new System.Drawing.Size(117, 22);
+                this.Status.Text = "Выполняется";
+                AnimateChange();
+            }
+            else
+            {
+                status = "Завершен";
+                await VisitApiHandler.UpdateVisitAsync(id, status);
+                this.Status.Text = "Завершен";
+                this.MasterPanel.Controls.Remove(this.ControlButton);
+                this.MasterPanel.Size = new System.Drawing.Size(473, 96);
+                this.Size = new System.Drawing.Size(473, 96);
+                AnimateChange();
+            }   
+        }
+        private void AnimateChange()
+        {
+            this.Visible = false;
+            Thread.Sleep(50);
+            this.Visible = true;
         }
 
         private void OnControlMouseEnter(object sender, EventArgs e)
         {
 
-            MasterPanel.BorderColor = Color.Red;
+            //MasterPanel.BorderColor = Color.Red;
 
         }
 
         private void OnControlMouseLeave(object sender, EventArgs e)
         {
-            MasterPanel.BorderColor = Color.Transparent;
+            //MasterPanel.BorderColor = Color.Transparent;
 
         }
     }
