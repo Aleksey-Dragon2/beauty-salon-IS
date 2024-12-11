@@ -178,6 +178,12 @@
     <Compile Include="components\ServiceInfoPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="DoneVisitPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DoneVisitPage.Designer.cs">
+      <DependentUpon>DoneVisitPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\visits\CreateVisitPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="components\ServiceInfoPanel.resx">
       <DependentUpon>ServiceInfoPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DoneVisitPage.resx">
+      <DependentUpon>DoneVisitPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\masters\CreateMasterPage.resx">
       <DependentUpon>CreateMasterPage.cs</DependentUpon>

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using salon_interface.Models;
 using Newtonsoft.Json;
-using ProjectName.Services; 
+using ProjectName.Services;
+using System.IO;
 
 namespace ProjectName.Services
 {
@@ -39,6 +40,29 @@ namespace ProjectName.Services
                 throw;
             }
         }
+        public async Task<MemoryStream> GetFileAsync(string endpoint)
+        {
+            try
+            {
+                var response = await _httpClientService.GetAsync(endpoint);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Ошибка при получении файла. Код ответа: {response.StatusCode}");
+                }
+
+                var memoryStream = new MemoryStream();
+                await response.Content.CopyToAsync(memoryStream);
+                memoryStream.Position = 0; // Сбросить позицию на начало потока
+                return memoryStream;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка получения файла: {ex.Message}");
+                throw;
+            }
+        }
+
         public async Task<Service> CreateServiceAsync(string endpoint, string name, float price, int master_id)
         {
             try

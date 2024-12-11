@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿ using Microsoft.Extensions.Configuration;
 using salon_interface.Models;
 using ProjectName.Services;
 using System;
@@ -28,6 +28,7 @@ namespace ProjectName.api
             string endpoint = GetAPI()["VisitApi:GetVisits"];
             return await _apiService.GetDataAsync<List<Visit>>(endpoint);
         }
+
         
         public static async Task<List<Visit>> GetVisitByDateAsync(string date)
         {
@@ -36,6 +37,19 @@ namespace ProjectName.api
             endpoint += $"?date={encodedDate}";
             return await _apiService.GetDataAsync<List<Visit>>(endpoint);
         }
+        public static async Task<List<VisitInfo>> GetVisitById(int id)
+        {
+            string endpoint = GetAPI()["VisitApi:GetVisitInfoById"];
+            endpoint += $"{id}";
+            return await _apiService.GetDataAsync<List<VisitInfo>>(endpoint);
+        }
+
+        public static async Task<MemoryStream> GetChequeFileAsync(int visitId)
+        {
+            string endpoint = $"{GetAPI()["VisitApi:GetCheque"]}?visit_id={visitId}";
+            return await _apiService.GetFileAsync(endpoint);
+        }
+
 
         public static async Task<Visit> CreateVisitAsync(string client_name, string date, string status, List<string> services)
         {

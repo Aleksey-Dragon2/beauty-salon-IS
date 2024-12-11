@@ -182,6 +182,8 @@ namespace salon_interface
                 this.MasterPanel.Size = new System.Drawing.Size(473, 96);
                 this.Size = new System.Drawing.Size(473, 96);
                 AnimateChange();
+                DoneVisitPage doneVisitPage = new DoneVisitPage((int)this.Tag);
+                doneVisitPage.Show();
             }   
         }
         private void AnimateChange()

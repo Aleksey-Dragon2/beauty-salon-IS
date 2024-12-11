@@ -39,7 +39,7 @@ namespace salon_interface
                 this.VisitsPanel.Controls.Add(visitInfoPanel);
             }
         }
-        private async void loadVisits(List<Visit> visits)
+        private void loadVisits(List<Visit> visits)
         {
             this.VisitsPanel.Controls.Clear();
             foreach (Visit visit in visits)
