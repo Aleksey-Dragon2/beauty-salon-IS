@@ -1,19 +1,26 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.responses import StreamingResponse
 from sqlalchemy import select, delete, and_, update, func, text, case
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import Optional
 
+
+from collections import defaultdict
 from .database import engine, SessionLocal
 from app import models
 from datetime import datetime, timedelta
-import uvicorn
 
 from urllib.parse import unquote
 
 from contextlib import asynccontextmanager
-import asyncio
 
+from app.cheque import BeautyReceiptPDF
+from app.query import get_sample_data
+
+import uvicorn
+import asyncio
+import io
 # Создаем таблицы в базе данных (если они еще не существуют)
 # models.Base.metadata.drop_all(bind=engine)
 models.Base.metadata.create_all(bind=engine)
@@ -399,6 +406,81 @@ def get_visits(db: Session = Depends(get_db)):
     stmt = select(models.Visit).order_by(order)
     masters = db.scalars(stmt).all()
     return masters
+
+@app.get("/visits/date/")
+def get_visits_by_date(date: str, db: Session = Depends(get_db)):
+    visits_date = unquote(date)
+    try:
+        format_visits_date = datetime.strptime(visits_date, "%Y-%m-%d").date()
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Неверный формат даты")
+        
+    order = case(
+        (models.Visit.status == "Просрочен", 1),
+        (models.Visit.status == "Завершен", 2),
+        (models.Visit.status == "Запланирован", 3),
+        (models.Visit.status == "Выполняется", 4),
+        else_=5
+    )
+
+    stmt = (
+        select(models.Visit)
+        .where(func.date(models.Visit.visits_date) == format_visits_date)
+        .order_by(order)
+    )
+    visits = db.scalars(stmt).all()
+    return visits
+
+
+@app.get("/visit/{visit_id}")
+def get_visit_data(visit_id: int, db: Session = Depends(get_db)):
+    # Создаём запрос с фильтром по id визита
+    stmt = (
+        select(
+            models.Visit.client_name,
+            models.Visit.visits_date,
+            models.Service.name.label("service_name"),
+            models.ProvidedService.service_price.label("service_price")
+        )
+        .join(models.ProvidedService, models.Visit.id == models.ProvidedService.visit_id)
+        .join(models.Service, models.ProvidedService.service_id == models.Service.id)
+        .where(models.Visit.id == visit_id)  # Условие фильтрации по visit_id
+    )
+
+    # Выполняем запрос
+    result = db.execute(stmt).all()
+
+    # Преобразуем результат в список словарей для удобного вывода
+    visit_data = [
+        {
+            "client_name": row.client_name,
+            "visit_date": row.visits_date,
+            "service_name": row.service_name,
+            "service_price": row.service_price
+        }
+        for row in result
+    ]
+    
+    # Если ничего не найдено, вернуть сообщение об отсутствии данных
+    if not visit_data:
+        return {"message": "Visit not found"}
+
+    return visit_data
+
+
+# Отправка чека
+@app.get("/visit/cheque/")
+def get_cheque(visit_id: int, db: Session = Depends(get_db)):
+    data = get_sample_data(visit_id=visit_id, db=db)
+
+    receipt = BeautyReceiptPDF()
+    buffer = io.BytesIO()
+    receipt.generate_receipt(buffer, data)
+    buffer.seek(0)
+    
+    return StreamingResponse(buffer, media_type="application/pdf", headers={
+        "Content-Disposition": f"attachment; filename=cheque_{visit_id}.pdf"
+    })
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
