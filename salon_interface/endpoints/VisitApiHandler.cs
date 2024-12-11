@@ -28,6 +28,14 @@ namespace ProjectName.api
             string endpoint = GetAPI()["VisitApi:GetVisits"];
             return await _apiService.GetDataAsync<List<Visit>>(endpoint);
         }
+        
+        public static async Task<List<Visit>> GetVisitByDateAsync(string date)
+        {
+            string endpoint = GetAPI()["VisitApi:GetVisitsByDate"];
+            string encodedDate = System.Web.HttpUtility.UrlEncode(date);
+            endpoint += $"?date={encodedDate}";
+            return await _apiService.GetDataAsync<List<Visit>>(endpoint);
+        }
 
         public static async Task<Visit> CreateVisitAsync(string client_name, string date, string status, List<string> services)
         {

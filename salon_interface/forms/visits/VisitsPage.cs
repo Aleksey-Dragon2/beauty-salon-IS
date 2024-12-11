@@ -16,13 +16,11 @@ namespace salon_interface
     {
 
         public delegate void UpdateVisitsInfo();
-        private UpdateVisitsInfo updateVisitsInfo;
         public VisitsPage()
         {
             InitializeComponent();
             loadFilters();
             loadVisits();
-            this.updateVisitsInfo = loadVisits;
         }
 
         private void TitleVisits_Click(object sender, EventArgs e)
@@ -41,10 +39,20 @@ namespace salon_interface
                 this.VisitsPanel.Controls.Add(visitInfoPanel);
             }
         }
+        private async void loadVisits(List<Visit> visits)
+        {
+            this.VisitsPanel.Controls.Clear();
+            foreach (Visit visit in visits)
+            {
+                VisitInfoPanel visitInfoPanel = new VisitInfoPanel(visit.Id, visit.Client_Name, visit.VisitDate.ToString(), visit.Status);
+                visitInfoPanel.Dock = DockStyle.Top;
+                this.VisitsPanel.Controls.Add(visitInfoPanel);
+            }
+        }
 
         private void CreateVisit_Click(object sender, EventArgs e)
         {
-            CreateVisitPage createVisitPage = new CreateVisitPage(this.updateVisitsInfo);
+            CreateVisitPage createVisitPage = new CreateVisitPage(this.loadVisits);
             createVisitPage.ShowDialog();
         }
     }

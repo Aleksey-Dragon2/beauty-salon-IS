@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using salon_interface.Models;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace salon_interface
 {
@@ -24,21 +26,21 @@ namespace salon_interface
 
         private void loadFilters()
         {
-            VisitFilterItem visitFilter = new VisitFilterItem("Все");
+            VisitFilterItem visitFilter = new VisitFilterItem("Все", this.loadVisits, this.loadVisits);
             visitFilter.Width = visitFilter.ItemText.Width + 20;
             visitFilter.ItemText.AutoSize = false;
             visitFilter.ItemText.Dock = DockStyle.Fill;
 
             this.tableFilter.Controls.Add(visitFilter);
 
-            visitFilter = new VisitFilterItem("Сегодня");
+            visitFilter = new VisitFilterItem("Сегодня", this.loadVisits, this.loadVisits);
             visitFilter.Width = visitFilter.ItemText.Width + 20;
             visitFilter.ItemText.AutoSize = false;
             visitFilter.ItemText.Dock = DockStyle.Fill;
 
             this.tableFilter.Controls.Add(visitFilter);
 
-            visitFilter = new VisitFilterItem("Завтра");
+            visitFilter = new VisitFilterItem("Завтра", this.loadVisits, this.loadVisits);
             visitFilter.Width = visitFilter.ItemText.Width + 20;
             visitFilter.ItemText.AutoSize = false;
             visitFilter.ItemText.Dock = DockStyle.Fill;

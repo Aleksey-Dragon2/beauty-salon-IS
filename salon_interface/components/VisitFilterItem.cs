@@ -12,16 +12,22 @@ namespace salon_interface
     {
         public Guna2Panel BackgroundPanel;
         public Label ItemText;
-        public VisitFilterItem(string nameFilter)
+        private updateVisitsInfo updateVisits;
+        private updateVisitsByDate visitsByDate;
+        public VisitFilterItem(string nameFilter, updateVisitsInfo updateVisitsInfo, updateVisitsByDate updateVisitsByDate)
         {
             InitializeComponent();
             this.ItemText.Text = nameFilter;
+            this.updateVisits = updateVisitsInfo;
+            this.visitsByDate = updateVisitsByDate;
         }
         public VisitFilterItem()
         {
             InitializeComponent();
         }
 
+        public delegate void updateVisitsInfo();
+        public delegate void updateVisitsByDate(List<Visit> visits);
         private void InitializeComponent()
         {
             this.BackgroundPanel = new Guna.UI2.WinForms.Guna2Panel();
@@ -84,7 +90,22 @@ namespace salon_interface
         //Общий обработчик клика
         private async void OnPanel_MouseClick(object sender, EventArgs e)
         {
+            string date = "";
+            if (this.ItemText.Text == "Сегодня")
+            {
+                date = DateTime.Today.ToString("yyyy-MM-dd");
+                this.visitsByDate(await VisitApiHandler.GetVisitByDateAsync(date));
+            }
+            else if (this.ItemText.Text == "Завтра")
+            {
+                date = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+                this.visitsByDate(await VisitApiHandler.GetVisitByDateAsync(date));
 
+            }
+            else
+            {
+                this.updateVisits();
+            }
         }
 
         private void OnControlMouseEnter(object sender, EventArgs e)
