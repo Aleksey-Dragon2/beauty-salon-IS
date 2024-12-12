@@ -41,44 +41,34 @@ namespace salon_interface
         
         private void AddServiceRow(Panel panel, string service, float price)
         {
-            // Создаем Label для строки с услугой и ценой
             Label rowLabel = new Label();
-            rowLabel.AutoSize = false; // Устанавливаем, чтобы управлять шириной
-            rowLabel.Width = panel.Width; // Ширина равна ширине панели
-            rowLabel.TextAlign = ContentAlignment.MiddleLeft; // Выравнивание текста
-            rowLabel.Font = new Font("Times New Roman", 12); // Шрифт
+            rowLabel.AutoSize = false;
+            rowLabel.Width = panel.Width;
+            rowLabel.TextAlign = ContentAlignment.MiddleLeft;
+            rowLabel.Font = new Font("Times New Roman", 12);
             rowLabel.Dock = DockStyle.Top;
 
-            // Формируем строку с точками
             string formattedText = FormatServiceRow(service, price, rowLabel.Width, rowLabel.Font);
             rowLabel.Text = formattedText;
 
-            // Добавляем строку на панель
             panel.Controls.Add(rowLabel);
         }
 
         private string FormatServiceRow(string service, float price, int labelWidth, Font font)
         {
-            // Рассчитываем количество точек между услугой и ценой
             string priceText = $"{price} byn";
-            int totalDots = 100; // Базовое количество точек
             string dots = "...";
 
             using (Graphics g = Graphics.FromImage(new Bitmap(1, 1)))
             {
-                // Рассчитываем ширину текста услуги и цены
                 float serviceWidth = g.MeasureString(service, font).Width;
                 float priceWidth = g.MeasureString(priceText, font).Width;
 
-                // Рассчитываем ширину доступного пространства для точек
                 float availableWidth = labelWidth - serviceWidth - priceWidth;
                 int dotsCount = (int)(availableWidth / g.MeasureString(".", font).Width);
 
-                // Создаем строку с нужным количеством точек
                 dots = new string('.', Math.Max(dotsCount, 0));
             }
-
-            // Возвращаем отформатированную строку
             return $"{service}{dots}{priceText}";
         }
 
