@@ -47,14 +47,14 @@ class ProvidedService(Base):
 
     id:Mapped[intpk]
     visit_id: Mapped[intnotnull]=mapped_column(ForeignKey("visits.id"))
-    service_id: Mapped[intnotnull]=mapped_column(ForeignKey("services.id"))
-    master_id: Mapped[intnotnull]=mapped_column(ForeignKey("masters.id"))
+    service_id: Mapped[intnotnull]=mapped_column(ForeignKey("services.id", ondelete="CASCADE"))
+    master_id: Mapped[intnotnull]=mapped_column(ForeignKey("masters.id", ondelete="CASCADE"))
     service_price: Mapped[float]=mapped_column(Numeric(10,2), nullable=False)
 
 class PriceCoefficient(Base):
     __tablename__='price_coefficients'
     
     id:Mapped[intpk]
-    application_date: Mapped[Date] = mapped_column(Date, nullable=False)
+    application_date: Mapped[Date] = mapped_column(Date, nullable=False, default=datetime.today)
     value: Mapped[float]=mapped_column(Numeric(10,2),nullable=True)
 

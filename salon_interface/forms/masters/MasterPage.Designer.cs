@@ -170,6 +170,7 @@
             this.Controls.Add(this.FilterPanel);
             this.Controls.Add(this.TitleMasters);
             this.Controls.Add(this.HeaderTable);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MasterPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MastersPage";

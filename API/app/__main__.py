@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import StreamingResponse
-from sqlalchemy import select, delete, and_, update, func, text, case
+from sqlalchemy import select, delete, and_, update, func, text, case, desc, extract
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import Optional
@@ -203,6 +203,33 @@ def update_visit(id: int, status : str, db: Session = Depends(get_db)):
         "message":"Статус успешно обновлен",
     }
 
+@app.post("/coefficient/")
+def create_price_coefficient(value: float, db: Session = Depends(get_db)):
+    try:
+        db_coefficient = models.PriceCoefficient(value=value)
+        db.add(db_coefficient)
+        
+        services = db.query(models.Service).all()
+
+        for service in services:
+            service.price = float(service.price) * value
+
+        db.commit()
+        return {"detail":"Services price update"}
+    
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=400,
+            detail="Error creating price coefficient"
+        )
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error updating prices: {str(e)}"
+        )
+
 
 # Создание мастера
 @app.post("/master/")
@@ -226,6 +253,75 @@ def create_master(name: str, surname: str, specialization: str, services: str, d
     db.refresh(db_master)
 
     return db_master
+
+@app.get("/master_stats/{master_id}")
+def get_master_stats(master_id: int, db: Session = Depends(get_db)):
+    # Подзапрос: Считаем количество услуг, оказанных мастером за текущий год
+    current_year = datetime.now().year
+    service_count_subquery = (
+        select(
+            models.ProvidedService.service_id,
+            func.count(models.ProvidedService.id).label("service_count")
+        )
+        .join(models.Visit, models.ProvidedService.visit_id == models.Visit.id)
+        .filter(
+            models.ProvidedService.master_id == master_id,
+            extract("year", models.Visit.visits_date) == current_year
+        )
+        .group_by(models.ProvidedService.service_id)
+        .subquery()
+    )
+
+    # Подзапрос: Выбираем наиболее популярную услугу мастера
+    popular_service_subquery = (
+        select(
+            service_count_subquery.c.service_id
+        )
+        .order_by(service_count_subquery.c.service_count.desc())
+        .limit(1)
+        .subquery()
+    )
+
+    # Основной запрос: Получаем статистику по мастеру
+    stmt = (
+        select(
+            models.Master.name,
+            models.Master.surname,
+            models.Master.specialization,
+            func.count(models.ProvidedService.id).label("total_services"),
+            models.Service.name.label("popular_service"),
+            func.avg(models.ProvidedService.service_price).label("avg_service_price")
+        )
+        .join(models.ProvidedService, models.Master.id == models.ProvidedService.master_id)
+        .join(models.Service, models.Service.id == models.ProvidedService.service_id)
+        .join(models.Visit, models.ProvidedService.visit_id == models.Visit.id)
+        .filter(
+            models.Master.id == master_id,
+            extract("year", models.Visit.visits_date) == current_year
+        )
+        .group_by(
+            models.Master.id,
+            models.Service.name
+        )
+    )
+
+    result = db.execute(stmt).all()
+
+    # Преобразуем результат в читаемый формат
+    response = [
+        {
+            "master_name": f"{row.name} {row.surname}",
+            "specialization": row.specialization,
+            "total_services": row.total_services,
+            "popular_service": row.popular_service,
+            "avg_service_price": float(row.avg_service_price)
+        }
+        for row in result
+    ]
+
+    return response
+
+
 
 # Добавление услуги в мастера
 @app.post("/master/assign-service/")
@@ -281,7 +377,6 @@ def update_master(
              master.specialization=specialization
 
         db.commit()
-        
 
 # Создание услуги
 @app.post("/service/", status_code=201)
@@ -309,7 +404,6 @@ def create_service(name: str, price: float, master_id: Optional[int] = None, db:
 # Удаление услуги
 @app.delete("/service/{id}", status_code=204)
 def delete_service_by_id(id: int, db:Session=Depends(get_db)):
-    try:
         service = db.query(models.Service).filter(models.Service.id == id).first()
         if service is None:
             raise HTTPException(status_code=404, detail="Service not found")
@@ -317,11 +411,7 @@ def delete_service_by_id(id: int, db:Session=Depends(get_db)):
         db.execute(stmt)
         db.commit()
         return {"detail": "Service deleted successfully"}
-    except:
-        raise HTTPException(
-            status_code=523,
-            detail=f"Database unreachable"
-        )
+
 
 
 # Обновление услуги
@@ -393,6 +483,16 @@ def get_services(db: Session = Depends(get_db)):
     services=db.scalars(stmt).all()
     return services
 
+@app.get("/coefficient/")
+def get_coefficient(db: Session = Depends(get_db)):
+    stmt = (
+        select(models.PriceCoefficient)
+        .order_by(desc(models.PriceCoefficient.application_date))
+        .limit(5)
+    )
+    coefficients = db.scalars(stmt).all()
+    return coefficients
+
 # Получение всех визитов
 @app.get("/visits/")
 def get_visits(db: Session = Depends(get_db)):
@@ -406,6 +506,7 @@ def get_visits(db: Session = Depends(get_db)):
     stmt = select(models.Visit).order_by(order)
     masters = db.scalars(stmt).all()
     return masters
+
 
 @app.get("/visits/date/")
 def get_visits_by_date(date: str, db: Session = Depends(get_db)):
@@ -466,7 +567,6 @@ def get_visit_data(visit_id: int, db: Session = Depends(get_db)):
         return {"message": "Visit not found"}
 
     return visit_data
-
 
 # Отправка чека
 @app.get("/visit/cheque/")

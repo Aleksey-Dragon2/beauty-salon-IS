@@ -29,6 +29,12 @@ namespace ProjectName.api
             string endpoint = GetAPI()["MasterApi:GetMasters"];
             return await _apiService.GetDataAsync<List<Master>>(endpoint);
         }
+        public static async Task<List<MasterStats>> GetMasterStats(int id)
+        {
+            string endpoint = GetAPI()["MasterApi:GetMasterStats"];
+            endpoint += $"{id}";
+            return await _apiService.GetDataAsync<List<MasterStats>>(endpoint);
+        }
 
         public static async Task<List<string>> GetSpecizlizationAsync()
         {
@@ -51,12 +57,12 @@ namespace ProjectName.api
 
         public static async Task<Master> UpdateMasterAsync(int id, string name, string surname, string specialization)
         {
-            string endpoint = GetAPI()["ApiUrls:ApiUpdateService"]; ;
+            string endpoint = GetAPI()["MasterApi:ApiUpdateService"]; ;
             return await _apiService.UpdateMasterAsync(endpoint, id, name, surname, specialization);
         }
         public static async Task DeleteMasterAsync(int id)
         {
-            string endpoint = $"{GetAPI()["ApiUrls:DeleteMaster"]}{id}";
+            string endpoint = $"{GetAPI()["MasterApi:DeleteMaster"]}{id}";
             await _apiService.DeleteDateAsync(endpoint);
         }
     }

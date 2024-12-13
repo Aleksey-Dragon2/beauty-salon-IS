@@ -288,5 +288,37 @@ namespace ProjectName.Services
                 throw;
             }
         }
+
+        public async Task<Coefficient> CreateCoefficientAsync(string endpoint, float value)
+        {
+            try
+            {
+                string encodedValue = value.ToString(CultureInfo.InvariantCulture); // InvariantCulture для корректной обработки чисел
+
+                var builder = new UriBuilder(endpoint)
+                {
+                    Query = $"value={value}"
+                };
+
+                var response = await _httpClientService.PostAsync(builder.ToString(), null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    var addedCoefficient = JsonConvert.DeserializeObject<Coefficient>(responseBody);
+                    return addedCoefficient;
+                }
+                else
+                {
+                    string errorResponse = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Ошибка при добавлении коэффициента: {response.StatusCode}, {response.Content}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

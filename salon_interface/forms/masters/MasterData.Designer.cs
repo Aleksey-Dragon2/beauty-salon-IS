@@ -33,9 +33,8 @@
             this.ServicesProvided = new System.Windows.Forms.Label();
             this.PopularService = new System.Windows.Forms.Label();
             this.AveragePriceServices = new System.Windows.Forms.Label();
-            this.MostPopular = new System.Windows.Forms.Label();
-            this.AcceptEditButton = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.DeleteMasterButton = new Guna.UI2.WinForms.Guna2Button();
+            this.CreateMasterButton = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // MasterName
@@ -44,7 +43,7 @@
             this.MasterName.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MasterName.Location = new System.Drawing.Point(0, 0);
             this.MasterName.Name = "MasterName";
-            this.MasterName.Size = new System.Drawing.Size(513, 37);
+            this.MasterName.Size = new System.Drawing.Size(547, 37);
             this.MasterName.TabIndex = 0;
             this.MasterName.Text = "Имя мастера";
             this.MasterName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -55,9 +54,9 @@
             this.Specialization.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Specialization.Location = new System.Drawing.Point(0, 37);
             this.Specialization.Name = "Specialization";
-            this.Specialization.Size = new System.Drawing.Size(513, 37);
+            this.Specialization.Size = new System.Drawing.Size(547, 37);
             this.Specialization.TabIndex = 1;
-            this.Specialization.Text = "Специализация";
+            this.Specialization.Text = "Специализация: ";
             this.Specialization.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ServicesProvided
@@ -66,9 +65,9 @@
             this.ServicesProvided.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ServicesProvided.Location = new System.Drawing.Point(0, 74);
             this.ServicesProvided.Name = "ServicesProvided";
-            this.ServicesProvided.Size = new System.Drawing.Size(513, 37);
+            this.ServicesProvided.Size = new System.Drawing.Size(547, 37);
             this.ServicesProvided.TabIndex = 2;
-            this.ServicesProvided.Text = "Услуг оказано";
+            this.ServicesProvided.Text = "Услуг оказано: ";
             this.ServicesProvided.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PopularService
@@ -77,9 +76,9 @@
             this.PopularService.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.PopularService.Location = new System.Drawing.Point(0, 111);
             this.PopularService.Name = "PopularService";
-            this.PopularService.Size = new System.Drawing.Size(513, 37);
+            this.PopularService.Size = new System.Drawing.Size(547, 37);
             this.PopularService.TabIndex = 3;
-            this.PopularService.Text = "Популярная услуга:";
+            this.PopularService.Text = "Популярная услуга: ";
             this.PopularService.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AveragePriceServices
@@ -88,68 +87,61 @@
             this.AveragePriceServices.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AveragePriceServices.Location = new System.Drawing.Point(0, 148);
             this.AveragePriceServices.Name = "AveragePriceServices";
-            this.AveragePriceServices.Size = new System.Drawing.Size(513, 37);
+            this.AveragePriceServices.Size = new System.Drawing.Size(547, 37);
             this.AveragePriceServices.TabIndex = 4;
-            this.AveragePriceServices.Text = "Средняя стоимость услуг:";
+            this.AveragePriceServices.Text = "Средняя стоимость услуг: ";
             this.AveragePriceServices.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // MostPopular
+            // DeleteMasterButton
             // 
-            this.MostPopular.Dock = System.Windows.Forms.DockStyle.Top;
-            this.MostPopular.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MostPopular.Location = new System.Drawing.Point(0, 185);
-            this.MostPopular.Name = "MostPopular";
-            this.MostPopular.Size = new System.Drawing.Size(513, 37);
-            this.MostPopular.TabIndex = 5;
-            this.MostPopular.Text = "Самый популярный x раз за год";
-            this.MostPopular.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.DeleteMasterButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.DeleteMasterButton.BorderRadius = 8;
+            this.DeleteMasterButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.DeleteMasterButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.DeleteMasterButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.DeleteMasterButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.DeleteMasterButton.FillColor = System.Drawing.Color.LightGray;
+            this.DeleteMasterButton.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.DeleteMasterButton.ForeColor = System.Drawing.Color.Black;
+            this.DeleteMasterButton.Location = new System.Drawing.Point(30, 275);
+            this.DeleteMasterButton.Name = "DeleteMasterButton";
+            this.DeleteMasterButton.Size = new System.Drawing.Size(215, 45);
+            this.DeleteMasterButton.TabIndex = 6;
+            this.DeleteMasterButton.Text = "Удалить мастера";
+            this.DeleteMasterButton.Click += new System.EventHandler(this.AcceptEditButton_Click);
             // 
-            // AcceptEditButton
+            // CreateMasterButton
             // 
-            this.AcceptEditButton.BorderRadius = 8;
-            this.AcceptEditButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.AcceptEditButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.AcceptEditButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.AcceptEditButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.AcceptEditButton.FillColor = System.Drawing.Color.LightGray;
-            this.AcceptEditButton.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.AcceptEditButton.ForeColor = System.Drawing.Color.Black;
-            this.AcceptEditButton.Location = new System.Drawing.Point(39, 275);
-            this.AcceptEditButton.Name = "AcceptEditButton";
-            this.AcceptEditButton.Size = new System.Drawing.Size(180, 45);
-            this.AcceptEditButton.TabIndex = 6;
-            this.AcceptEditButton.Text = "Удалить мастера";
-            // 
-            // guna2Button1
-            // 
-            this.guna2Button1.BorderRadius = 8;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.LightGray;
-            this.guna2Button1.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button1.Location = new System.Drawing.Point(306, 275);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(180, 45);
-            this.guna2Button1.TabIndex = 7;
-            this.guna2Button1.Text = "Добавить услугу";
+            this.CreateMasterButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.CreateMasterButton.BorderRadius = 8;
+            this.CreateMasterButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.CreateMasterButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.CreateMasterButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.CreateMasterButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.CreateMasterButton.FillColor = System.Drawing.Color.LightGray;
+            this.CreateMasterButton.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.CreateMasterButton.ForeColor = System.Drawing.Color.Black;
+            this.CreateMasterButton.Location = new System.Drawing.Point(297, 275);
+            this.CreateMasterButton.Name = "CreateMasterButton";
+            this.CreateMasterButton.Size = new System.Drawing.Size(217, 45);
+            this.CreateMasterButton.TabIndex = 7;
+            this.CreateMasterButton.Text = "Добавить услугу";
+            this.CreateMasterButton.Click += new System.EventHandler(this.CreateMasterButton_Click);
             // 
             // MasterData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 359);
-            this.Controls.Add(this.guna2Button1);
-            this.Controls.Add(this.AcceptEditButton);
-            this.Controls.Add(this.MostPopular);
+            this.ClientSize = new System.Drawing.Size(547, 359);
+            this.Controls.Add(this.CreateMasterButton);
+            this.Controls.Add(this.DeleteMasterButton);
             this.Controls.Add(this.AveragePriceServices);
             this.Controls.Add(this.PopularService);
             this.Controls.Add(this.ServicesProvided);
             this.Controls.Add(this.Specialization);
             this.Controls.Add(this.MasterName);
             this.Name = "MasterData";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MasterData";
             this.ResumeLayout(false);
 
@@ -162,8 +154,7 @@
         private System.Windows.Forms.Label ServicesProvided;
         private System.Windows.Forms.Label PopularService;
         private System.Windows.Forms.Label AveragePriceServices;
-        private System.Windows.Forms.Label MostPopular;
-        private Guna.UI2.WinForms.Guna2Button AcceptEditButton;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button DeleteMasterButton;
+        private Guna.UI2.WinForms.Guna2Button CreateMasterButton;
     }
 }

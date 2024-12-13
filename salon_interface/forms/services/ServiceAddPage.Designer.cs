@@ -222,7 +222,7 @@ namespace salon_interface
             this.TableTitle.ColumnCount = 3;
             this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.02104F));
             this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.97896F));
-            this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
+            this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
             this.TableTitle.Controls.Add(this.TitlePriceService, 2, 0);
             this.TableTitle.Controls.Add(this.TitleNameService, 1, 0);
             this.TableTitle.Controls.Add(this.TitleMasterService, 0, 0);
@@ -239,10 +239,10 @@ namespace salon_interface
             this.TitlePriceService.AutoSize = true;
             this.TitlePriceService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TitlePriceService.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitlePriceService.Location = new System.Drawing.Point(703, 0);
+            this.TitlePriceService.Location = new System.Drawing.Point(702, 0);
             this.TitlePriceService.Name = "TitlePriceService";
             this.TitlePriceService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitlePriceService.Size = new System.Drawing.Size(164, 48);
+            this.TitlePriceService.Size = new System.Drawing.Size(165, 48);
             this.TitlePriceService.TabIndex = 3;
             this.TitlePriceService.Text = "Цена";
             this.TitlePriceService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -255,7 +255,7 @@ namespace salon_interface
             this.TitleNameService.Location = new System.Drawing.Point(318, 0);
             this.TitleNameService.Name = "TitleNameService";
             this.TitleNameService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitleNameService.Size = new System.Drawing.Size(379, 48);
+            this.TitleNameService.Size = new System.Drawing.Size(378, 48);
             this.TitleNameService.TabIndex = 2;
             this.TitleNameService.Text = "Название услуги";
             this.TitleNameService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;

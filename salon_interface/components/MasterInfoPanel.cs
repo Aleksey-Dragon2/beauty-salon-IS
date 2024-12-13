@@ -101,12 +101,9 @@ namespace salon_interface
         //Общий обработчик клика
         private void OnPanel_MouseClick(object sender, EventArgs e)
         {
-            //int id = Convert.ToInt32(PanelService.Name.Split('_')[1]);
-            //ServiceEditPage serviceAddPage = new ServiceEditPage(id, loadServices);
-            //serviceAddPage.FillEditData(this.NameService.Text, this.PriceService.Text);
-            //serviceAddPage.ShowDialog();
-            MessageBox.Show(this.Tag.ToString());
-
+            int id = (int)this.Tag;
+            MasterData masterData = new MasterData(id);
+            masterData.ShowDialog();
         }
 
         private void OnControlMouseEnter(object sender, EventArgs e)
