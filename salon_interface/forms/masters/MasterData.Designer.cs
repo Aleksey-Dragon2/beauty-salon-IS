@@ -34,7 +34,7 @@
             this.PopularService = new System.Windows.Forms.Label();
             this.AveragePriceServices = new System.Windows.Forms.Label();
             this.DeleteMasterButton = new Guna.UI2.WinForms.Guna2Button();
-            this.CreateMasterButton = new Guna.UI2.WinForms.Guna2Button();
+            this.AddServiceMasterButton = new Guna.UI2.WinForms.Guna2Button();
             this.SuspendLayout();
             // 
             // MasterName
@@ -108,32 +108,32 @@
             this.DeleteMasterButton.Size = new System.Drawing.Size(215, 45);
             this.DeleteMasterButton.TabIndex = 6;
             this.DeleteMasterButton.Text = "Удалить мастера";
-            this.DeleteMasterButton.Click += new System.EventHandler(this.AcceptEditButton_Click);
+            this.DeleteMasterButton.Click += new System.EventHandler(this.DeleteMasterButton_Click);
             // 
-            // CreateMasterButton
+            // AddServiceMasterButton
             // 
-            this.CreateMasterButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.CreateMasterButton.BorderRadius = 8;
-            this.CreateMasterButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.CreateMasterButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.CreateMasterButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.CreateMasterButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.CreateMasterButton.FillColor = System.Drawing.Color.LightGray;
-            this.CreateMasterButton.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.CreateMasterButton.ForeColor = System.Drawing.Color.Black;
-            this.CreateMasterButton.Location = new System.Drawing.Point(297, 275);
-            this.CreateMasterButton.Name = "CreateMasterButton";
-            this.CreateMasterButton.Size = new System.Drawing.Size(217, 45);
-            this.CreateMasterButton.TabIndex = 7;
-            this.CreateMasterButton.Text = "Добавить услугу";
-            this.CreateMasterButton.Click += new System.EventHandler(this.CreateMasterButton_Click);
+            this.AddServiceMasterButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.AddServiceMasterButton.BorderRadius = 8;
+            this.AddServiceMasterButton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.AddServiceMasterButton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.AddServiceMasterButton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.AddServiceMasterButton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.AddServiceMasterButton.FillColor = System.Drawing.Color.LightGray;
+            this.AddServiceMasterButton.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.AddServiceMasterButton.ForeColor = System.Drawing.Color.Black;
+            this.AddServiceMasterButton.Location = new System.Drawing.Point(297, 275);
+            this.AddServiceMasterButton.Name = "AddServiceMasterButton";
+            this.AddServiceMasterButton.Size = new System.Drawing.Size(217, 45);
+            this.AddServiceMasterButton.TabIndex = 7;
+            this.AddServiceMasterButton.Text = "Добавить услугу";
+            this.AddServiceMasterButton.Click += new System.EventHandler(this.AddServiceMasterButton_Click);
             // 
             // MasterData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(547, 359);
-            this.Controls.Add(this.CreateMasterButton);
+            this.Controls.Add(this.AddServiceMasterButton);
             this.Controls.Add(this.DeleteMasterButton);
             this.Controls.Add(this.AveragePriceServices);
             this.Controls.Add(this.PopularService);
@@ -155,6 +155,6 @@
         private System.Windows.Forms.Label PopularService;
         private System.Windows.Forms.Label AveragePriceServices;
         private Guna.UI2.WinForms.Guna2Button DeleteMasterButton;
-        private Guna.UI2.WinForms.Guna2Button CreateMasterButton;
+        private Guna.UI2.WinForms.Guna2Button AddServiceMasterButton;
     }
 }

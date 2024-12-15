@@ -155,7 +155,7 @@ namespace ProjectName.Services
 
                 var builder = new UriBuilder(endpoint)
                 {
-                    Query = $"name={encodedName}&surname={encodedSurname}&specialization={encodedSpecialization}&service={encodedServices}"
+                    Query = $"name={encodedName}&surname={encodedSurname}&specialization={encodedSpecialization}&services={encodedServices}"
                 };
 
                 var response = await _httpClientService.PostAsync(builder.ToString(), null);
@@ -174,6 +174,39 @@ namespace ProjectName.Services
                         throw new Exception($"Такой мастер уже существует");
                     }
                     throw new Exception($"Ошибка при добавлении мастера: {response.StatusCode}, {response.Content}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<Master> AddMasterServices(string endpoint, int id, List<string> services)
+        {
+            try
+            {
+                string encodeId = id.ToString(CultureInfo.InvariantCulture);
+                string encodedServices = System.Web.HttpUtility.UrlEncode(string.Join(",", services));
+
+
+                var builder = new UriBuilder(endpoint)
+                {
+                    Query = $"master_id={encodeId}&services={encodedServices}"
+                };
+
+                var response = await _httpClientService.PostAsync(builder.ToString(), null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    var addedMaster = JsonConvert.DeserializeObject<Master>(responseBody);
+                    return addedMaster;
+                }
+                else
+                {
+                    throw new Exception($"Ошибка при добавлении услуг мастера: {response.StatusCode}, {response.Content}");
                 }
             }
             catch (Exception ex)
@@ -293,11 +326,10 @@ namespace ProjectName.Services
         {
             try
             {
-                string encodedValue = value.ToString(CultureInfo.InvariantCulture); // InvariantCulture для корректной обработки чисел
-
+                string encodedValue = value.ToString(CultureInfo.InvariantCulture);
                 var builder = new UriBuilder(endpoint)
                 {
-                    Query = $"value={value}"
+                    Query = $"value={encodedValue}"
                 };
 
                 var response = await _httpClientService.PostAsync(builder.ToString(), null);

@@ -160,13 +160,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="components\Header.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="components\customTable.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="components\CoefficientHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="components\AddServiceMaster.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="components\VisitInfoPanel.cs">
@@ -185,6 +185,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="endpoints\CoefficientApiHandler.cs" />
+    <Compile Include="FormManager.cs" />
     <Compile Include="forms\visits\DoneVisitPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,11 +264,11 @@
     <Compile Include="forms\visits\VisitsPage.Designer.cs">
       <DependentUpon>VisitsPage.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="components\Header.resx">
-      <DependentUpon>Header.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="components\CoefficientHistory.resx">
       <DependentUpon>CoefficientHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="components\AddServiceMaster.resx">
+      <DependentUpon>AddServiceMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="components\VisitInfoPanel.resx">
       <DependentUpon>VisitInfoPanel.cs</DependentUpon>

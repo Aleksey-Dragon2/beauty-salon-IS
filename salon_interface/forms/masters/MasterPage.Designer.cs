@@ -72,6 +72,7 @@
             this.CoefficientsLabel.TabIndex = 3;
             this.CoefficientsLabel.Text = "Коэффициенты";
             this.CoefficientsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CoefficientsLabel.Click += new System.EventHandler(this.CoefficientsLabel_Click);
             // 
             // VisitsLabel
             // 
@@ -84,6 +85,7 @@
             this.VisitsLabel.TabIndex = 2;
             this.VisitsLabel.Text = "Визиты";
             this.VisitsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.VisitsLabel.Click += new System.EventHandler(this.VisitsLabel_Click);
             // 
             // MastersLabel
             // 
@@ -96,7 +98,6 @@
             this.MastersLabel.TabIndex = 1;
             this.MastersLabel.Text = "Мастера";
             this.MastersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.MastersLabel.Click += new System.EventHandler(this.MastersLabel_Click);
             // 
             // ServicesLabel
             // 
@@ -174,7 +175,6 @@
             this.Name = "MasterPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MastersPage";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MasterPage_FormClosing);
             this.HeaderTable.ResumeLayout(false);
             this.HeaderTable.PerformLayout();
             this.ResumeLayout(false);

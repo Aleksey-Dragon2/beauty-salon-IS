@@ -10,17 +10,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using loadMasters = salon_interface.MasterPage.loadMasters;
 
 namespace salon_interface
 {
     public partial class MasterData : Form
     {
         private int master_id;
-        public MasterData(int id)
+        private loadMasters loadMasters;
+
+        public MasterData(int id, loadMasters loadMasters)
         {
             InitializeComponent();
             LoadData(id);
             this.master_id = id;
+            this.loadMasters = loadMasters;
         }
 
         private async void LoadData(int id)
@@ -37,15 +41,26 @@ namespace salon_interface
             }
         }
 
-        private async void AcceptEditButton_Click(object sender, EventArgs e)
+        private async void DeleteMasterButton_Click(object sender, EventArgs e)
         {
             await MasterApiHandler.DeleteMasterAsync(this.master_id);
+            this.loadMasters();
             this.Close();
         }
 
-        private void CreateMasterButton_Click(object sender, EventArgs e)
+        private void AddServiceMasterButton_Click(object sender, EventArgs e)
         {
+            this.Controls.Clear();
+            this.Size = new System.Drawing.Size(550, 450);
+            AddServiceMaster addServiceMaster = new AddServiceMaster(master_id);
+            addServiceMaster.SizeChanged += new System.EventHandler(this.close_form);
+            this.Controls.Add(addServiceMaster);
 
+        }
+
+        private void close_form(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

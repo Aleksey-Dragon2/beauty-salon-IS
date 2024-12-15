@@ -117,7 +117,6 @@ namespace salon_interface
             this.AddPriceService.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AddPriceService.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AddPriceService.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AddPriceService.Enabled = false;
             this.AddPriceService.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AddPriceService.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.AddPriceService.ForeColor = System.Drawing.Color.Black;
@@ -145,7 +144,6 @@ namespace salon_interface
             this.AddNameService.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AddNameService.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.AddNameService.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AddNameService.Enabled = false;
             this.AddNameService.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.AddNameService.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.AddNameService.ForeColor = System.Drawing.Color.Black;
@@ -222,7 +220,7 @@ namespace salon_interface
             this.TableTitle.ColumnCount = 3;
             this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.02104F));
             this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.97896F));
-            this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
+            this.TableTitle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 172F));
             this.TableTitle.Controls.Add(this.TitlePriceService, 2, 0);
             this.TableTitle.Controls.Add(this.TitleNameService, 1, 0);
             this.TableTitle.Controls.Add(this.TitleMasterService, 0, 0);
@@ -239,10 +237,10 @@ namespace salon_interface
             this.TitlePriceService.AutoSize = true;
             this.TitlePriceService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TitlePriceService.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitlePriceService.Location = new System.Drawing.Point(702, 0);
+            this.TitlePriceService.Location = new System.Drawing.Point(700, 0);
             this.TitlePriceService.Name = "TitlePriceService";
             this.TitlePriceService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitlePriceService.Size = new System.Drawing.Size(165, 48);
+            this.TitlePriceService.Size = new System.Drawing.Size(167, 48);
             this.TitlePriceService.TabIndex = 3;
             this.TitlePriceService.Text = "Цена";
             this.TitlePriceService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -252,10 +250,10 @@ namespace salon_interface
             this.TitleNameService.AutoSize = true;
             this.TitleNameService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TitleNameService.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitleNameService.Location = new System.Drawing.Point(318, 0);
+            this.TitleNameService.Location = new System.Drawing.Point(317, 0);
             this.TitleNameService.Name = "TitleNameService";
             this.TitleNameService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitleNameService.Size = new System.Drawing.Size(378, 48);
+            this.TitleNameService.Size = new System.Drawing.Size(377, 48);
             this.TitleNameService.TabIndex = 2;
             this.TitleNameService.Text = "Название услуги";
             this.TitleNameService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -268,7 +266,7 @@ namespace salon_interface
             this.TitleMasterService.Location = new System.Drawing.Point(3, 0);
             this.TitleMasterService.Name = "TitleMasterService";
             this.TitleMasterService.Padding = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.TitleMasterService.Size = new System.Drawing.Size(309, 48);
+            this.TitleMasterService.Size = new System.Drawing.Size(308, 48);
             this.TitleMasterService.TabIndex = 0;
             this.TitleMasterService.Text = "Выбор мастера";
             this.TitleMasterService.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -352,7 +350,6 @@ namespace salon_interface
             this.Controls.Add(this.TableAddService);
             this.Controls.Add(this.TableTitle);
             this.Controls.Add(this.TitleAddService);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ServiceAddPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ServiceAddPage";

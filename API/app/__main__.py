@@ -203,6 +203,7 @@ def update_visit(id: int, status : str, db: Session = Depends(get_db)):
         "message":"Статус успешно обновлен",
     }
 
+# Создание коэффициента
 @app.post("/coefficient/")
 def create_price_coefficient(value: float, db: Session = Depends(get_db)):
     try:
@@ -325,12 +326,46 @@ def get_master_stats(master_id: int, db: Session = Depends(get_db)):
 
 # Добавление услуги в мастера
 @app.post("/master/assign-service/")
-def master_assign_service(master_id:int, service_id:int, db:Session=Depends(get_db)):
-    db_master_services=models.MasterService(master_id=master_id, service_id=service_id)
-    db.add(db_master_services)
+def add_services_to_master(master_id: int, services: str, db: Session = Depends(get_db)):
+    # Проверить, существует ли мастер
+    stmt = select(models.Master).where(models.Master.id == master_id)
+    master = db.scalars(stmt).first()
+    if not master:
+        raise HTTPException(status_code=404, detail=f"Master with ID {master_id} not found")
+
+    # Разделить строку услуг на список
+    service_names = services.split(',')
+    added_services = []
+
+    for service_name in service_names:
+        # Удалить пробелы вокруг имени услуги
+        service_name = service_name.strip()
+
+        # Найти ID услуги
+        stmt = select(models.Service.id).where(models.Service.name == service_name)
+        service_id = db.scalars(stmt).first()
+
+        if not service_id:
+            raise HTTPException(status_code=404, detail=f"Service '{service_name}' not found")
+
+        # Проверить, не добавлена ли уже услуга для этого мастера
+        stmt = select(models.MasterService).where(
+            (models.MasterService.master_id == master_id) &
+            (models.MasterService.service_id == service_id)
+        )
+        existing_master_service = db.scalars(stmt).first()
+
+        if existing_master_service:
+            continue  # Пропустить, если связь уже существует
+
+        # Добавить услугу к мастеру
+        db_master_service = models.MasterService(master_id=master_id, service_id=service_id)
+        db.add(db_master_service)
+        added_services.append(service_name)
+
     db.commit()
-    db.refresh(db_master_services)
-    return db_master_services
+
+    return {"message": "Services added successfully", "added_services": added_services}
 
 # Удаление услуги у мастера
 @app.post("/master/remove-service/")
@@ -386,7 +421,7 @@ def create_service(name: str, price: float, master_id: Optional[int] = None, db:
         db_service = models.Service(name=name, price=price)
         db.add(db_service)
         db.flush()
-        if master_id is None:
+        if master_id == 0:
             db.commit()
             return db_service
         db_provided_service = models.MasterService(master_id=master_id, service_id=db_service.id)

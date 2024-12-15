@@ -9,26 +9,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ShowServiceForm = salon_interface.ServicesPage.ShowServiceForm;
 
 namespace salon_interface
 {
     public partial class MasterPage : Form
     {
-        private ShowServiceForm showServiceForm;
+        private FormManager formManager;
+
         public delegate void loadMasters();
         public delegate void updateMasters(List<Master> masters);
-        public MasterPage(ShowServiceForm showServiceForm)
-        {
-            InitializeComponent();
-            LoadMasters();
-            this.showServiceForm = showServiceForm;
-        }
-        public MasterPage()
+        public MasterPage(FormManager formManager)
         {
             InitializeComponent();
             LoadMasters();
             LoadFilters();
+            this.formManager = formManager;
+
+            this.FormClosing += MastersPage_FormClosing;
         }
 
         public async void LoadMasters()
@@ -37,7 +34,7 @@ namespace salon_interface
             List<Master> masters = await MasterApiHandler.GetMastersAsync();
             foreach (var master in masters)
             {
-                MasterInfoPanel masterPanel = new MasterInfoPanel(master.Id, master.Name, master.Surname, master.Specialization);
+                MasterInfoPanel masterPanel = new MasterInfoPanel(master.Id, master.Name, master.Surname, master.Specialization, LoadMasters);
                 this.customFlowLayoutPanel1.Controls.Add(masterPanel);
             }
         }
@@ -47,7 +44,7 @@ namespace salon_interface
             this.customFlowLayoutPanel1.Controls.Clear();
             foreach (var master in masters)
             {
-                MasterInfoPanel masterPanel = new MasterInfoPanel(master.Id, master.Name, master.Surname, master.Specialization);
+                MasterInfoPanel masterPanel = new MasterInfoPanel(master.Id, master.Name, master.Surname, master.Specialization, LoadMasters);
                 this.customFlowLayoutPanel1.Controls.Add(masterPanel);
             }
         }
@@ -70,30 +67,29 @@ namespace salon_interface
             }
         }
 
-        private void MastersLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CreateMaster_Click(object sender, EventArgs e)
         {
             CreateMasterPage createMasterPage= new CreateMasterPage(LoadMasters);
             createMasterPage.ShowDialog();
         }
 
-        private void MasterPage_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void ServicesLabel_Click(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Maximized)
-            {
+            formManager.ShowForm("ServicesPage");
+        }
 
-            }
-            showServiceForm(this.Location);
-            this.Hide();
+        private void VisitsLabel_Click(object sender, EventArgs e)
+        {
+            formManager.ShowForm("VisitsPage");
+        }
+
+        private void CoefficientsLabel_Click(object sender, EventArgs e)
+        {
+            formManager.ShowForm("PriceCoefficientPage");
+        }
+        private void MastersPage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

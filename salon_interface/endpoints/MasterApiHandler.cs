@@ -55,6 +55,12 @@ namespace ProjectName.api
             return await _apiService.CreateMasterAsync(endpoint, name, surname, specialization, services);
         }
 
+        public static async Task<Master> AddMasterServices(int id, List<string> services)
+        {
+            string endpoint = GetAPI()["MasterApi:AddMasterServices"];
+            return await _apiService.AddMasterServices(endpoint,id, services);
+        }
+
         public static async Task<Master> UpdateMasterAsync(int id, string name, string surname, string specialization)
         {
             string endpoint = GetAPI()["MasterApi:ApiUpdateService"]; ;

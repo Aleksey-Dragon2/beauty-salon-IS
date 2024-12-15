@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.TitleMasters = new System.Windows.Forms.Label();
-            this.choseSpecialization = new Guna.UI2.WinForms.Guna2ComboBox();
             this.masterSurname = new Guna.UI2.WinForms.Guna2TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.masterName = new Guna.UI2.WinForms.Guna2TextBox();
             this.labelName = new System.Windows.Forms.Label();
             this.labelSurname = new System.Windows.Forms.Label();
             this.labelSpecialization = new System.Windows.Forms.Label();
+            this.textBoxInput = new Guna.UI2.WinForms.Guna2TextBox();
             this.choiseServicesList = new System.Windows.Forms.CheckedListBox();
             this.AcceptCreateButton = new Guna.UI2.WinForms.Guna2Button();
             this.DeniedCreateButton = new Guna.UI2.WinForms.Guna2Button();
+            this.listBoxSuggestions = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,23 +53,6 @@
             this.TitleMasters.TabIndex = 3;
             this.TitleMasters.Text = "Новый мастер";
             this.TitleMasters.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // choseSpecialization
-            // 
-            this.choseSpecialization.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.choseSpecialization.BackColor = System.Drawing.Color.Transparent;
-            this.choseSpecialization.BorderRadius = 8;
-            this.choseSpecialization.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.choseSpecialization.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.choseSpecialization.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.choseSpecialization.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.choseSpecialization.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.choseSpecialization.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.choseSpecialization.ItemHeight = 30;
-            this.choseSpecialization.Location = new System.Drawing.Point(14, 61);
-            this.choseSpecialization.Name = "choseSpecialization";
-            this.choseSpecialization.Size = new System.Drawing.Size(241, 36);
-            this.choseSpecialization.TabIndex = 4;
             // 
             // masterSurname
             // 
@@ -102,8 +86,8 @@
             this.tableLayoutPanel1.Controls.Add(this.labelName, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelSurname, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.masterSurname, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.choseSpecialization, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelSpecialization, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxInput, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 46);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -169,6 +153,28 @@
             this.labelSpecialization.Text = "Специализация";
             this.labelSpecialization.Click += new System.EventHandler(this.labelSpecialization_Click);
             // 
+            // textBoxInput
+            // 
+            this.textBoxInput.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBoxInput.BorderRadius = 8;
+            this.textBoxInput.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBoxInput.DefaultText = "";
+            this.textBoxInput.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.textBoxInput.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.textBoxInput.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.textBoxInput.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.textBoxInput.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.textBoxInput.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.textBoxInput.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.textBoxInput.Location = new System.Drawing.Point(14, 59);
+            this.textBoxInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBoxInput.Name = "textBoxInput";
+            this.textBoxInput.PasswordChar = '\0';
+            this.textBoxInput.PlaceholderText = "";
+            this.textBoxInput.SelectedText = "";
+            this.textBoxInput.Size = new System.Drawing.Size(242, 40);
+            this.textBoxInput.TabIndex = 11;
+            // 
             // choiseServicesList
             // 
             this.choiseServicesList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -213,19 +219,31 @@
             this.DeniedCreateButton.Text = "Отменить";
             this.DeniedCreateButton.Click += new System.EventHandler(this.DeniedCreateButton_Click);
             // 
+            // listBoxSuggestions
+            // 
+            this.listBoxSuggestions.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listBoxSuggestions.FormattingEnabled = true;
+            this.listBoxSuggestions.ItemHeight = 22;
+            this.listBoxSuggestions.Location = new System.Drawing.Point(15, 146);
+            this.listBoxSuggestions.Name = "listBoxSuggestions";
+            this.listBoxSuggestions.Size = new System.Drawing.Size(241, 48);
+            this.listBoxSuggestions.TabIndex = 10;
+            this.listBoxSuggestions.Visible = false;
+            // 
             // CreateMasterPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(813, 454);
+            this.Controls.Add(this.listBoxSuggestions);
             this.Controls.Add(this.DeniedCreateButton);
             this.Controls.Add(this.AcceptCreateButton);
             this.Controls.Add(this.choiseServicesList);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.TitleMasters);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CreateMasterPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CreateMasterPage";
@@ -238,7 +256,6 @@
         #endregion
 
         private System.Windows.Forms.Label TitleMasters;
-        private Guna.UI2.WinForms.Guna2ComboBox choseSpecialization;
         private Guna.UI2.WinForms.Guna2TextBox masterSurname;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelName;
@@ -248,5 +265,7 @@
         private System.Windows.Forms.CheckedListBox choiseServicesList;
         private Guna.UI2.WinForms.Guna2Button AcceptCreateButton;
         private Guna.UI2.WinForms.Guna2Button DeniedCreateButton;
+        private System.Windows.Forms.ListBox listBoxSuggestions;
+        private Guna.UI2.WinForms.Guna2TextBox textBoxInput;
     }
 }

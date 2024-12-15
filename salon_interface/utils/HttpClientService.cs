@@ -37,12 +37,10 @@ namespace ProjectName.Services
             }
             catch (HttpRequestException ex)
             {
-                MessageBox.Show(($"HTTP-запрос завершился ошибкой: {ex.Message}"));
                 throw;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(($"Неизвестная ошибка: {ex.Message}"));
                 throw;
             }
         }

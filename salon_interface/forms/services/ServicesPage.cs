@@ -11,21 +11,17 @@ namespace salon_interface
 {
     public partial class ServicesPage : Form
     {
-        private MasterPage MasterPage;
-        public ServicesPage()
+        private FormManager formManager;
+        public ServicesPage(FormManager formManager)
         {
             InitializeComponent();
             updateService();
+            this.formManager = formManager;
+
+            this.FormClosing += ServicesPage_FormClosing;
         }
 
         public delegate void LoadServices();
-        public delegate void ShowServiceForm(Point point);
-
-        private void ShowServiceLocation(Point point)
-        {
-            this.Location = point;
-            this.Show();
-        }
 
         public async void updateService()
         {
@@ -41,7 +37,7 @@ namespace salon_interface
             {
                 ServiceInfoPanel servicePanel = new ServiceInfoPanel(service.Id.ToString(), loadServices);
                 servicePanel.NameService.Text = service.Name;
-                servicePanel.PriceService.Text = service.Price.ToString();
+                servicePanel.PriceService.Text = service.Price.ToString().Replace(',', '.');
 
                 Panel tehnicalPanel = new Panel();
                 tehnicalPanel.Dock = DockStyle.Top;
@@ -53,25 +49,27 @@ namespace salon_interface
         }
         private void CreateServiceButton_Click(object sender, EventArgs e)
         {
-            ServiceAddPage serviceAddPage = new ServiceAddPage(this);
+            ServiceAddPage serviceAddPage = new ServiceAddPage(updateService);
             serviceAddPage.ShowDialog();
         }
 
         private void MastersLabel_Click(object sender, EventArgs e)
         {
-            this.MasterPage = new MasterPage(this.ShowServiceLocation);
-            if (this.WindowState == FormWindowState.Maximized)
-            {
-                this.MasterPage.WindowState = FormWindowState.Maximized;
-            }
-            this.MasterPage.Location = this.Location;
-            this.MasterPage.Show();
-            this.Hide();
-
+            formManager.ShowForm("MastersPage");
         }
 
         private void VisitsLabel_Click(object sender, EventArgs e)
         {
+            formManager.ShowForm("VisitsPage");
+        }
+
+        private void CoefficientsLabel_Click(object sender, EventArgs e)
+        {
+            formManager.ShowForm("PriceCoefficientPage");
+        }
+        private void ServicesPage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 

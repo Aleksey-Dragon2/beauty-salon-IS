@@ -49,7 +49,7 @@ namespace salon_interface
             {
             int id = this.id;
             string name=this.EditNameService.Text;
-            float price=Convert.ToSingle(this.EditPriceService.Text);
+            float price=Convert.ToSingle(this.EditPriceService.Text.Replace('.', ','));
             await ServiceApiHandler.UpdateServiceAsync(id,name, price);
             this.Close();
                 loadServices();

@@ -100,6 +100,7 @@ namespace salon_interface
             this.CoefficientsLabel.TabIndex = 3;
             this.CoefficientsLabel.Text = "Коэффициенты";
             this.CoefficientsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CoefficientsLabel.Click += new System.EventHandler(this.CoefficientsLabel_Click);
             // 
             // VisitsLabel
             // 
@@ -124,6 +125,7 @@ namespace salon_interface
             this.MastersLabel.TabIndex = 1;
             this.MastersLabel.Text = "Мастера";
             this.MastersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MastersLabel.Click += new System.EventHandler(this.MastersLabel_Click);
             // 
             // ServicesLabel
             // 
@@ -136,6 +138,7 @@ namespace salon_interface
             this.ServicesLabel.TabIndex = 0;
             this.ServicesLabel.Text = "Услуги";
             this.ServicesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ServicesLabel.Click += new System.EventHandler(this.ServicesLabel_Click);
             // 
             // TitleVisits
             // 
@@ -201,7 +204,9 @@ namespace salon_interface
             this.Controls.Add(this.TitleVisits);
             this.Controls.Add(this.CreateVisit);
             this.Controls.Add(this.HeaderTable);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "VisitsPage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VisitsPage";
             this.HeaderTable.ResumeLayout(false);
             this.HeaderTable.PerformLayout();

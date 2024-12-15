@@ -2,7 +2,9 @@
 using Guna.UI2.WinForms.Enums;
 using System;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using loadMasters = salon_interface.MasterPage.loadMasters;
 
 namespace salon_interface
 {
@@ -11,12 +13,14 @@ namespace salon_interface
         public Guna2Panel MasterPanel;
         public Label NameLabel;
         public Label SpecializationLabel;
-        public MasterInfoPanel(int id, string name, string surname, string specialization)
+        private loadMasters loadMasters;
+        public MasterInfoPanel(int id, string name, string surname, string specialization, loadMasters loadMasters)
         {
             InitializeComponent();
             this.NameLabel.Text = $"{name} {surname}";
             this.SpecializationLabel.Text = $"{specialization}";
             this.Tag = id;
+            this.loadMasters = loadMasters;
         }
         public MasterInfoPanel()
         {
@@ -102,7 +106,7 @@ namespace salon_interface
         private void OnPanel_MouseClick(object sender, EventArgs e)
         {
             int id = (int)this.Tag;
-            MasterData masterData = new MasterData(id);
+            MasterData masterData = new MasterData(id, this.loadMasters);
             masterData.ShowDialog();
         }
 

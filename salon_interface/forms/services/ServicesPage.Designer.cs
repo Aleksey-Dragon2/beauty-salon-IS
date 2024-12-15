@@ -89,6 +89,7 @@ namespace salon_interface
             this.CoefficientsLabel.TabIndex = 3;
             this.CoefficientsLabel.Text = "Коэффициенты";
             this.CoefficientsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CoefficientsLabel.Click += new System.EventHandler(this.CoefficientsLabel_Click);
             // 
             // VisitsLabel
             // 
@@ -250,6 +251,7 @@ namespace salon_interface
             this.Controls.Add(this.PanelServicesList);
             this.Controls.Add(this.PanelTitleServices);
             this.Controls.Add(this.HeaderTable);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ServicesPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Beauty Salon";

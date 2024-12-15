@@ -13,23 +13,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static salon_interface.ServicesPage;
+using LoadServises = salon_interface.ServicesPage.LoadServices;
 
 namespace salon_interface
 {
     public partial class ServiceAddPage : Form
     {
-        private ServicesPage servicesPage = new ServicesPage();
         private List<Master> masters = new List<Master>();
-        public ServiceAddPage(ServicesPage servicesPage)
-        {
-            InitializeComponent();
-            this.servicesPage = servicesPage;
-            loadSpecialization();
-        }
-        public ServiceAddPage()
+        private LoadServises loadServices;
+
+        public ServiceAddPage(LoadServises loadServises)
         {
             InitializeComponent();
             loadSpecialization();
+            this.loadServices = loadServises;
         }
 
         private async void AcceptAddButton_Click(object sender, EventArgs e)
@@ -49,15 +47,19 @@ namespace salon_interface
             else
             {
 
-            string serviceName = this.AddNameService.Text;
-            float serivcePrice = Convert.ToSingle(this.AddPriceService.Text);
-            string masterSurname = this.ChoseMaster.Text.Split(' ')[0];
-            string specialization = this.ChoiseMasterSpezialization.Text;
-            int master_id = Find_Id_Masters(masterSurname, specialization);
+                string serviceName = this.AddNameService.Text;
+                float serivcePrice = Convert.ToSingle(this.AddPriceService.Text.Replace('.', ','));
+                string masterSurname = this.ChoseMaster.Text.Split(' ')[0];
+                string specialization = this.ChoiseMasterSpezialization.Text;
+                int master_id = 0;
+                if (this.ChoseMaster.Enabled)
+                {
+                    master_id = Find_Id_Masters(masterSurname, specialization);
+                }
                 try
                 {
                     await ServiceApiHandler.CreateServiceAsync(serviceName, serivcePrice, master_id);
-                    this.servicesPage.updateService();
+                    loadServices();
                     this.Close();
                 }
                 catch (Exception ex)
@@ -65,8 +67,6 @@ namespace salon_interface
                     this.errorLabel.Text = ex.Message;
                     this.errorLabel.Visible = true;
                 }
-
-
             }
         }
 
@@ -136,16 +136,16 @@ namespace salon_interface
 
         private void ChoseMaster_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.ChoseMaster.Text!=""&&this.ChoseMaster.Text!="Мастер")
-            {
-                this.AddNameService.Enabled= true;
-                this.AddPriceService.Enabled= true;
-            }
-            else
-            {
-                this.AddNameService.Enabled = false;
-                this.AddPriceService.Enabled = false;
-            }
+            //if (this.ChoseMaster.Text!=""&&this.ChoseMaster.Text!="Мастер")
+            //{
+            //    this.AddNameService.Enabled= true;
+            //    this.AddPriceService.Enabled= true;
+            //}
+            //else
+            //{
+            //    this.AddNameService.Enabled = false;
+            //    this.AddPriceService.Enabled = false;
+            //}
         }
 
         private void AddNameService_TextChanged(object sender, EventArgs e)

@@ -17,7 +17,26 @@ namespace salon_interface
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ServicesPage());
+
+            var formManager = new FormManager();
+
+            // Создаем формы
+            var ServicesPage = new ServicesPage(formManager);
+            var MasterPage = new MasterPage(formManager);
+            var VisitsPage = new VisitsPage(formManager);
+            var PriceCoefficientPage = new PriceCoefficientPage(formManager);
+
+            // Регистрируем формы в менеджере
+            formManager.RegisterForm("ServicesPage", ServicesPage);
+            formManager.RegisterForm("MastersPage", MasterPage);
+            formManager.RegisterForm("VisitsPage", VisitsPage);
+            formManager.RegisterForm("PriceCoefficientPage", PriceCoefficientPage);
+
+            // Показываем начальную форму
+            formManager.ShowForm("ServicesPage");
+
+            // Запускаем приложение
+            Application.Run();
         }
     }
 }

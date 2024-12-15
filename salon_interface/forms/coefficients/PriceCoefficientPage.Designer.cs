@@ -88,6 +88,7 @@
             this.VisitsLabel.TabIndex = 2;
             this.VisitsLabel.Text = "Визиты";
             this.VisitsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.VisitsLabel.Click += new System.EventHandler(this.VisitsLabel_Click);
             // 
             // MastersLabel
             // 
@@ -100,6 +101,7 @@
             this.MastersLabel.TabIndex = 1;
             this.MastersLabel.Text = "Мастера";
             this.MastersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.MastersLabel.Click += new System.EventHandler(this.MastersLabel_Click);
             // 
             // ServicesLabel
             // 
@@ -112,6 +114,7 @@
             this.ServicesLabel.TabIndex = 0;
             this.ServicesLabel.Text = "Услуги";
             this.ServicesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ServicesLabel.Click += new System.EventHandler(this.ServicesLabel_Click);
             // 
             // TitleLabel
             // 
@@ -157,6 +160,7 @@
             this.CoefficientValue.SelectedText = "";
             this.CoefficientValue.Size = new System.Drawing.Size(289, 38);
             this.CoefficientValue.TabIndex = 5;
+            this.CoefficientValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddServicePrice_KeyPress);
             // 
             // label1
             // 
